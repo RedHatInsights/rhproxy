@@ -8,7 +8,7 @@
 export PROXY_HOST="insights-proxy"
 
 # Next line updated via envsubst
-export PROXY_PORT="${INSIGHTS_PROXY_SERVICE_PORT}"
+export PROXY_PORT="${RHPROXY_SERVICE_PORT}"
 if [ -z "${PROXY_PORT}" ]; then
   PROXY_PORT="3128"
 fi

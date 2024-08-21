@@ -1,9 +1,9 @@
 # See the documentation for more information:
 # https://packit.dev/docs/configuration/
 
-specfile_path: insights-proxy.spec
+specfile_path: rhproxy.spec
 
-upstream_project_url: https://github.com/abellotti/insights-proxy-service
+upstream_project_url: https://github.com/RedHatInsights/rhproxy
 
 jobs:
   - job: copr_build
@@ -21,15 +21,15 @@ jobs:
   - job: copr_build
     trigger: commit
     branch: main
-    owner: abellott
-    project: "insights-proxy-service-latest"
+    owner: "@rhproxy"
+    project: "rhproxy-latest"
     preserve_project: True
     targets: *targets_list
 
   - job: copr_build
     trigger: release
-    owner: abellott
-    project: "insights-proxy-service"
+    owner: "@rhproxy"
+    project: "rhproxy"
     preserve_project: True
     targets: *targets_list
 
