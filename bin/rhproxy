@@ -1,22 +1,22 @@
 #!/bin/bash
 #
-# Insights-Proxy Service
+# Insights Proxy Service
 #
 export VERBOSE="n"
-INSIGHTS_PROXY_NAME="Insights-Proxy"
-INSIGHTS_PROXY_SERVICE="insights-proxy"
-INSIGHTS_PROXY_PKG_ROOT="${INSIGHTS_PROXY_PKG_ROOT:-/usr/share/${INSIGHTS_PROXY_SERVICE}}"
+RHPROXY_NAME="Insights Proxy"
+RHPROXY_SERVICE="rhproxy"
+RHPROXY_PKG_ROOT="${RHPROXY_PKG_ROOT:-/usr/share/${RHPROXY_SERVICE}}"
 
-CONFIG_PATH="${INSIGHTS_PROXY_PKG_ROOT}/config"
-ENV_PATH="${INSIGHTS_PROXY_PKG_ROOT}/env"
-DOWNLOAD_PATH="${INSIGHTS_PROXY_PKG_ROOT}/download"
+CONFIG_PATH="${RHPROXY_PKG_ROOT}/config"
+ENV_PATH="${RHPROXY_PKG_ROOT}/env"
+DOWNLOAD_PATH="${RHPROXY_PKG_ROOT}/download"
 
-INSIGHTS_PROXY_USER_PATH="${HOME}/.local/share/insights-proxy"
-ENV_USER_PATH="${HOME}/.config/insights-proxy/env/"
+RHPROXY_USER_PATH="${HOME}/.local/share/rhproxy"
+ENV_USER_PATH="${HOME}/.config/rhproxy/env/"
 SYSTEMD_USER_PATH="${HOME}/.config/containers/systemd/"
 
-CERTS_SHARE_PATH="${INSIGHTS_PROXY_USER_PATH}/certs"
-DOWNLOAD_SHARE_PATH="${INSIGHTS_PROXY_USER_PATH}/download"
+CERTS_SHARE_PATH="${RHPROXY_USER_PATH}/certs"
+DOWNLOAD_SHARE_PATH="${RHPROXY_USER_PATH}/download"
 
 if [ "${1}" == "-v" ] || [ "${1}" == "--verbose" ]; then
   VERBOSE="y"
@@ -33,7 +33,7 @@ function debug_msg {
 }
 
 if [ "$(id -u)" -eq 0 ]; then
-  echo "${INSIGHTS_PROXY_SERVICE} must not run as root."
+  echo "${RHPROXY_SERVICE} must not run as root."
   exit 1
 fi
 
@@ -65,10 +65,10 @@ function update_download_files {
   CONFIG_CLIENT="bin/configure-client.sh"
   debug_msg "Copying ${CONFIG_CLIENT} ..."
 
-  export INSIGHTS_PROXY_SERVICE_PORT
-  INSIGHTS_PROXY_SERVICE_PORT="$(grep '^INSIGHTS_PROXY_SERVICE_PORT=' "${ENV_USER_PATH}/insights-proxy.env" | cut -f2 -d=)"
+  export RHPROXY_SERVICE_PORT
+  RHPROXY_SERVICE_PORT="$(grep '^RHPROXY_SERVICE_PORT=' "${ENV_USER_PATH}/rhproxy.env" | cut -f2 -d=)"
 
-  envsubst "\$INSIGHTS_PROXY_SERVICE_PORT}" \
+  envsubst "\$RHPROXY_SERVICE_PORT}" \
     < "${DOWNLOAD_PATH}/${CONFIG_CLIENT}.template" \
     > "${DOWNLOAD_SHARE_PATH}/${CONFIG_CLIENT}"
 
@@ -82,7 +82,7 @@ if [ "${COMMAND}" == "install" ]; then
 
   systemctl --user reset-failed
 
-  echo "Installing ${INSIGHTS_PROXY_NAME} configuration files ..."
+  echo "Installing ${RHPROXY_NAME} configuration files ..."
   mkdir -p "${ENV_USER_PATH}"
   mkdir -p "${SYSTEMD_USER_PATH}"
 
@@ -94,86 +94,86 @@ if [ "${COMMAND}" == "install" ]; then
     copy_env "${env_file}" "${ENV_USER_PATH}"
   done
 
-  echo "Generate the ${INSIGHTS_PROXY_NAME} service ..."
+  echo "Generate the ${RHPROXY_NAME} service ..."
   systemctl --user daemon-reload
 
   update_download_files
 
-  echo "${INSIGHTS_PROXY_NAME} Installed."
+  echo "${RHPROXY_NAME} Installed."
   exit 0
 fi
 
 if [ "${COMMAND}" == "uninstall" ]; then
 
-  echo "Stopping ${INSIGHTS_PROXY_NAME} ..."
-  systemctl --user stop insights-proxy
+  echo "Stopping ${RHPROXY_NAME} ..."
+  systemctl --user stop rhproxy
 
-  echo "Removing ${INSIGHTS_PROXY_NAME} Service ..."
-  rm -f "${XDG_RUNTIME_DIR}"/systemd/generator/insights-proxy-*.service
-  rm -f "${SYSTEMD_USER_PATH}"/insights-proxy*.container
+  echo "Removing ${RHPROXY_NAME} Service ..."
+  rm -f "${XDG_RUNTIME_DIR}"/systemd/generator/rhproxy-*.service
+  rm -f "${SYSTEMD_USER_PATH}"/rhproxy*.container
   rm -f "${ENV_USER_PATH}"/*.env
 
   systemctl --user daemon-reload
   systemctl --user reset-failed
 
   if [ "${1}" == "-f" ]; then
-    echo "Deleting ${INSIGHTS_PROXY_NAME} Data ..."
+    echo "Deleting ${RHPROXY_NAME} Data ..."
     echo "   Removing ${CERTS_SHARE_PATH} ..."
     rm -rf "${CERTS_SHARE_PATH}"
     echo "   Removing ${DOWNLOAD_SHARE_PATH} ..."
     rm -rf "${DOWNLOAD_SHARE_PATH}"
   fi
 
-  echo "${INSIGHTS_PROXY_NAME} Uninstalled."
+  echo "${RHPROXY_NAME} Uninstalled."
   exit 0
 fi
 
 if [ "${COMMAND}" == "update" ]; then
-  echo "Updating download files for the ${INSIGHTS_PROXY_NAME} service ..."
+  echo "Updating download files for the ${RHPROXY_NAME} service ..."
 
   update_download_files
   exit 0
 fi
 
 if [ "${COMMAND}" == "start" ]; then
-  echo "Starting the ${INSIGHTS_PROXY_NAME} service ..."
+  echo "Starting the ${RHPROXY_NAME} service ..."
   systemctl --user daemon-reload
-  systemctl --user start ${INSIGHTS_PROXY_SERVICE}.service
+  systemctl --user start ${RHPROXY_SERVICE}.service
 
   update_download_files
   exit 0
 fi
 
 if [ "${COMMAND}" == "stop" ]; then
-  echo "Stopping the ${INSIGHTS_PROXY_NAME} service ..."
-  systemctl --user stop ${INSIGHTS_PROXY_SERVICE}.service
+  echo "Stopping the ${RHPROXY_NAME} service ..."
+  systemctl --user stop ${RHPROXY_SERVICE}.service
   exit 0
 fi
 
 if [ "${COMMAND}" == "restart" ]; then
-  echo "Re-start the ${INSIGHTS_PROXY_NAME} service ..."
+  echo "Re-start the ${RHPROXY_NAME} service ..."
   systemctl --user daemon-reload
-  systemctl --user restart ${INSIGHTS_PROXY_SERVICE}.service
+  systemctl --user restart ${RHPROXY_SERVICE}.service
 
   update_download_files
   exit 0
 fi
 
 if [ "${COMMAND}" == "status" ]; then
-  systemctl --user status ${INSIGHTS_PROXY_SERVICE}.service
+  systemctl --user status ${RHPROXY_SERVICE}.service
   exit 0
 fi
 
-echo "Usage: ${INSIGHTS_PROXY_SERVICE} [-v | --verbose] <command>"
+echo "Usage: ${RHPROXY_SERVICE} [-v | --verbose] <command>"
 echo ""
 echo "Where <command> is one of:"
-echo "  install                  - Install ${INSIGHTS_PROXY_NAME}"
-echo "  uninstall [-f]           - Uninstall ${INSIGHTS_PROXY_NAME}"
+echo "  install                  - Install ${RHPROXY_NAME}"
+echo "  uninstall [-f]           - Uninstall ${RHPROXY_NAME}"
 echo "                             specify -f to force remove the certs and download data"
 echo "  update                   - Update download files"
-echo "  start                    - Start the ${INSIGHTS_PROXY_NAME} Service"
-echo "  stop                     - Stop the ${INSIGHTS_PROXY_NAME} Service"
-echo "  restart                  - Re-start the ${INSIGHTS_PROXY_NAME} Service"
-echo "  status                   - Display Status of the ${INSIGHTS_PROXY_NAME} Service"
+echo "  start                    - Start the ${RHPROXY_NAME} Service"
+echo "  stop                     - Stop the ${RHPROXY_NAME} Service"
+echo "  restart                  - Re-start the ${RHPROXY_NAME} Service"
+echo "  status                   - Display Status of the ${RHPROXY_NAME} Service"
 
 exit 1

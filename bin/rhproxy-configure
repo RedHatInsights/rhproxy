@@ -5,8 +5,8 @@
 # Customize/Update the service environment before starting up the NGINX Proxy Server.
 #
 
-export PROXY_ENVFILE="insights-proxy.env"
-export SERVERS_ENVFILE="insights-proxy-servers.env"
+export PROXY_ENVFILE="rhproxy.env"
+export SERVERS_ENVFILE="rhproxy-servers.env"
 
 [ $# -ne 1 ] && echo "Usage: ${0} service-environment-directory" >&2 && exit 1
 
@@ -18,11 +18,11 @@ shift
 cd "${ENV_DIR}"
 
 #
-# Let's define the INSIGHTS_PROXY_SERVER_NAMES environment based on the servers list
+# Let's define the RHPROXY_SERVER_NAMES environment based on the servers list
 #
 
-echo -n "INSIGHTS_PROXY_SERVER_NAMES=" > "${SERVERS_ENVFILE}"
-cat insights-proxy.servers | egrep -v "^#|^$|^[ \t]*$" | tr "\n" " " >> "${SERVERS_ENVFILE}"
+echo -n "RHPROXY_SERVER_NAMES=" > "${SERVERS_ENVFILE}"
+cat rhproxy.servers | egrep -v "^#|^$|^[ \t]*$" | tr "\n" " " >> "${SERVERS_ENVFILE}"
 echo >> "${SERVERS_ENVFILE}"
 
 #
@@ -31,5 +31,5 @@ echo >> "${SERVERS_ENVFILE}"
 
 export SYSTEM_DNS_RESOLVER=$(awk '/^nameserver/{print $2; exit;}' /etc/resolv.conf)
 export DNS_RESOLVER="${SYSTEM_DNS_RESOLVER:=1.1.1.1}"
-sed -i "s/^INSIGHTS_PROXY_DNS_SERVER=.*/INSIGHTS_PROXY_DNS_SERVER=${DNS_RESOLVER}/" "${PROXY_ENVFILE}"
+sed -i "s/^RHPROXY_DNS_SERVER=.*/RHPROXY_DNS_SERVER=${DNS_RESOLVER}/" "${PROXY_ENVFILE}"
 

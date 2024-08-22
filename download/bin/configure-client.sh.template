@@ -5,10 +5,8 @@
 # to Insights via the Insights Proxy
 #
 
-export PROXY_HOST="insights-proxy"
-
 # Next line updated via envsubst
-export PROXY_PORT="${INSIGHTS_PROXY_SERVICE_PORT}"
+export PROXY_PORT="${RHPROXY_SERVICE_PORT}"
 if [ -z "${PROXY_PORT}" ]; then
   PROXY_PORT="3128"
 fi
@@ -23,7 +21,7 @@ fi
 
 export SUBCMD=""
 if [ -z "${1}" ]; then
-  echo "Usage: configure-client.sh [--configure [--proxy-host hostname] [--proxy-port port] | --unconfigure]"
+  echo "Usage: configure-client.sh [--configure --proxy-host hostname [--proxy-port port] | --unconfigure]"
   exit 1
 fi
 SUBCMD="${1}"
@@ -79,12 +77,12 @@ export RHCD_OVERRIDE_DIR="/etc/systemd/system/rhcd.service.d"
 if [ "${SUBCMD}" = "--configure" ]; then
   # Configure the Insights Client and RHC to communicate via the Insights Proxy
 
-  if [ "${1}" == "--proxy-host" ]; then
-    shift
-    [ -z "${1}" ] && echo "Must specify a hostname with --proxy-host" && exit 1
-    PROXY_HOST="${1}"
-    shift
-  fi
+  # Must specify a proxy host
+  [ ! "${1}" == "--proxy-host" ] && echo "Must specify a --proxy-host option" && exit 1
+  shift
+  [ -z "${1}" ] && echo "Must specify a hostname with --proxy-host" && exit 1
+  PROXY_HOST="${1}"
+  shift
 
   if [ "${1}" == "--proxy-port" ]; then
     shift
