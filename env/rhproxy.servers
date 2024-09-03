@@ -14,5 +14,10 @@ sso.redhat.com
 
 # Support RedHat Dnf/Yum Installs
 cdn.redhat.com
+mirrors.fedoraproject.org
+# Note: mirrors from fedoraproject can come from many places.
+#       allowing all for now until we can get a concrete list.
+# JIRA: https://issues.redhat.com/projects/IPP/issues/IPP-12?filter=allopenissues
+~^.*$
 
 # Non RedHat Servers
