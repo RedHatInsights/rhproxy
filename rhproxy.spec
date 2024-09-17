@@ -1,7 +1,10 @@
+%global base_version 1.3
+%global patch_version 0
+
 Name:           rhproxy
-Version:        1.3
+Version:        %{base_version}.%{patch_version}
 Release:        1%{?dist}
-Summary:        Insights Proxy Service v1.3
+Summary:        Insights Proxy Service v%{version}
 
 License:        GPLv3
 URL:            https://github.com/RedHatInsights/rhproxy
@@ -32,6 +35,9 @@ cp env/*.servers %{buildroot}/%{_datadir}/%{name}/env/
 mkdir -p %{buildroot}/%{_datadir}/%{name}/download/bin
 cp download/bin/*.template %{buildroot}/%{_datadir}/%{name}/download/bin/
 
+# Let's make sure we pick the major.minor released version of the engine
+sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datadir}/%{name}/config/rhproxy.container
+
 %files
 %license LICENSE
 %doc README.md
@@ -43,14 +49,15 @@ cp download/bin/*.template %{buildroot}/%{_datadir}/%{name}/download/bin/
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
-* Tue Aug 21 2024 Alberto Bellotti <abellott@redhat.com>
-- Version 1.3
+* Tue Sep 17 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.0
+- Moving to major.minor.patch version of the RPM.
+- Moving to major.minor released versions of the container engine.
+
+* Tue Aug 21 2024 Alberto Bellotti <abellott@redhat.com> - 1.3
 - Renaming to rhproxy
 
-* Tue Jul 02 2024 Alberto Bellotti <abellott@redhat.com>
-- Version 1.2
+* Tue Jul 02 2024 Alberto Bellotti <abellott@redhat.com> - 1.2
 - Additional enhancements
 
-* Fri Jun 28 2024 Alberto Bellotti <abellott@redhat.com>
-- Version 1.1
+* Fri Jun 28 2024 Alberto Bellotti <abellott@redhat.com> - 1.1
 - Initial prototype
