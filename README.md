@@ -98,7 +98,7 @@ Where <command> is one of:
 The configuration of rhproxy can be updated as follows:
 
 - update the Insights Proxy parameters in `~/.config/rhproxy/env/rhproxy.env` 
-- you can also update the list of allowed upstream servers in `~/.config/rhproxy/env/rhproxy.servers`
+- you can also update the list of allowed upstream servers in `~/.config/rhproxy/env/redhat.servers` and `~/.config/rhproxy/env/mirror.servers`
 
 then restart the service:
 

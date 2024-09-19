@@ -1,5 +1,5 @@
 %global base_version 1.3
-%global patch_version 0
+%global patch_version 1
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
@@ -45,10 +45,16 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datad
 %{_datadir}/%{name}/bin/rhproxy-configure
 %{_datadir}/%{name}/config/rhproxy.container
 %{_datadir}/%{name}/env/rhproxy.env
-%{_datadir}/%{name}/env/rhproxy.servers
+%{_datadir}/%{name}/env/redhat.servers
+%{_datadir}/%{name}/env/mirror.servers
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Tue Sep 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.1
+- Sharing rhproxy env directory with the rhproxy-engine
+- No longer the need to create an env variable for the list of servers
+- Now supporting redhat.servers and mirror.servers
+
 * Tue Sep 17 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.0
 - Moving to major.minor.patch version of the RPM.
 - Moving to major.minor released versions of the container engine.

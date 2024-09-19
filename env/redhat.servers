@@ -14,5 +14,4 @@ sso.redhat.com
 
 # Support RedHat Dnf/Yum Installs
 cdn.redhat.com
-
-# Non RedHat Servers
+*.fedoraproject.org

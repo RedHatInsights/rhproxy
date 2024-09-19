@@ -10,9 +10,9 @@ ExposeHostPort=3128
 PublishPort=8443:8443
 ExposeHostPort=8443
 EnvironmentFile=%h/.config/rhproxy/env/rhproxy.env
-EnvironmentFile=%h/.config/rhproxy/env/rhproxy-servers.env
 Volume=%h/.local/share/rhproxy/certs:/opt/app-root/certs:z
 Volume=%h/.local/share/rhproxy/download:/opt/app-root/download:z
+Volume=%h/.config/rhproxy/env:/opt/app-root/rhproxy-env:z
 # Since we could write self-generated keys to the shared certs volume
 # Let's make sure we map the nginx user to the host's user.
 UserNS=keep-id:uid=1001,gid=1001
