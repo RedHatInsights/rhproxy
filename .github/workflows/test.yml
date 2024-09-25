@@ -17,8 +17,13 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.0
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Install python dependencies
-        run: pip install pyquery
+        run: pip3 install pyquery
 
       - name: Check dependencies
         run: |

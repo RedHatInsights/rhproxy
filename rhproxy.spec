@@ -27,6 +27,7 @@ mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_datadir}/%{name}/bin
 cp bin/%{name} %{buildroot}/%{_bindir}/%{name}
 cp bin/rhproxy-configure %{buildroot}/%{_datadir}/%{name}/bin/rhproxy-configure
+cp bin/get-mirrors %{buildroot}/%{_datadir}/%{name}/bin/get-mirrors
 mkdir -p %{buildroot}/%{_datadir}/%{name}/config
 cp config/*.container %{buildroot}/%{_datadir}/%{name}/config/
 mkdir -p %{buildroot}/%{_datadir}/%{name}/env
@@ -43,6 +44,7 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datad
 %doc README.md
 %{_bindir}/%{name}
 %{_datadir}/%{name}/bin/rhproxy-configure
+%{_datadir}/%{name}/bin/get-mirrors
 %{_datadir}/%{name}/config/rhproxy.container
 %{_datadir}/%{name}/env/rhproxy.env
 %{_datadir}/%{name}/env/redhat.servers
@@ -50,7 +52,7 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datad
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
-* Tue Sep 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.1
+* Wed Sep 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.1
 - Sharing rhproxy env directory with the rhproxy-engine
 - No longer the need to create an env variable for the list of servers
 - Now supporting redhat.servers and mirror.servers
