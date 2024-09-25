@@ -1,6 +1,6 @@
 # Dnf/Yum Mirror Servers
-# Updated:  2024-09-24
-# Count:    403
+# Updated:  2024-09-25
+# Count:    404
 #
 # Warning: Manual updates to this file are lost when rhproxy is updated.
 42.hs-esslingen.de
@@ -172,6 +172,7 @@ mirror.accum.se
 mirror.accuris.ca
 mirror.airenetworks.es
 mirror.alwyzon.net
+mirror.ams-1.serverforge.org
 mirror.bahnhof.net
 mirror.biznetgio.com
 mirror.bytemark.co.uk
