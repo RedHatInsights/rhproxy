@@ -84,13 +84,17 @@ The usage of the rhproxy service controller is included here below:
 Usage: rhproxy [-v | --verbose] <command>
 
 Where <command> is one of:
-  install                  - Install the Insights Proxy
-  uninstall [-f]           - Uninstall the Insights Proxy
-                             specify -f to force remove the certs and download data
-  start                    - Start the Insights Proxy Service
-  stop                     - Stop the Insights Proxy Service
-  restart                  - Re-start the Insights Proxy Service
-  status                   - Display Status of the Insights Proxy Service
+  install           - Install Insights Proxy
+  uninstall [-f]    - Uninstall Insights Proxy
+                      specify -f to force remove the certs and download data
+
+  start             - Start the Insights Proxy Service
+  stop              - Stop the Insights Proxy Service
+  restart           - Re-start the Insights Proxy Service
+  status            - Display Status of the Insights Proxy Service
+
+  update            - Update download files
+  update-mirrors    - Update the list of mirror servers
 ```
 
 ### Updating the rhproxy configuration
