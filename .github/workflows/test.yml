@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main, "release/*", "feature/*"]
+
+jobs:
+  check-dependencies:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install python dependencies
+        run: pip install pyquery
+
+      - name: Check dependencies
+        run: |
+          make check-mirrors
