@@ -18,6 +18,9 @@ SYSTEMD_USER_PATH="${HOME}/.config/containers/systemd/"
 CERTS_SHARE_PATH="${RHPROXY_USER_PATH}/certs"
 DOWNLOAD_SHARE_PATH="${RHPROXY_USER_PATH}/download"
 
+GET_MIRRORS="${RHPROXY_PKG_ROOT}/bin/get-mirrors"
+MIRROR_SERVERS="${ENV_USER_PATH}/mirror.servers"
+
 if [ "${1}" == "-v" ] || [ "${1}" == "--verbose" ]; then
   VERBOSE="y"
   shift
@@ -164,16 +167,25 @@ if [ "${COMMAND}" == "status" ]; then
   exit 0
 fi
 
+if [ "${COMMAND}" == "update-mirrors" ]; then
+  echo "Updating list of mirrors in ${MIRROR_SERVERS} ..."
+  "${GET_MIRRORS}" > "${MIRROR_SERVERS}"
+  exit 0
+fi
+
 echo "Usage: ${RHPROXY_SERVICE} [-v | --verbose] <command>"
 echo ""
 echo "Where <command> is one of:"
-echo "  install                  - Install ${RHPROXY_NAME}"
-echo "  uninstall [-f]           - Uninstall ${RHPROXY_NAME}"
-echo "                             specify -f to force remove the certs and download data"
-echo "  update                   - Update download files"
-echo "  start                    - Start the ${RHPROXY_NAME} Service"
-echo "  stop                     - Stop the ${RHPROXY_NAME} Service"
-echo "  restart                  - Re-start the ${RHPROXY_NAME} Service"
-echo "  status                   - Display Status of the ${RHPROXY_NAME} Service"
+echo "  install           - Install ${RHPROXY_NAME}"
+echo "  uninstall [-f]    - Uninstall ${RHPROXY_NAME}"
+echo "                      specify -f to force remove the certs and download data"
+echo ""
+echo "  start             - Start the ${RHPROXY_NAME} Service"
+echo "  stop              - Stop the ${RHPROXY_NAME} Service"
+echo "  restart           - Re-start the ${RHPROXY_NAME} Service"
+echo "  status            - Display Status of the ${RHPROXY_NAME} Service"
+echo ""
+echo "  update            - Update download files"
+echo "  update-mirrors    - Update the list of mirror servers"
 
 exit 1
