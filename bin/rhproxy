@@ -169,7 +169,19 @@ fi
 
 if [ "${COMMAND}" == "update-mirrors" ]; then
   echo "Updating list of mirrors in ${MIRROR_SERVERS} ..."
-  "${GET_MIRRORS}" > "${MIRROR_SERVERS}"
+  NEW_MIRRORS=$(mktemp)
+  if ! "${GET_MIRRORS}" > "${NEW_MIRRORS}"; then
+    echo "Failed to get an updated list of mirrors" >&2
+    rm -f "${NEW_MIRRORS}"
+    exit 1
+  fi
+  sed -e '/^#/d' | grep '[a-z]' >/dev/null
+  if [ $? -eq 1 ]; then
+    echo "No mirror servers were found, not updating the list of mirrors" >&2
+  else
+    cp "${NEW_MIRRORS}" "${MIRROR_SERVERS}"
+  fi
+  rm -f "${NEW_MIRRORS}"
   exit 0
 fi
 

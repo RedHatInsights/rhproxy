@@ -27,6 +27,7 @@ mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_datadir}/%{name}/bin
 cp bin/%{name} %{buildroot}/%{_bindir}/%{name}
 cp bin/rhproxy-configure %{buildroot}/%{_datadir}/%{name}/bin/rhproxy-configure
+cp bin/get-mirrors %{buildroot}/%{_datadir}/%{name}/bin/get-mirrors
 mkdir -p %{buildroot}/%{_datadir}/%{name}/config
 cp config/*.container %{buildroot}/%{_datadir}/%{name}/config/
 mkdir -p %{buildroot}/%{_datadir}/%{name}/env
@@ -43,6 +44,7 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datad
 %doc README.md
 %{_bindir}/%{name}
 %{_datadir}/%{name}/bin/rhproxy-configure
+%{_datadir}/%{name}/bin/get-mirrors
 %{_datadir}/%{name}/config/rhproxy.container
 %{_datadir}/%{name}/env/rhproxy.env
 %{_datadir}/%{name}/env/redhat.servers
