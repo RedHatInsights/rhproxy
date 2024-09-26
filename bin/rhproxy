@@ -19,6 +19,7 @@ CERTS_SHARE_PATH="${RHPROXY_USER_PATH}/certs"
 DOWNLOAD_SHARE_PATH="${RHPROXY_USER_PATH}/download"
 
 GET_MIRRORS="${RHPROXY_PKG_ROOT}/bin/get-mirrors"
+PIP_REQUIREMENTS="${RHPROXY_PKG_ROOT}/bin/requirements.txt"
 MIRROR_SERVERS="${ENV_USER_PATH}/mirror.servers"
 
 if [ "${1}" == "-v" ] || [ "${1}" == "--verbose" ]; then
@@ -169,6 +170,7 @@ fi
 
 if [ "${COMMAND}" == "update-mirrors" ]; then
   echo "Updating list of mirrors in ${MIRROR_SERVERS} ..."
+  pip3 install --user -r "${PIP_REQUIREMENTS}" >/dev/null
   NEW_MIRRORS=$(mktemp)
   if ! "${GET_MIRRORS}" > "${NEW_MIRRORS}"; then
     echo "Failed to get an updated list of mirrors" >&2
