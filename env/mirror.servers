@@ -1,6 +1,6 @@
 # Dnf/Yum Mirror Servers
-# Updated:  2024-09-25
-# Count:    404
+# Updated:  2024-09-26
+# Count:    402
 #
 # Warning: Manual updates to this file are lost when rhproxy is updated.
 42.hs-esslingen.de
@@ -55,7 +55,6 @@ es-mirrors.evowise.com
 es.mirrors.cicku.me
 espejito.fder.edu.uy
 eu.edge.kernel.org
-fastmirror.pp.ua
 fedora-alt.c3sl.ufpr.br
 fedora-archive.ip-connect.info
 fedora-archive.ip-connect.vn.ua
@@ -169,7 +168,6 @@ mirror.23m.com
 mirror.2degrees.nz
 mirror.aarnet.edu.au
 mirror.accum.se
-mirror.accuris.ca
 mirror.airenetworks.es
 mirror.alwyzon.net
 mirror.ams-1.serverforge.org
