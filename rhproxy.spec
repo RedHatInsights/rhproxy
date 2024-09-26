@@ -13,6 +13,8 @@ Source0:        %{url}/archive/%{version}.tar.gz
 BuildArch:      noarch
 
 Requires:       bash
+Requires:       python3
+Requires:       python3-pip
 
 %description
 This RPM installs the Insights Proxy Service on the System.
