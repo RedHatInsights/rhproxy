@@ -70,8 +70,39 @@ allow rhcd_t squid_port_t:tcp_socket name_connect;
   /usr/sbin/semodule -X 300 -i "${SEL_BUILD}/rhcd-proxy.pp"
 }
 
+export INSIGHTS_CONF_DIR="/etc/redhat"
+export INSIGHTS_CONF="${INSIGHTS_CONF_DIR}/insights.conf"
 export RHSM_CONF="/etc/rhsm/rhsm.conf"
 export RHCD_OVERRIDE_DIR="/etc/systemd/system/rhcd.service.d"
+
+
+function create_insights_conf {
+  # Let's define the Insights config file if not there already
+  if [ ! -f "${INSIGHTS_CONF}" ]; then
+    mkdir -p "${INSIGHTS_CONF_DIR}"
+    cat - > "${INSIGHTS_CONF}" <<!END!
+# Red Hat Insights Configuration File
+
+[global]
+
+# An http proxy server to use for communicating with Insights
+rhproxy_host =
+
+# The port for the insights proxy
+rhproxy_port =
+
+# The scheme to use for the insights proxy
+rhproxy_scheme = http
+
+# The user name for authenticating to the insights proxy (optional)
+rhproxy_user =
+
+# The password for authenticating to the insights proxy (optional)
+rhproxy_password =
+!END!
+  fi
+}
+
 
 #---------------- Configure ---------------
 if [ "${SUBCMD}" = "--configure" ]; then
@@ -106,6 +137,15 @@ Environment=HTTP_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
 Environment=HTTPS_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
 !END!
 
+  create_insights_conf
+  echo "Configuring ${INSIGHTS_CONF} rhproxy for ${PROXY_HOST}:${PROXY_PORT} ..."
+  cp "${INSIGHTS_CONF}" "${INSIGHTS_CONF}.saved"
+  sed -i  -e "s/^rhproxy_host =.*$/rhproxy_host = ${PROXY_HOST}/" \
+          -e "s/^rhproxy_port =.*$/rhproxy_port = ${PROXY_PORT}/" \
+          -e "s/^rhproxy_scheme =.*$/rhproxy_port = http/" \
+          -e "s/^rhproxy_user =.*$/rhproxy_user =/" \
+          -e "s/^rhproxy_password =.*$/rhproxy_password =/" "${INSIGHTS_CONF}"
+
   install_rhcd_selinux_policy
   restart_services
 
@@ -118,6 +158,13 @@ elif [ "${SUBCMD}" = "--unconfigure" ]; then
   cp "${RHSM_CONF}" "${RHSM_CONF}.saved"
   sed -i  -e "s/^proxy_hostname =.*$/proxy_hostname =/" \
           -e "s/^proxy_port =.*$/proxy_port =-1/" "${RHSM_CONF}"
+
+  if [ -f "${INSIGHTS_CONF}" ]; then
+    echo "Un-Configuring rhproxy from ${INSIGHTS_CONF} ..."
+    cp "${INSIGHTS_CONF}" "${INSIGHTS_CONF}.saved"
+    sed -i  -e "s/^rhproxy_host =.*$/rhproxy_host =/" \
+            -e "s/^rhproxy_port =.*$/rhproxy_port =/" "${INSIGHTS_CONF}"
+  fi
 
   # Remove the override for the RHC Daemon
   rm -f "${RHCD_OVERRIDE_DIR}/override.conf"
