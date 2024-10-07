@@ -18,10 +18,6 @@ SYSTEMD_USER_PATH="${HOME}/.config/containers/systemd/"
 CERTS_SHARE_PATH="${RHPROXY_USER_PATH}/certs"
 DOWNLOAD_SHARE_PATH="${RHPROXY_USER_PATH}/download"
 
-GET_MIRRORS="${RHPROXY_PKG_ROOT}/bin/get-mirrors"
-PIP_REQUIREMENTS="${RHPROXY_PKG_ROOT}/bin/requirements.txt"
-MIRROR_SERVERS="${ENV_USER_PATH}/mirror.servers"
-
 if [ "${1}" == "-v" ] || [ "${1}" == "--verbose" ]; then
   VERBOSE="y"
   shift
@@ -98,6 +94,15 @@ if [ "${COMMAND}" == "install" ]; then
     copy_env "${env_file}" "${ENV_USER_PATH}"
   done
 
+  for servers_file in redhat.servers epel.servers; do
+    copy_env "${ENV_PATH}/${servers_file}" "${ENV_USER_PATH}"
+  done
+
+  # Only copy the mirror servers if it does not exist from earlier installations
+  if [ ! -f "${ENV_USER_PATH}/mirror.servers" ]; then
+    copy_env "${ENV_PATH}/mirror.servers" "${ENV_USER_PATH}"
+  fi
+
   echo "Generate the ${RHPROXY_NAME} service ..."
   systemctl --user daemon-reload
 
@@ -168,25 +173,6 @@ if [ "${COMMAND}" == "status" ]; then
   exit 0
 fi
 
-if [ "${COMMAND}" == "update-mirrors" ]; then
-  echo "Updating list of mirrors in ${MIRROR_SERVERS} ..."
-  pip3 install --user -r "${PIP_REQUIREMENTS}" >/dev/null
-  NEW_MIRRORS=$(mktemp)
-  if ! "${GET_MIRRORS}" > "${NEW_MIRRORS}"; then
-    echo "Failed to get an updated list of mirrors" >&2
-    rm -f "${NEW_MIRRORS}"
-    exit 1
-  fi
-  sed -e '/^#/d' | grep '[a-z]' >/dev/null
-  if [ $? -eq 1 ]; then
-    echo "No mirror servers were found, not updating the list of mirrors" >&2
-  else
-    cp "${NEW_MIRRORS}" "${MIRROR_SERVERS}"
-  fi
-  rm -f "${NEW_MIRRORS}"
-  exit 0
-fi
-
 echo "Usage: ${RHPROXY_SERVICE} [-v | --verbose] <command>"
 echo ""
 echo "Where <command> is one of:"
@@ -200,6 +186,5 @@ echo "  restart           - Re-start the ${RHPROXY_NAME} Service"
 echo "  status            - Display Status of the ${RHPROXY_NAME} Service"
 echo ""
 echo "  update            - Update download files"
-echo "  update-mirrors    - Update the list of mirror servers"
 
 exit 1

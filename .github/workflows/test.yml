@@ -27,4 +27,4 @@ jobs:
 
       - name: Check dependencies
         run: |
-          make check-mirrors
+          make check-epel-servers
