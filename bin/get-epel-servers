@@ -8,7 +8,7 @@ def get_hostname(mirror_name):
     url_parse = urlparse(mirror_name)
     return url_parse.hostname if url_parse.scheme else mirror_name
 
-doc = PyQuery(url="https://mirrormanager.fedoraproject.org/mirrors")
+doc = PyQuery(url="https://mirrormanager.fedoraproject.org/mirrors/EPEL")
 labels = []
 mirrors = []
 
@@ -24,13 +24,13 @@ for row in doc('table')[0]:
             mirror[k] = v
         mirrors += [mirror]
 
-# Let's make sure the list of mirror host names are sorted and unique
+# Let's make sure the list of EPEL mirror host names are sorted and unique
 host_names = sorted(set((get_hostname(mirror["Mirror Name"]) for mirror in mirrors)))
 
-print("# Dnf/Yum Mirror Servers")
-print("# Updated: ",str(datetime.now().date()))
+print("# Dnf/Yum EPEL Servers")
+print("# Updated: ", str(datetime.now().date()))
 print("# Count:   ", len(host_names))
 print("#")
-print("# Warning: Manual updates to this file are lost when rhproxy is updated.")
+print("# Warning: Any updates to this file are lost when rhproxy is updated.")
 print("\n".join(host_names))
 exit(0)

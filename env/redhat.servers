@@ -1,4 +1,4 @@
-# Support RedHat Insights Servers
+# RedHat Insights Servers
 api.access.redhat.com
 cert-api.access.redhat.com
 
@@ -12,7 +12,7 @@ connect.cloud.redhat.com
 subscription.rhsm.redhat.com
 sso.redhat.com
 
-# Support RedHat Dnf/Yum Installs
+# Dnf/Yum RedHat Servers
 cdn.redhat.com
 mirrors.fedoraproject.org
 codecs.fedoraproject.org
