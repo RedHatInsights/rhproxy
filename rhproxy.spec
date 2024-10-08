@@ -1,5 +1,5 @@
 %global base_version 1.3
-%global patch_version 1
+%global patch_version 2
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
@@ -46,11 +46,16 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datad
 %{_datadir}/%{name}/config/rhproxy.container
 %{_datadir}/%{name}/env/rhproxy.env
 %{_datadir}/%{name}/env/redhat.servers
+%{_datadir}/%{name}/env/epel.servers
 %{_datadir}/%{name}/env/mirror.servers
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
-* Tue Sep 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.1
+* Wed Oct 08 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.2
+- Adding support for EPEL server via epel.servers
+- Adding support for optional mirror servers via mirror.servers
+
+* Wed Sep 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.1
 - Sharing rhproxy env directory with the rhproxy-engine
 - No longer the need to create an env variable for the list of servers
 - Now supporting redhat.servers and mirror.servers
