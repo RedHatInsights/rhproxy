@@ -108,7 +108,7 @@ Where <command> is one of:
 
 The configuration of rhproxy can be updated as follows:
 
-- Update the Insights Proxy parameters in `~/.config/rhproxy/env/rhproxy.env` 
+- Update the Insights Proxy parameters in `~/.config/rhproxy/env/rhproxy.env`
 - Provide optional mirror servers in the following file:
   - `~/.config/rhproxy/env/mirror.servers`
 

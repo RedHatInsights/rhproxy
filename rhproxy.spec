@@ -1,5 +1,5 @@
 %global base_version 1.3
-%global patch_version 2
+%global patch_version 3
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
@@ -13,8 +13,6 @@ Source0:        %{url}/archive/%{version}.tar.gz
 BuildArch:      noarch
 
 Requires:       bash
-Requires:       python3
-Requires:       python3-pip
 
 %description
 This RPM installs the Insights Proxy Service on the System.
@@ -53,6 +51,10 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datad
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Wed Oct 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.3
+- Adding support for EPEL server via epel.servers
+- Adding support for optional mirror servers via mirror.servers
+
 * Thu Oct 17 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.2
 - Now using URL based Source in the RPM spec
 
