@@ -50,7 +50,7 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datad
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
-* Tue Sep 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.1
+* Wed Sep 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.1
 - Sharing rhproxy env directory with the rhproxy-engine
 - No longer the need to create an env variable for the list of servers
 - Now supporting redhat.servers and mirror.servers
@@ -59,7 +59,7 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datad
 - Moving to major.minor.patch version of the RPM.
 - Moving to major.minor released versions of the container engine.
 
-* Tue Aug 21 2024 Alberto Bellotti <abellott@redhat.com> - 1.3
+* Wed Aug 21 2024 Alberto Bellotti <abellott@redhat.com> - 1.3
 - Renaming to rhproxy
 
 * Tue Jul 02 2024 Alberto Bellotti <abellott@redhat.com> - 1.2
