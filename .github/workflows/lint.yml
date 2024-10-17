@@ -1,0 +1,27 @@
+name: Lint Insights Proxy (rhproxy) Quadlet Installer
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - '*'
+  pull_request:
+    branches: [main, 'release/*']
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+      - run: go install mvdan.cc/sh/v3/cmd/shfmt@latest
+      - run: sudo apt-get install -y shellcheck rpmlint
+      - name: run shellcheck
+        run: shellcheck ./bin/* ./download/bin/*
+      - name: run rpmlint
+        env:
+          RHPROXY_RPMLINT_CONF: "rhproxy.rpmlint.toml"
+        run: |
+          echo 'Filters = ["no-%build-section"]' > "$RHPROXY_RPMLINT_CONF"
+          rpmlint -c "$RPMLINT_RPMLINT_CONF" -s rhproxy.spec
+
