@@ -14,13 +14,15 @@ shift
 
 [ ! -d "${ENV_DIR}" ] && echo "Insights Proxy environment directory ${ENV_DIR} does not exist" >&2 && exit 1
 
-cd "${ENV_DIR}"
+cd "${ENV_DIR}" || exit 1
 
 #
 # Let's define the resolver to use for the NGINX Server.
 #
 
-export SYSTEM_DNS_RESOLVER=$(awk '/^nameserver/{print $2; exit;}' /etc/resolv.conf)
+export SYSTEM_DNS_RESOLVER
+SYSTEM_DNS_RESOLVER=$(awk '/^nameserver/{print $2; exit;}' /etc/resolv.conf)
+
 export DNS_RESOLVER="${SYSTEM_DNS_RESOLVER:=1.1.1.1}"
 sed -i "s/^RHPROXY_DNS_SERVER=.*/RHPROXY_DNS_SERVER=${DNS_RESOLVER}/" "${PROXY_ENVFILE}"
 
