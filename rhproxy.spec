@@ -8,7 +8,7 @@ Summary:        Insights Proxy Service v%{version}
 
 License:        GPLv3
 URL:            https://github.com/RedHatInsights/rhproxy
-Source0:        %{name}-%{version}.tar.gz
+Source0:        %{url}/archive/%{version}.tar.gz
 
 BuildArch:      noarch
 
