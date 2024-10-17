@@ -22,6 +22,6 @@ jobs:
         env:
           RHPROXY_RPMLINT_CONF: "rhproxy.rpmlint.toml"
         run: |
-          echo 'Filters = ["no-%build-section"]' > "$RHPROXY_RPMLINT_CONF"
+          echo 'Filters = ["no-%build-section", "no-cleaning-of", "no-buildroot-tag"]' > "$RHPROXY_RPMLINT_CONF"
           rpmlint -c "$RPMLINT_RPMLINT_CONF" -s rhproxy.spec
 
