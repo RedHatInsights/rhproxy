@@ -25,6 +25,6 @@ jobs:
       - name: Install python dependencies
         run: pip3 install pyquery
 
-      - name: Check dependencies
+      - name: Check EPEL Servers
         run: |
           make check-epel-servers

@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:  2024-10-07
-# Count:    321
+# Updated:  2024-10-21
+# Count:    316
 #
 # Warning: Any updates to this file are lost when rhproxy is updated.
 abqix.mm.fcix.net
@@ -100,7 +100,6 @@ hkg.mirror.rackspace.com
 iad.mirror.rackspace.com
 ima.mm.fcix.net
 in.mirrors.cicku.me
-ipng.mm.fcix.net
 irltoolkit.mm.fcix.net
 it1.mirror.vhosting-it.com
 it2.mirror.vhosting-it.com
@@ -115,7 +114,6 @@ linux.domainesia.com
 linux.mirrors.es.net
 linuxsoft.cern.ch
 mirror-icn.yuki.net.uk
-mirror-mci.yuki.net.uk
 mirror-nrt.yuki.net.uk
 mirror.01link.hk
 mirror.0xem.ma
@@ -153,6 +151,7 @@ mirror.etf.bg.ac.rs
 mirror.euserv.net
 mirror.facebook.net
 mirror.fcix.net
+mirror.fjordos.no
 mirror.fmt-2.serverforge.org
 mirror.freedif.org
 mirror.freethought-internet.co.uk
@@ -176,7 +175,6 @@ mirror.lax.adaptivedatanetworks.com
 mirror.layeronline.com
 mirror.linux-ia64.org
 mirror.logol.ru
-mirror.lshiy.com
 mirror.lstn.net
 mirror.mangohost.net
 mirror.marwan.ma
@@ -194,7 +192,6 @@ mirror.nl.mirhosting.net
 mirror.nodesdirect.com
 mirror.nsc.liu.se
 mirror.nyist.edu.cn
-mirror.ontdb.com
 mirror.overthewire.com.au
 mirror.papua.go.id
 mirror.pilotfiber.com
@@ -266,7 +263,6 @@ mirrors.tscak.com
 mirrors.tuna.tsinghua.edu.cn
 mirrors.ukfast.co.uk
 mirrors.uni-ruse.bg
-mirrors.up.pt
 mirrors.upr.edu
 mirrors.vcea.wsu.edu
 mirrors.wcupa.edu
@@ -309,7 +305,6 @@ sg.mirrors.cicku.me
 sg.ssimn.org
 sjc.mirror.rackspace.com
 southfront.mm.fcix.net
-stix.mm.fcix.net
 stl.us.ssimn.org
 syd.mirror.rackspace.com
 tw.mirrors.cicku.me
