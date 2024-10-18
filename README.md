@@ -84,21 +84,35 @@ The usage of the rhproxy service controller is included here below:
 Usage: rhproxy [-v | --verbose] <command>
 
 Where <command> is one of:
-  install                  - Install the Insights Proxy
-  uninstall [-f]           - Uninstall the Insights Proxy
-                             specify -f to force remove the certs and download data
-  start                    - Start the Insights Proxy Service
-  stop                     - Stop the Insights Proxy Service
-  restart                  - Re-start the Insights Proxy Service
-  status                   - Display Status of the Insights Proxy Service
+  install           - Install Insights Proxy
+  uninstall [-f]    - Uninstall Insights Proxy
+                      specify -f to force remove the certs and download data
+
+  start             - Start the Insights Proxy Service
+  stop              - Stop the Insights Proxy Service
+  restart           - Re-start the Insights Proxy Service
+  status            - Display Status of the Insights Proxy Service
+
+  update            - Update download files
 ```
 
 ### Updating the rhproxy configuration
 
+
+
+- The list of allowed upstream servers are provided in:
+  - `~/.config/rhproxy/env/redhat.servers` for RedHat Insights Servers
+  - `~/.config/rhproxy/env/epel.servers` for Allowed Dnf/Yum EPEL Servers
+
+  These are replaced with rhproxy RPM updates so any manual updates to them will be lost.
+
 The configuration of rhproxy can be updated as follows:
 
-- update the Insights Proxy parameters in `~/.config/rhproxy/env/rhproxy.env` 
-- you can also update the list of allowed upstream servers in `~/.config/rhproxy/env/redhat.servers` and `~/.config/rhproxy/env/mirror.servers`
+- Update the Insights Proxy parameters in `~/.config/rhproxy/env/rhproxy.env`
+- Provide optional mirror servers in the following file:
+  - `~/.config/rhproxy/env/mirror.servers`
+
+  Updates to that file are presistent and not touched with rhproxy RPM updates.
 
 then restart the service:
 

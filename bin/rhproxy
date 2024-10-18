@@ -94,6 +94,15 @@ if [ "${COMMAND}" == "install" ]; then
     copy_env "${env_file}" "${ENV_USER_PATH}"
   done
 
+  for servers_file in redhat.servers epel.servers; do
+    copy_env "${ENV_PATH}/${servers_file}" "${ENV_USER_PATH}"
+  done
+
+  # Only copy the mirror servers if it does not exist from earlier installations
+  if [ ! -f "${ENV_USER_PATH}/mirror.servers" ]; then
+    copy_env "${ENV_PATH}/mirror.servers" "${ENV_USER_PATH}"
+  fi
+
   echo "Generate the ${RHPROXY_NAME} service ..."
   systemctl --user daemon-reload
 
@@ -167,13 +176,15 @@ fi
 echo "Usage: ${RHPROXY_SERVICE} [-v | --verbose] <command>"
 echo ""
 echo "Where <command> is one of:"
-echo "  install                  - Install ${RHPROXY_NAME}"
-echo "  uninstall [-f]           - Uninstall ${RHPROXY_NAME}"
-echo "                             specify -f to force remove the certs and download data"
-echo "  update                   - Update download files"
-echo "  start                    - Start the ${RHPROXY_NAME} Service"
-echo "  stop                     - Stop the ${RHPROXY_NAME} Service"
-echo "  restart                  - Re-start the ${RHPROXY_NAME} Service"
-echo "  status                   - Display Status of the ${RHPROXY_NAME} Service"
+echo "  install           - Install ${RHPROXY_NAME}"
+echo "  uninstall [-f]    - Uninstall ${RHPROXY_NAME}"
+echo "                      specify -f to force remove the certs and download data"
+echo ""
+echo "  start             - Start the ${RHPROXY_NAME} Service"
+echo "  stop              - Stop the ${RHPROXY_NAME} Service"
+echo "  restart           - Re-start the ${RHPROXY_NAME} Service"
+echo "  status            - Display Status of the ${RHPROXY_NAME} Service"
+echo ""
+echo "  update            - Update download files"
 
 exit 1
