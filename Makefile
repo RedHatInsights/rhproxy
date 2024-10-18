@@ -13,7 +13,7 @@ help:
 lint: shellcheck
 
 shellcheck:
-	@shellcheck ./bin/* ./download/bin/*
+	@shellcheck ./bin/rhproxy* ./download/bin/*
 
 check-epel-servers:
 	@echo "Checking that the list of EPEL servers is the latest ..."
