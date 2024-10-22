@@ -17,7 +17,7 @@ jobs:
       - run: go install mvdan.cc/sh/v3/cmd/shfmt@latest
       - run: sudo apt-get install -y shellcheck rpmlint
       - name: run shellcheck
-        run: shellcheck ./bin/* ./download/bin/*
+        run: shellcheck ./bin/rhproxy* ./download/bin/*
       - name: run rpmlint
         env:
           RHPROXY_RPMLINT_CONF: "rhproxy.rpmlint.toml"
