@@ -24,8 +24,6 @@ You need to first enable the latest build [COPR latest build repo](https://copr.
 # sudo dnf config-manager --set-enabled copr:copr.fedorainfracloud.org:group_rhproxy:rhproxy-latest
 ```
 
-##### Proceeding with rhproxy installation:
-
 Available repositories for rhproxy include:
 
 - rhel-9-x86_64

@@ -23,9 +23,9 @@ check-epel-servers:
 	 diff "$${CURRENT_EPEL_SERVERS}" "$${LATEST_EPEL_SERVERS}"; \
 	 /usr/bin/cmp "$${CURRENT_EPEL_SERVERS}" "$${LATEST_EPEL_SERVERS}" >/dev/null; \
 	 if [ $$? -eq 0 ]; then \
-	   echo "Mirror servers list is up to date"; EC=0; \
+	   echo "::notice ::EPEL servers list is up to date"; EC=0; \
 	 else \
-	   echo "Mirror servers list needs to be updated"; EC=1; \
+	   echo "::warning ::EPEL servers list needs to be updated"; EC=1; \
 	 fi; \
 	 rm -f "$${CURRENT_EPEL_SERVERS}" "$${LATEST_EPEL_SERVERS}"; \
 	 exit $${EC}
