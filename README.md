@@ -6,7 +6,18 @@ Using the `rhproxy` service controller, ***all commands*** for installing and in
 
 To use the service controller to install and manage the rhproxy service, first install the controller:
 
-You need to first enable the latest build [COPR build repo](https://copr.fedorainfracloud.org/coprs/g/rhproxy/rhproxy-latest). Example here showing enabling the x86_64 repo for RHEL 9:
+##### For Release Builds:
+
+You need to first enable the latest build [COPR release build repo](https://copr.fedorainfracloud.org/coprs/g/rhproxy/rhproxy/builds). Example here showing enabling the x86_64 repo for RHEL 9:
+
+```sh
+# sudo dnf copr enable @rhproxy/rhproxy rhel-9-x86_64
+# sudo dnf config-manager --set-enabled copr:copr.fedorainfracloud.org:group_rhproxy:rhproxy
+```
+
+##### For Latest Builds:
+
+You need to first enable the latest build [COPR latest build repo](https://copr.fedorainfracloud.org/coprs/g/rhproxy/rhproxy-latest/builds). Example here showing enabling the x86_64 repo for RHEL 9:
 
 ```sh
 # sudo dnf copr enable @rhproxy/rhproxy-latest rhel-9-x86_64
