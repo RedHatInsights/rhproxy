@@ -1,5 +1,5 @@
 %global base_version 1.3
-%global patch_version 3
+%global patch_version 4
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
@@ -13,6 +13,7 @@ Source0:        %{url}/archive/%{version}.tar.gz
 BuildArch:      noarch
 
 Requires:       bash
+Requires:       podman >= 4.9.4
 
 %description
 This RPM installs the Insights Proxy Service on the System.
@@ -51,6 +52,9 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datad
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Thu Oct 24 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.4
+- Adding podman requirement to the RPM spec
+
 * Wed Oct 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.3
 - Adding support for EPEL server via epel.servers
 - Adding support for optional mirror servers via mirror.servers
