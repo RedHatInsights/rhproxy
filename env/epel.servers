@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:  2024-10-21
-# Count:    316
+# Updated:  2024-10-24
+# Count:    317
 #
 # Warning: Any updates to this file are lost when rhproxy is updated.
 abqix.mm.fcix.net
@@ -15,6 +15,7 @@ b4sh.mm.fcix.net
 br.mirrors.cicku.me
 bungi.mm.fcix.net
 ca.mirrors.cicku.me
+cdn.fjordos.no
 centos.anexia.at
 ch.mirrors.cicku.me
 citrahost.com
