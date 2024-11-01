@@ -1,6 +1,6 @@
 %global base_version 1.3
-%global patch_version 4
-%global engine_version 1.3.2
+%global patch_version 5
+%global engine_version 1.3.3
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
