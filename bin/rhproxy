@@ -106,6 +106,9 @@ if [ "${COMMAND}" == "install" ]; then
   echo "Generate the ${RHPROXY_NAME} service ..."
   systemctl --user daemon-reload
 
+  echo "Enabling Lingering for user ${USER} ..."
+  loginctl enable-linger "${USER}"
+
   update_download_files
 
   echo "${RHPROXY_NAME} Installed."
@@ -132,6 +135,9 @@ if [ "${COMMAND}" == "uninstall" ]; then
     echo "   Removing ${DOWNLOAD_SHARE_PATH} ..."
     rm -rf "${DOWNLOAD_SHARE_PATH}"
   fi
+
+  echo "Disabling Lingering for user ${USER} ..."
+  loginctl disable-linger "${USER}"
 
   echo "${RHPROXY_NAME} Uninstalled."
   exit 0

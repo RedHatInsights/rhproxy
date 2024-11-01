@@ -1,5 +1,6 @@
 %global base_version 1.3
 %global patch_version 4
+%global engine_version 1.3.2
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
@@ -37,7 +38,7 @@ mkdir -p %{buildroot}/%{_datadir}/%{name}/download/bin
 cp download/bin/*.template %{buildroot}/%{_datadir}/%{name}/download/bin/
 
 # Let's make sure we pick the major.minor released version of the engine
-sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{base_version}/' %{buildroot}/%{_datadir}/%{name}/config/rhproxy.container
+sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_datadir}/%{name}/config/rhproxy.container
 
 %files
 %license LICENSE
