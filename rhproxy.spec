@@ -1,11 +1,11 @@
 %global base_version 1.3
-%global patch_version 4
-%global engine_version 1.3.2
+%global patch_version 5
+%global engine_version 1.3.3
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
 Release:        1%{?dist}
-Summary:        Insights Proxy Service v%{version}
+Summary:        Insights proxy Service v%{version}
 
 License:        GPLv3
 URL:            https://github.com/RedHatInsights/rhproxy
@@ -17,9 +17,9 @@ Requires:       bash
 Requires:       podman >= 4.9.4
 
 %description
-This RPM installs the Insights Proxy Service on the System.
+This RPM installs the Insights proxy Service on the System.
 The rhproxy service controller installs and manages
-the Insights Proxy via a systemd quadlet service.
+the Insights proxy via a systemd quadlet service.
 
 %prep
 %autosetup -n %{name}-%{version}

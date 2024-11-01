@@ -2,7 +2,7 @@
 
 #
 # Script to configure (or unconfigure) a client for communicating
-# to Insights via the Insights Proxy
+# to Insights via the Insights proxy
 #
 
 # Next line updated via envsubst
@@ -75,7 +75,7 @@ export RHCD_OVERRIDE_DIR="/etc/systemd/system/rhcd.service.d"
 
 #---------------- Configure ---------------
 if [ "${SUBCMD}" = "--configure" ]; then
-  # Configure the Insights Client and RHC to communicate via the Insights Proxy
+  # Configure the Insights Client and RHC to communicate via the Insights proxy
 
   # Must specify a proxy host
   [ ! "${1}" == "--proxy-host" ] && echo "Must specify a --proxy-host option" && exit 1
@@ -111,7 +111,7 @@ Environment=HTTPS_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
 
 #---------------- Unconfigure ---------------
 elif [ "${SUBCMD}" = "--unconfigure" ]; then
-  # Update the Insights Client and RHC to stop using the Insights Proxy
+  # Update the Insights Client and RHC to stop using the Insights proxy
 
   echo "Un-Configuring insights-client/rhsm/rhc/rhcd from proxying to Insights ..."
   # Remove the proxy definition from the rhsm.conf file.

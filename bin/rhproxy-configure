@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# Insights Proxy Configuration.
+# Insights proxy Configuration.
 #
-# Customize/Update the service environment before starting up the NGINX Proxy Server.
+# Customize/Update the service environment before starting up the NGINX proxy Server.
 #
 
 export PROXY_ENVFILE="rhproxy.env"
@@ -12,7 +12,7 @@ export PROXY_ENVFILE="rhproxy.env"
 export ENV_DIR="${1}"
 shift
 
-[ ! -d "${ENV_DIR}" ] && echo "Insights Proxy environment directory ${ENV_DIR} does not exist" >&2 && exit 1
+[ ! -d "${ENV_DIR}" ] && echo "Insights proxy environment directory ${ENV_DIR} does not exist" >&2 && exit 1
 
 cd "${ENV_DIR}" || exit 1
 
