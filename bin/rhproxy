@@ -1,9 +1,9 @@
 #!/bin/bash
 #
-# Insights Proxy Service
+# Insights proxy Service
 #
 export VERBOSE="n"
-RHPROXY_NAME="Insights Proxy"
+RHPROXY_NAME="Insights proxy"
 RHPROXY_SERVICE="rhproxy"
 RHPROXY_PKG_ROOT="${RHPROXY_PKG_ROOT:-/usr/share/${RHPROXY_SERVICE}}"
 

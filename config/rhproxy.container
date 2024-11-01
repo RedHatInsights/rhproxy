@@ -1,5 +1,5 @@
 [Unit]
-Description=Red Hat Insights Proxy
+Description=Red Hat Insights proxy
 Requires=podman.socket
 
 [Container]

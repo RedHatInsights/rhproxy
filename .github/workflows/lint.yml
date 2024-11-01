@@ -1,4 +1,4 @@
-name: Lint Insights Proxy (rhproxy) Quadlet Installer
+name: Lint Insights proxy (rhproxy) Quadlet Installer
 
 on:
   push:
