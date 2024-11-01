@@ -53,7 +53,7 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
-* Thu Nov 01 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.5
+* Fri Nov 01 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.5
 - Using 1.3.3 rhproxy engine which is built with included sources
 - Enabling user lingering upon rhproxy install
 - Disabling user lingering upon rhproxy uninstall
@@ -62,7 +62,7 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 * Thu Oct 24 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.4
 - Adding podman requirement to the RPM spec
 
-* Wed Oct 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.3
+* Fri Oct 18 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.3
 - Adding support for EPEL server via epel.servers
 - Adding support for optional mirror servers via mirror.servers
 
