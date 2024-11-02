@@ -1,36 +1,36 @@
 #!/usr/bin/env python3
 
 from datetime import datetime
-from pyquery import PyQuery
 from urllib.parse import urlparse
+
+import requests
+import xmltodict
 
 def get_hostname(mirror_name):
     url_parse = urlparse(mirror_name)
     return url_parse.hostname if url_parse.scheme else mirror_name
 
-doc = PyQuery(url="https://mirrormanager.fedoraproject.org/mirrors/EPEL")
-labels = []
-mirrors = []
+mirrors = set()
+epel_repos = ["epel-7", "epel-8", "epel-9", "epel-10"]
+archs = ["aarch64", "armhfp", "i386", "ppc64", "ppc64le", "s390", "s390x", "x86_64"]
 
-for row in doc('table')[0]:
-    # First row has the labels
-    if not labels:
-        for k in row:
-            labels += [k.text]
-    # All other rows have the mirror entries
-    else:
-        mirror = {}
-        for k, v in list(zip(labels, [v.text for v in row])):
-            mirror[k] = v
-        mirrors += [mirror]
-
-# Let's make sure the list of EPEL mirror host names are sorted and unique
-host_names = sorted(set((get_hostname(mirror["Mirror Name"]) for mirror in mirrors)))
+for repo in epel_repos:
+    for arch in archs:
+        mirrors_url = (
+            "https://mirrors.fedoraproject.org/metalink?repo={}&arch={}"
+        ).format(repo, arch)
+        mirrors_xml = requests.get(mirrors_url)
+        mirrors_dict = xmltodict.parse(mirrors_xml.text)
+        if "files" in mirrors_dict["metalink"].keys():
+            urls = mirrors_dict["metalink"]["files"]["file"]["resources"]["url"]
+            for url in urls:
+                mirror_url = url["#text"]
+                mirrors.add(get_hostname(mirror_url))
 
 print("# Dnf/Yum EPEL Servers")
 print("# Updated: ", str(datetime.now().date()))
-print("# Count:   ", len(host_names))
+print("# Count:   ", len(mirrors))
 print("#")
 print("# Warning: Any updates to this file are lost when rhproxy is updated.")
-print("\n".join(host_names))
+print("\n".join(sorted(mirrors)))
 exit(0)
