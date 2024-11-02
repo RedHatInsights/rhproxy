@@ -24,7 +24,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install python dependencies
-        run: pip3 install requests xmltodict
+        run: pip3 install requests lxml
 
       - name: Check EPEL Servers
         run: |

@@ -1,6 +1,8 @@
 # Dnf/Yum EPEL Servers
-# Updated:  2024-11-02
-# Count:    80
+# Updated:        2024-11-04
+# Count:          80
+# Versions:       epel-5, epel-6, epel-7, epel-8, epel-9, epel-10
+# Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390, s390x, x86_64
 #
 # Warning: Any updates to this file are lost when rhproxy is updated.
 abqix.mm.fcix.net
@@ -17,6 +19,7 @@ d2lzkl7pfhq30w.cloudfront.net
 dl.fedoraproject.org
 download-cc-rdu01.fedoraproject.org
 epel.mirror.constant.com
+epel.mirror.shastacoe.net
 epel.stl.us.ssimn.org
 fedora-archive.ip-connect.info
 fedora-archive.ip-connect.vn.ua
@@ -30,39 +33,38 @@ ima.mm.fcix.net
 irltoolkit.mm.fcix.net
 ix-denver.mm.fcix.net
 lesnet.mm.fcix.net
-linux-mirrors.fnal.gov
-linux.mirrors.es.net
 lolhost.mm.fcix.net
 mirror.0xem.ma
 mirror.2degrees.nz
 mirror.chpc.utah.edu
 mirror.colorado.edu
-mirror.cpsc.ucalgary.ca
 mirror.cs.princeton.edu
 mirror.csclub.uwaterloo.ca
 mirror.dal.nexril.net
 mirror.dst.ca
+mirror.facebook.net
 mirror.fcix.net
 mirror.fmt-2.serverforge.org
 mirror.grid.uchicago.edu
+mirror.lstn.net
 mirror.math.princeton.edu
 mirror.mci-1.serverforge.org
+mirror.nodesdirect.com
+mirror.rnet.missouri.edu
 mirror.servaxnet.com
+mirror.sfo12.us.leaseweb.net
 mirror.steadfastnet.com
-mirror.tornadovps.com
 mirror.us-midwest-1.nexcess.net
 mirror.us.mirhosting.net
 mirror.xenyth.net
-mirrors.cat.pdx.edu
 mirrors.hostiserver.com
 mirrors.iu13.net
+mirrors.mit.edu
 mirrors.rit.edu
 mirrors.sonic.net
 mirrors.upr.edu
-mirrors.vcea.wsu.edu
-mirrors.wcupa.edu
+mirrors.xmission.com
 mnvoip.mm.fcix.net
-muug.ca
 na.edge.kernel.org
 nnenix.mm.fcix.net
 nocix.mm.fcix.net
