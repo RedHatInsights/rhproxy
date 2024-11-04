@@ -136,7 +136,7 @@ The configuration parameters include:
 - `RHPROXY_DISABLE` to disable the forward proxying, _defaults to 0_
 - `RHPROXY_DEBUG_CONFIG` to log environment variable and Nginx configuration upon startup, _defaults to 0_
 - `RHPROXY_SERVICE_PORT` to define the listening port of the forward proxy, _defaults to 3128_
-- `RHPROXY_DNS_SERVER` to define which DNS server to use for name resolution, _defaults to 8.8.8.8_
+- `RHPROXY_DNS_SERVER` to define which DNS server to use for name resolution, _defaults to 1.1.1.1_
 - `RHPROXY_WEB_SERVER_DISABLE` to disable the insights proxy web server, _defaults to 0_
 - `RHPROXY_WEB_SERVER_PORT` to define the listening port of the insights proxy web server, _defaults to 8443_
 
