@@ -1,6 +1,8 @@
 # Dnf/Yum EPEL Servers
-# Updated:  2024-11-01
-# Count:    319
+# Updated:        2024-11-05
+# Count:          313
+# Versions:       4, 5, 6, 7, 8, 9, 10
+# Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
 # Warning: Any updates to this file are lost when rhproxy is updated.
 abqix.mm.fcix.net
@@ -10,25 +12,29 @@ ap.edge.kernel.org
 ask4.mm.fcix.net
 atl.mirrors.knownhost.com
 au.mirrors.cicku.me
-au.ssimn.org
 b4sh.mm.fcix.net
 br.mirrors.cicku.me
 bungi.mm.fcix.net
 ca.mirrors.cicku.me
 cdn.fjordos.no
 centos.anexia.at
+centos.mirror.alwyzon.net
 ch.mirrors.cicku.me
-citrahost.com
 codingflyboy.mm.fcix.net
 cofractal-ewr.mm.fcix.net
 cofractal-sea.mm.fcix.net
 creeperhost.mm.fcix.net
+d2lzkl7pfhq30w.cloudfront.net
 de.mirrors.cicku.me
 dfw.mirror.rackspace.com
 divergentnetworks.mm.fcix.net
+dl.fedoraproject.org
 download-cc-rdu01.fedoraproject.org
 download.nus.edu.sg
 edgeuno-bog2.mm.fcix.net
+epel.01link.hk
+epel.au.ssimn.org
+epel.gb.ssimn.org
 epel.grena.ge
 epel.hysing.is
 epel.ip-connect.info
@@ -36,25 +42,27 @@ epel.mirror.constant.com
 epel.mirror.digitalpacific.com.au
 epel.mirror.liquidtelecom.com
 epel.mirror.omnilance.com
-epel.mirror.serveriai.lt
 epel.mirror.shastacoe.net
-epel.mirror.srv.magticom.ge
+epel.sg.ssimn.org
+epel.srv.magticom.ge
+epel.stl.us.ssimn.org
 epel.uni-sofia.bg
 es-mirrors.evowise.com
 es.mirrors.cicku.me
 espejito.fder.edu.uy
 eu.edge.kernel.org
 fastmirror.pp.ua
+fedora-archive.ip-connect.info
+fedora-archive.ip-connect.vn.ua
+fedora-archive.mirror.liquidtelecom.com
 fedora-epel.koyanet.lv
+fedora-epel.mirror.iweb.com
 fedora-mirror02.rbc.ru
 fedora.cs.nctu.edu.tw
 fedora.cu.be
 fedora.ipacct.com
-fedora.is.co.za
 fedora.melbourneitmirror.net
 fedora.mirror.garr.it
-fedora.mirror.iweb.com
-fedora.mirror.serversaustralia.com.au
 fedora.mirror.thegigabit.com
 fedora.mirrorservice.org
 fedora.tu-chemnitz.de
@@ -73,11 +81,8 @@ ftp.cc.uoc.gr
 ftp.cica.es
 ftp.fau.de
 ftp.fi.muni.cz
-ftp.funet.fi
 ftp.halifax.rwth-aachen.de
 ftp.icm.edu.pl
-ftp.iij.ad.jp
-ftp.ines.lug.ro
 ftp.kaist.ac.kr
 ftp.kddilabs.jp
 ftp.nluug.nl
@@ -93,7 +98,6 @@ ftp.uni-stuttgart.de
 ftp.upjs.sk
 ftp.yz.yamagata-u.ac.jp
 gb.mirrors.cicku.me
-gb.ssimn.org
 ge.mirror.cloud9.ge
 gsl-syd.mm.fcix.net
 hk.mirrors.cicku.me
@@ -126,13 +130,13 @@ mirror.2degrees.nz
 mirror.aarnet.edu.au
 mirror.accum.se
 mirror.airenetworks.es
-mirror.alwyzon.net
 mirror.ams-1.serverforge.org
 mirror.bahnhof.net
 mirror.cedia.org.ec
 mirror.centos.ikoula.com
 mirror.cherryservers.com
 mirror.chpc.utah.edu
+mirror.citrahost.com
 mirror.cloudhosting.lv
 mirror.cogentco.com
 mirror.colorado.edu
@@ -181,6 +185,7 @@ mirror.logol.ru
 mirror.lstn.net
 mirror.mangohost.net
 mirror.marwan.ma
+mirror.math.princeton.edu
 mirror.mci-1.serverforge.org
 mirror.metrocast.net
 mirror.netcologne.de
@@ -189,7 +194,6 @@ mirror.netsite.dk
 mirror.netzwerge.de
 mirror.nevacloud.com
 mirror.nextlayer.at
-mirror.niif.hu
 mirror.nl.leaseweb.net
 mirror.nl.mirhosting.net
 mirror.nodesdirect.com
@@ -209,13 +213,11 @@ mirror.sfo12.us.leaseweb.net
 mirror.siena.edu
 mirror.steadfastnet.com
 mirror.szerverem.hu
-mirror.t-home.mk
 mirror.team-cymru.com
 mirror.telepoint.bg
 mirror.theory7.net
 mirror.tornadovps.com
 mirror.twds.com.tw
-mirror.uepg.br
 mirror.umd.edu
 mirror.us-midwest-1.nexcess.net
 mirror.us.leaseweb.net
@@ -228,10 +230,8 @@ mirror.xenyth.net
 mirror.yandex.ru
 mirror.yer.az
 mirror2.totbb.net
-mirrorepel.math.princeton.edu
 mirroronet.pl
 mirrors.20i.com
-mirrors.bestthaihost.com
 mirrors.cat.pdx.edu
 mirrors.chroot.ro
 mirrors.coreix.net
@@ -254,13 +254,12 @@ mirrors.netix.net
 mirrors.neusoft.edu.cn
 mirrors.nic.cz
 mirrors.nxthost.com
-mirrors.powernet.com.ru.
+mirrors.powernet.com.ru
 mirrors.ptisp.pt
 mirrors.qlu.edu.cn
 mirrors.rit.edu
 mirrors.sohu.com
 mirrors.sonic.net
-mirrors.thzhost.com
 mirrors.tscak.com
 mirrors.tuna.tsinghua.edu.cn
 mirrors.ukfast.co.uk
@@ -294,7 +293,6 @@ reflector.westga.edu
 rep-epel-il.upress.io
 repo.boun.edu.tr
 repo.extreme-ix.org
-repo.fedora.md
 repo.ialab.dsu.edu
 repo.jing.rocks
 repo2.shinjiru.com
@@ -304,11 +302,9 @@ ru.mirrors.cicku.me
 ryamer.mm.fcix.net
 sa.mirrors.cicku.me
 sg.mirrors.cicku.me
-sg.ssimn.org
 sjc.mirror.rackspace.com
 southfront.mm.fcix.net
 stix.mm.fcix.net
-stl.us.ssimn.org
 syd.mirror.rackspace.com
 tw.mirrors.cicku.me
 ucmirror.canterbury.ac.nz
@@ -319,6 +315,6 @@ veronanetworks.mm.fcix.net
 volico.mm.fcix.net
 www.ftp.ne.jp
 www.gtlib.gatech.edu
-www.h-net.ch
+www.nic.funet.fi
 za.mirrors.cicku.me
 ziply.mm.fcix.net

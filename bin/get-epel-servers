@@ -4,33 +4,41 @@ from datetime import datetime
 from pyquery import PyQuery
 from urllib.parse import urlparse
 
-def get_hostname(mirror_name):
-    url_parse = urlparse(mirror_name)
-    return url_parse.hostname if url_parse.scheme else mirror_name
+import re
+import requests
 
-doc = PyQuery(url="https://mirrormanager.fedoraproject.org/mirrors/EPEL")
-labels = []
-mirrors = []
+doc = PyQuery(url="https://mirrormanager.fedoraproject.org")
+
+query_params = []
+epel_versions = set()
+epel_archs = set()
+mirrors = set()
 
 for row in doc('table')[0]:
-    # First row has the labels
-    if not labels:
-        for k in row:
-            labels += [k.text]
-    # All other rows have the mirror entries
-    else:
-        mirror = {}
-        for k, v in list(zip(labels, [v.text for v in row])):
-            mirror[k] = v
-        mirrors += [mirror]
+    for td in row:
+        a_href = td.find('a')
+        if a_href is not None:
+            href = a_href.attrib['href']
+            if re.match("^/mirrors/EPEL/[^/]*/[^/]*$", href):
+                href_paths = href.split("/")
+                version, arch = href_paths[3], href_paths[4]
+                epel_versions.add(version)
+                epel_archs.add(arch)
+                query_params += ["repo=epel-{}&arch={}&country=global".format(version, arch)]
 
-# Let's make sure the list of EPEL mirror host names are sorted and unique
-host_names = sorted(set((get_hostname(mirror["Mirror Name"]) for mirror in mirrors)))
+for params in query_params:
+    mirrorlist_url = "https://mirrors.fedoraproject.org/mirrorlist?{}".format(params)
+    for mirror in requests.get(mirrorlist_url).text.split("\n"):
+        url_parse = urlparse(mirror)
+        if url_parse.scheme:
+            mirrors.add(url_parse.hostname)
 
 print("# Dnf/Yum EPEL Servers")
-print("# Updated: ", str(datetime.now().date()))
-print("# Count:   ", len(host_names))
+print("# Updated:       ", str(datetime.now().date()))
+print("# Count:         ", len(mirrors))
+print("# Versions:      ", ", ".join(sorted(epel_versions, key=int)))
+print("# Architectures: ", ", ".join(sorted(epel_archs)))
 print("#")
 print("# Warning: Any updates to this file are lost when rhproxy is updated.")
-print("\n".join(host_names))
+print("\n".join(sorted(mirrors)))
 exit(0)

@@ -24,7 +24,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install python dependencies
-        run: pip3 install pyquery
+        run: pip3 install pyquery requests
 
       - name: Check EPEL Servers
         run: |
