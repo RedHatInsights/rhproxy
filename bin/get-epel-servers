@@ -21,7 +21,7 @@ archs = ["aarch64", "armhfp", "i386", "ppc64", "ppc64le", "s390", "s390x", "x86_
 for repo in epel_repos:
     for arch in archs:
         mirrors_url = (
-            "https://mirrors.fedoraproject.org/metalink?repo={}&arch={}"
+            "https://mirrors.fedoraproject.org/metalink?repo={}&arch={}&country=global"
         ).format(repo, arch)
         mirrors_xml = requests.get(mirrors_url)
         mirrors_stream = io.BytesIO(mirrors_xml.content)
