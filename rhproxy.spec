@@ -1,6 +1,6 @@
 %global base_version 1.3
-%global patch_version 5
-%global engine_version 1.3.3
+%global patch_version 6
+%global engine_version 1.3.4
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
@@ -53,6 +53,13 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Tue Nov 05 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.6
+- Using 1.3.4 rhproxy engine which includes cleanup of the source
+- Default DNS Server to 1.1.1.1 to be consistent with the rhproxy engine
+- Dynamically fetch EPEL versions and architectures
+- Used the mirrorlist endpoint to Fetch EPEL mirrors (similar to metalink)
+- Fetch servers from all Geo locations
+
 * Fri Nov 01 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.5
 - Using 1.3.3 rhproxy engine which is built with included sources
 - Enabling user lingering upon rhproxy install
