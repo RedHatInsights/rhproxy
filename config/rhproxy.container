@@ -4,7 +4,7 @@ Requires=podman.socket
 
 [Container]
 ContainerName=rhproxy
-Image=quay.io/abellott/rhproxy-engine:{{RHPROXY_ENGINE_RELEASE_TAG}}
+Image=quay.io/insights_proxy/rhproxy-engine:{{RHPROXY_ENGINE_RELEASE_TAG}}
 PublishPort=3128:3128
 ExposeHostPort=3128
 PublishPort=8443:8443
