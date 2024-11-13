@@ -150,5 +150,30 @@ The configuration parameters include:
 - `RHPROXY_WEB_SERVER_DISABLE` to disable the insights proxy web server, _defaults to 0_
 - `RHPROXY_WEB_SERVER_PORT` to define the listening port of the insights proxy web server, _defaults to 8443_
 
+# Configuring the client machines
 
+With the Insights proxy service installed and running, the client machines need to be updated to have all RedHat subscription management and Insights client tools communicate with the Insights services through the proxy. While each tool can be manually configured for the proxy, a helper script is also provided to simplify the configuration.
+
+The helper script `configure-client.sh` can be downloaded as follows:
+
+```
+$ curl -k -L https://<rhproxy-hostname>:8443/download/bin/configure-client.sh -o configure-client.sh
+$ chmod +x configure-client.sh
+```
+
+As root, run the script as follows:
+
+```
+$ sudo ./configure-client.sh --configure --proxy-host <rhproxy-hostname>
+Configuring insights-client and tools proxy to <rhproxy-hostname>:3128 ...
+Restarting Insights Services ...
+```
+
+The script can also be used to undo the proxy configuration for the Insights client tools as follows:
+
+```
+$ sudo ./configure-client.sh --unconfigure
+Un-Configuring insights-client/rhsm/rhc/rhcd from proxying to Insights ...
+Restarting Insights Services ...
+```
 
