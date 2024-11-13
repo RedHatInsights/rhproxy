@@ -1,6 +1,6 @@
 %global base_version 1.3
-%global patch_version 6
-%global engine_version 1.3.4
+%global patch_version 7
+%global engine_version 1.3.6
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
@@ -53,6 +53,10 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Tue Nov 12 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.7
+- Using the 1.3.6 Konflux built rhproxy engine
+- Pulling rhproxy-engine from the quay.io/insights_proxy/rhproxy-engine repo
+
 * Tue Nov 05 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.6
 - Using 1.3.4 rhproxy engine which includes cleanup of the source
 - Default DNS Server to 1.1.1.1 to be consistent with the rhproxy engine

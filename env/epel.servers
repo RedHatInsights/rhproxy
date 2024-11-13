@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2024-11-05
-# Count:          313
+# Updated:        2024-11-12
+# Count:          307
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -40,14 +40,12 @@ epel.hysing.is
 epel.ip-connect.info
 epel.mirror.constant.com
 epel.mirror.digitalpacific.com.au
-epel.mirror.liquidtelecom.com
 epel.mirror.omnilance.com
 epel.mirror.shastacoe.net
 epel.sg.ssimn.org
 epel.srv.magticom.ge
 epel.stl.us.ssimn.org
 epel.uni-sofia.bg
-es-mirrors.evowise.com
 es.mirrors.cicku.me
 espejito.fder.edu.uy
 eu.edge.kernel.org
@@ -84,7 +82,6 @@ ftp.fi.muni.cz
 ftp.halifax.rwth-aachen.de
 ftp.icm.edu.pl
 ftp.kaist.ac.kr
-ftp.kddilabs.jp
 ftp.nluug.nl
 ftp.nsc.ru
 ftp.ntua.gr
@@ -112,7 +109,6 @@ it2.mirror.vhosting-it.com
 ix-denver.mm.fcix.net
 jp.mirrors.cicku.me
 kr.mirrors.cicku.me
-la-mirrors.evowise.com
 lchs.mm.fcix.net
 lesnet.mm.fcix.net
 level66.mm.fcix.net
@@ -211,6 +207,7 @@ mirror.sabay.com.kh
 mirror.servaxnet.com
 mirror.sfo12.us.leaseweb.net
 mirror.siena.edu
+mirror.siwoo.org
 mirror.steadfastnet.com
 mirror.szerverem.hu
 mirror.team-cymru.com
@@ -279,7 +276,6 @@ nl.mirrors.cicku.me
 nnenix.mm.fcix.net
 nocix.mm.fcix.net
 nullroute.mm.fcix.net
-ny-mirrors.evowise.com
 ohioix.mm.fcix.net
 opencolo.mm.fcix.net
 ord.mirror.rackspace.com
@@ -308,12 +304,10 @@ stix.mm.fcix.net
 syd.mirror.rackspace.com
 tw.mirrors.cicku.me
 ucmirror.canterbury.ac.nz
-uk-mirrors.evowise.com
 us.mirrors.cicku.me
 uvermont.mm.fcix.net
 veronanetworks.mm.fcix.net
 volico.mm.fcix.net
-www.ftp.ne.jp
 www.gtlib.gatech.edu
 www.nic.funet.fi
 za.mirrors.cicku.me
