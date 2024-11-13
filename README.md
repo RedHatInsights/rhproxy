@@ -1,46 +1,60 @@
-# Installing Insights proxy
+# Installing the Insights proxy
 
-### Using the official RPM
+First install the `rhproxy` RPM, this installs the service controller. You then use the service controller to install and manage the rhproxy service.
 
-Using the `rhproxy` service controller, ***all commands*** for installing and interacting with Insights proxy should be executed as a *regular non-root* user.
+First, enable the appropriate repo then install the `rhproxy` RPM:
 
-To use the service controller to install and manage the rhproxy service, first install the controller:
 
-##### For Release Builds:
+## Enabling the RPM Repo:
 
-You need to first enable the latest build [COPR release build repo](https://copr.fedorainfracloud.org/coprs/g/rhproxy/rhproxy/builds). Example here showing enabling the x86_64 repo for RHEL 9:
+### For Tech Preview Builds:
+
+#### X86_64
 
 ```sh
-# sudo dnf copr enable @rhproxy/rhproxy rhel-9-x86_64
+# sudo subscription-manager repos --enable insights-proxy-1-tech-preview-for-rhel9-x86_64-rpms
+```
+
+#### AARCH64
+
+```sh
+# sudo subscription-manager repos --enable insights-proxy-1-tech-preview-for-rhel9-aarch64-rpms
+```
+
+### For Upstream Release Builds:
+
+Enable the [COPR release build repo](https://copr.fedorainfracloud.org/coprs/g/rhproxy/rhproxy/builds) with the appropriate \${arch} of _x86\_64_ or _aarch64_:
+
+
+```sh
+# sudo dnf copr enable @rhproxy/rhproxy rhel-9-${arch}
 # sudo dnf config-manager --set-enabled copr:copr.fedorainfracloud.org:group_rhproxy:rhproxy
 ```
 
-##### For Latest Builds:
+### For Upstream Latest Builds:
 
-You need to first enable the latest build [COPR latest build repo](https://copr.fedorainfracloud.org/coprs/g/rhproxy/rhproxy-latest/builds). Example here showing enabling the x86_64 repo for RHEL 9:
+Enable the [COPR latest build repo](https://copr.fedorainfracloud.org/coprs/g/rhproxy/rhproxy-latest/builds) with the appropriate \${arch} of _x86\_64_ or _aarch64_:
 
-```sh
-# sudo dnf copr enable @rhproxy/rhproxy-latest rhel-9-x86_64
+
+```
+# sudo dnf copr enable @rhproxy/rhproxy-latest rhel-9-${arch}
 # sudo dnf config-manager --set-enabled copr:copr.fedorainfracloud.org:group_rhproxy:rhproxy-latest
 ```
 
-Available repositories for rhproxy include:
 
-- rhel-9-x86_64
-- rhel-9-aarch64
-- fedora-39-x86_64
-- fedora-39-aarch64
-- fedora-40-x86_64
-- fedora-40-aarch64
+## Install the latest RPM:
 
-
-Then, install the latest rhproxy.
+Install the latest rhproxy RPM:
 
 ```sh
 # sudo dnf install -y rhproxy
 ```
 
-You must then run the rhproxy service controller as a regular non-root user of the system.
+# Running the Insights proxy
+
+## Installing the Insights proxy service:
+
+When using the `rhproxy` service controller, ***all commands*** for installing and interacting with Insights proxy should be executed as a *regular non-root* user of the system.
 
 Install the rhproxy service:
 
@@ -48,20 +62,16 @@ Install the rhproxy service:
 $ rhproxy install
 ```
 
-Required before starting the rhproxy service for pulling down the
-service image from Quay.io:
-
-```
-$ podman login quay.io
-```
-
+## Running the Insights proxy:
 
 Start the rhproxy service:
+
 ```
 $ rhproxy start
 ```
 
 Display status of the rhproxy service:
+
 ```
 $ rhproxy status
 ```
@@ -74,16 +84,16 @@ To allow external access to the Insights proxy, run the following commands:
 # sudo firewall-cmd --reload
 ```
 
-A few seconds later, you may proxy-forward Red-Hat Insights traffic to http://\<server-hosting-the-proxy\>:3128
+A few seconds later, you may proxy-forward Red-Hat Insights traffic to http://\<rhproxy-hostname\>:3128
 
 When running the Insights proxy, a self-signed certificate is created for accessing any resources served by the proxy
-nd is stored in the host's `~/.local/share/rhproxy/certs/` directory. You may provide your own
+and is stored in the host's `~/.local/share/rhproxy/certs/` directory. You may provide your own
 HTTPS certificate and key in this location before starting the Insights proxy:
 
 - `~/.local/share/rhproxy/certs/rhproxy.crt`
 - `~/.local/share/rhproxy/certs/rhproxy.key`
 
-The web server part of the Insights proxy can be accessed at https://\<server-hosting-the-proxy\>:8443
+The web server part of the Insights proxy can be accessed via https://\<rhproxy-hostname\>:8443
 
 The download content area for the Insights proxy web server is located in the following location:
 
@@ -113,14 +123,14 @@ Where <command> is one of:
 
 - The list of allowed upstream servers are provided in:
   - `~/.config/rhproxy/env/redhat.servers` for RedHat Insights Servers
-  - `~/.config/rhproxy/env/epel.servers` for Allowed Dnf/Yum EPEL Servers
+  - `~/.config/rhproxy/env/epel.servers` for Dnf/Yum EPEL Servers
 
   These are replaced with rhproxy RPM updates so any manual updates to them will be lost.
 
 The configuration of rhproxy can be updated as follows:
 
 - Update the Insights proxy parameters in `~/.config/rhproxy/env/rhproxy.env`
-- Provide optional mirror servers in the following file:
+- Provide optional Dnf/Yum servers in the following file:
   - `~/.config/rhproxy/env/mirror.servers`
 
   Updates to that file are presistent and not touched with rhproxy RPM updates.
