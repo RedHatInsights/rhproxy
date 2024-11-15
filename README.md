@@ -12,13 +12,13 @@ First, enable the appropriate repo then install the `rhproxy` RPM:
 #### X86_64
 
 ```sh
-# sudo subscription-manager repos --enable insights-proxy-1-tech-preview-for-rhel9-x86_64-rpms
+# sudo subscription-manager repos --enable insights-proxy-1-tech-preview-for-rhel-9-x86_64-rpms
 ```
 
 #### AARCH64
 
 ```sh
-# sudo subscription-manager repos --enable insights-proxy-1-tech-preview-for-rhel9-aarch64-rpms
+# sudo subscription-manager repos --enable insights-proxy-1-tech-preview-for-rhel-9-aarch64-rpms
 ```
 
 ### For Upstream Release Builds:
