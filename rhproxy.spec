@@ -15,6 +15,7 @@ BuildArch:      noarch
 
 Requires:       bash
 Requires:       podman >= 4.9.4
+Requires:       polkit
 
 %description
 This RPM installs the Insights proxy Service on the System.
