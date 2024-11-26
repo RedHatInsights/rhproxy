@@ -1,5 +1,5 @@
 %global base_version 1.3
-%global patch_version 7
+%global patch_version 8
 %global engine_version 1.3.6
 
 Name:           rhproxy
@@ -54,6 +54,10 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Tue Nov 26 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.8
+- Require the polkit RPM if not installed
+- Fixed DNF repo specification for the tech preview in the README
+
 * Tue Nov 12 2024 Alberto Bellotti <abellott@redhat.com> - 1.3.7
 - Using the 1.3.6 Konflux built rhproxy engine
 - Pulling rhproxy-engine from the quay.io/insights_proxy/rhproxy-engine repo
