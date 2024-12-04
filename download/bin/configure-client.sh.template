@@ -100,6 +100,7 @@ user =
 # The password for authenticating to the insights proxy (optional)
 password =
 !END!
+    chmod 644 "${INSIGHTS_CONF}"
   fi
 }
 
@@ -140,13 +141,17 @@ Environment=HTTPS_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
   create_insights_conf
   echo "Configuring ${INSIGHTS_CONF} rhproxy for ${PROXY_HOST}:${PROXY_PORT} ..."
   cp "${INSIGHTS_CONF}" "${INSIGHTS_CONF}.saved"
-  sed -n '0,/^\[insights-proxy\]/p' "${INSIGHTS_CONF}.saved" > "${INSIGHTS_CONF}"
-  sed    '0,/^\[insights-proxy\]/d' "${INSIGHTS_CONF}.saved" |
+  TMP_CONF="$(mktemp)"
+  sed -n '0,/^\[insights-proxy\]/p' "${INSIGHTS_CONF}" > "${TMP_CONF}"
+  if sed '0,/^\[insights-proxy\]/d' "${INSIGHTS_CONF}" |
     sed -e "0,/^host =.*$/ s//host = ${PROXY_HOST}/" \
         -e "0,/^port =.*$/ s//port = ${PROXY_PORT}/" \
         -e "0,/^scheme =.*$/ s//scheme = http/" \
         -e "0,/^user =.*$/ s//user =/" \
-        -e "0,/^password =.*$/ s//password =/" >> "${INSIGHTS_CONF}"
+        -e "0,/^password =.*$/ s//password =/" >> "${TMP_CONF}"; then
+    cp "${TMP_CONF}" "${INSIGHTS_CONF}"
+  fi
+  rm -f "${TMP_CONF}"
 
   install_rhcd_selinux_policy
   restart_services
@@ -164,10 +169,14 @@ elif [ "${SUBCMD}" = "--unconfigure" ]; then
   if [ -f "${INSIGHTS_CONF}" ]; then
     echo "Un-Configuring rhproxy from ${INSIGHTS_CONF} ..."
     cp "${INSIGHTS_CONF}" "${INSIGHTS_CONF}.saved"
-    sed -n '0,/^\[insights-proxy\]/p' "${INSIGHTS_CONF}.saved" > "${INSIGHTS_CONF}"
-    sed    '0,/^\[insights-proxy\]/d' "${INSIGHTS_CONF}.saved" |
+    TMP_CONF="$(mktemp)"
+    sed -n '0,/^\[insights-proxy\]/p' "${INSIGHTS_CONF}" > "${TMP_CONF}"
+    if sed '0,/^\[insights-proxy\]/d' "${INSIGHTS_CONF}" |
       sed -e "0,/^host =.*$/ s//host =/" \
-          -e "0,/^port =.*$/ s//port =/" >> "${INSIGHTS_CONF}"
+          -e "0,/^port =.*$/ s//port =/" >> "${TMP_CONF}"; then
+      cp "${TMP_CONF}" "${INSIGHTS_CONF}"
+    fi
+    rm -f "${TMP_CONF}"
   fi
 
   # Remove the override for the RHC Daemon
