@@ -84,21 +84,18 @@ function create_insights_conf {
 # Red Hat Insights Configuration File
 
 [insights-proxy]
-
 # An http proxy server to use for communicating with Insights
-host =
+host = ""
 
 # The port for the insights proxy
-port =
+port = 0
 
 # The scheme to use for the insights proxy
-scheme = http
+scheme = "http"
 
-# The user name for authenticating to the insights proxy (optional)
-user =
-
-# The password for authenticating to the insights proxy (optional)
-password =
+# The user name and password for authenticating to the insights proxy (optional)
+user = ""
+password = ""
 !END!
     chmod 644 "${INSIGHTS_CONF}"
   fi
@@ -144,11 +141,11 @@ Environment=HTTPS_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
   TMP_CONF="$(mktemp)"
   sed -n '0,/^\[insights-proxy\]/p' "${INSIGHTS_CONF}" > "${TMP_CONF}"
   if sed '0,/^\[insights-proxy\]/d' "${INSIGHTS_CONF}" |
-    sed -e "0,/^host =.*$/ s//host = ${PROXY_HOST}/" \
+    sed -e "0,/^host =.*$/ s//host = \"${PROXY_HOST}\"/" \
         -e "0,/^port =.*$/ s//port = ${PROXY_PORT}/" \
-        -e "0,/^scheme =.*$/ s//scheme = http/" \
-        -e "0,/^user =.*$/ s//user =/" \
-        -e "0,/^password =.*$/ s//password =/" >> "${TMP_CONF}"; then
+        -e "0,/^scheme =.*$/ s//scheme = \"http\"/" \
+        -e "0,/^user =.*$/ s//user = \"\"/" \
+        -e "0,/^password =.*$/ s//password = \"\"/" >> "${TMP_CONF}"; then
     cp "${TMP_CONF}" "${INSIGHTS_CONF}"
   fi
   rm -f "${TMP_CONF}"
@@ -172,8 +169,8 @@ elif [ "${SUBCMD}" = "--unconfigure" ]; then
     TMP_CONF="$(mktemp)"
     sed -n '0,/^\[insights-proxy\]/p' "${INSIGHTS_CONF}" > "${TMP_CONF}"
     if sed '0,/^\[insights-proxy\]/d' "${INSIGHTS_CONF}" |
-      sed -e "0,/^host =.*$/ s//host =/" \
-          -e "0,/^port =.*$/ s//port =/" >> "${TMP_CONF}"; then
+      sed -e "0,/^host =.*$/ s//host = \"\"/" \
+          -e "0,/^port =.*$/ s//port = 0/" >> "${TMP_CONF}"; then
       cp "${TMP_CONF}" "${INSIGHTS_CONF}"
     fi
     rm -f "${TMP_CONF}"
