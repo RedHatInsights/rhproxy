@@ -15,4 +15,5 @@ sso.redhat.com
 # Dnf/Yum RedHat Servers
 cdn.redhat.com
 mirrors.fedoraproject.org
+mirrormanager.fedoraproject.org
 codecs.fedoraproject.org

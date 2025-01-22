@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2024-11-26
-# Count:          307
+# Updated:        2025-01-22
+# Count:          300
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -21,7 +21,6 @@ centos.anexia.at
 centos.mirror.alwyzon.net
 ch.mirrors.cicku.me
 codingflyboy.mm.fcix.net
-cofractal-ewr.mm.fcix.net
 cofractal-sea.mm.fcix.net
 coresite-atl.mm.fcix.net
 creeperhost.mm.fcix.net
@@ -35,16 +34,15 @@ download.nus.edu.sg
 edgeuno-bog2.mm.fcix.net
 epel.01link.hk
 epel.au.ssimn.org
-epel.gb.ssimn.org
 epel.grena.ge
 epel.hysing.is
 epel.ip-connect.info
+epel.ip-connect.vn.ua
 epel.mirror.constant.com
 epel.mirror.digitalpacific.com.au
 epel.mirror.liquidtelecom.com
 epel.mirror.omnilance.com
 epel.mirror.shastacoe.net
-epel.sg.ssimn.org
 epel.srv.magticom.ge
 epel.stl.us.ssimn.org
 epel.uni-sofia.bg
@@ -65,7 +63,6 @@ fedora.mirror.garr.it
 fedora.mirror.thegigabit.com
 fedora.mirrorservice.org
 fedora.tu-chemnitz.de
-fedora.uib.no
 forksystems.mm.fcix.net
 fr2.rpmfind.net
 free.nchc.org.tw
@@ -101,8 +98,8 @@ gsl-syd.mm.fcix.net
 hk.mirrors.cicku.me
 hkg.mirror.rackspace.com
 iad.mirror.rackspace.com
-ima.mm.fcix.net
 in.mirrors.cicku.me
+insect.mm.fcix.net
 ipng.mm.fcix.net
 irltoolkit.mm.fcix.net
 it1.mirror.vhosting-it.com
@@ -119,6 +116,7 @@ linux.mirrors.es.net
 linuxsoft.cern.ch
 lolhost.mm.fcix.net
 mirror-icn.yuki.net.uk
+mirror-mci.yuki.net.uk
 mirror-nrt.yuki.net.uk
 mirror.01link.hk
 mirror.0xem.ma
@@ -132,10 +130,8 @@ mirror.cedia.org.ec
 mirror.centos.ikoula.com
 mirror.cherryservers.com
 mirror.chpc.utah.edu
-mirror.citrahost.com
 mirror.cloudhosting.lv
 mirror.cogentco.com
-mirror.colorado.edu
 mirror.compevo.com
 mirror.cpsc.ucalgary.ca
 mirror.cs.princeton.edu
@@ -146,7 +142,6 @@ mirror.daniel-jost.net
 mirror.datacenter.by
 mirror.de.leaseweb.net
 mirror.digitalnova.at
-mirror.dimensi.cloud
 mirror.dogado.de
 mirror.dst.ca
 mirror.efect.ro
@@ -164,6 +159,7 @@ mirror.grid.uchicago.edu
 mirror.hnd.cl
 mirror.host.ag
 mirror.hoster.kz
+mirror.hostiko.network
 mirror.hostnet.nl
 mirror.hyperdedic.ru
 mirror.i3d.net
@@ -195,7 +191,6 @@ mirror.nl.mirhosting.net
 mirror.nodesdirect.com
 mirror.nsc.liu.se
 mirror.nyist.edu.cn
-mirror.overthewire.com.au
 mirror.papua.go.id
 mirror.pilotfiber.com
 mirror.ps.kz
@@ -208,6 +203,7 @@ mirror.servaxnet.com
 mirror.sfo12.us.leaseweb.net
 mirror.siena.edu
 mirror.siwoo.org
+mirror.snu.edu.in
 mirror.steadfastnet.com
 mirror.szerverem.hu
 mirror.team-cymru.com
@@ -226,8 +222,7 @@ mirror.wd6.net
 mirror.xenyth.net
 mirror.yandex.ru
 mirror.yer.az
-mirror2.totbb.net
-mirroronet.pl
+mirror.za.abantu.cloud
 mirrors.20i.com
 mirrors.cat.pdx.edu
 mirrors.chroot.ro
@@ -257,7 +252,6 @@ mirrors.qlu.edu.cn
 mirrors.rit.edu
 mirrors.sohu.com
 mirrors.sonic.net
-mirrors.tscak.com
 mirrors.tuna.tsinghua.edu.cn
 mirrors.ukfast.co.uk
 mirrors.uni-ruse.bg
@@ -267,8 +261,6 @@ mirrors.wcupa.edu
 mirrors.xmission.com
 mirrors.xtom.de
 mirrors.xtom.ee
-mirrors.yun-idc.com
-mirrors.zju.edu.cn
 mnvoip.mm.fcix.net
 muug.ca
 na.edge.kernel.org
@@ -284,6 +276,7 @@ paducahix.mm.fcix.net
 pkg.adfinis-on-exoscale.ch
 pkg.adfinis.com
 pubmirror1.math.uh.edu
+pubmirror2.math.uh.edu
 pubmirror3.math.uh.edu
 reflector.westga.edu
 rep-epel-il.upress.io
