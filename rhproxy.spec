@@ -1,6 +1,6 @@
-%global base_version 1.3
-%global patch_version 9
-%global engine_version 1.3.6
+%global base_version 1.5
+%global patch_version 0
+%global engine_version 1.5.0
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
@@ -54,6 +54,10 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Thu Jan 23 2025 Alberto Bellotti <abellott@redhat.com> - 1.5.0
+- GA Release of Insights proxy
+- Now pulling the rhproxy-engine container image 1.5.0 from registry.redhat.io
+
 * Wed Jan 22 2025 Alberto Bellotti <abellott@redhat.com> - 1.3.9
 - Added mirrormanager.fedoraproject.org as allowed Red Hat server.
 
