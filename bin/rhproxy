@@ -90,7 +90,7 @@ if [ "${COMMAND}" == "install" ]; then
     copy_container "${container_file}" "${SYSTEMD_USER_PATH}"
   done
 
-  for env_file in "${ENV_PATH}"/*.env "${ENV_PATH}"/*.servers; do
+  for env_file in "${ENV_PATH}"/*.env; do
     copy_env "${env_file}" "${ENV_USER_PATH}"
   done
 

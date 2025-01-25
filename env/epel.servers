@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-01-22
-# Count:          300
+# Updated:        2025-01-25
+# Count:          301
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -215,6 +215,7 @@ mirror.umd.edu
 mirror.us-midwest-1.nexcess.net
 mirror.us.leaseweb.net
 mirror.us.mirhosting.net
+mirror.usi.edu
 mirror.uv.es
 mirror.vpsnet.com
 mirror.vsys.host
