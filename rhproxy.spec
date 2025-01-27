@@ -1,5 +1,5 @@
 %global base_version 1.5
-%global patch_version 0
+%global patch_version 1
 %global engine_version 1.5.0
 
 Name:           rhproxy
@@ -54,6 +54,9 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Sat Jan 25 2025 Alberto Bellotti <abellott@redhat.com> - 1.5.1
+- Fixed an issue where the mirror.server file was getting overwritten.
+
 * Thu Jan 23 2025 Alberto Bellotti <abellott@redhat.com> - 1.5.0
 - GA Release of Insights proxy
 - Now pulling the rhproxy-engine container image 1.5.0 from registry.redhat.io
