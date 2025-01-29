@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-01-27
-# Count:          301
+# Updated:        2025-01-29
+# Count:          300
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -202,7 +202,6 @@ mirror.sabay.com.kh
 mirror.servaxnet.com
 mirror.sfo12.us.leaseweb.net
 mirror.siena.edu
-mirror.siwoo.org
 mirror.snu.edu.in
 mirror.steadfastnet.com
 mirror.szerverem.hu
