@@ -1,0 +1,112 @@
+# Insights proxy tests
+
+## About
+This is the test suite for Insights proxy. Test cases are written as Ansible tasks that are
+executed on the proxy server and a client machine. This pair of systems must be launched
+beforehand.
+
+A script is provided to facilitate the creation of test systems in AWS, including the correct
+security group settings. It creates an inventory file which is then used by the Ansible playbook.
+
+## Requirements
+* Ansible
+* Red Hat account
+* Optionally, if using test systems in AWS:
+    * RPMS: python3-boto awscli2
+    * AWS credentials; run `aws configure` to obtain access keys
+    * `~/.ssh/config` with the configuration for EC2 VMs
+    * `/etc/ec2.yaml` with VPC data, format: `region: [VPC ID, subnet ID]` under `vpc`
+
+Examples:
+
+SSH configurtion:
+
+```
+Host *.amazonaws.com
+    User ec2-user
+    IdentityFile ~/.ssh/id_rsa_or
+```
+
+VPC configuration:
+
+```
+vpc:
+  eu-west-1: [vpc-123abc, subnet-456def]
+  us-east-1: [vpc-0099ff, subnet-eeda11]
+```
+
+Note: these VPCs and subnets must exist in your AWS acount first.
+
+* If not using AWS:
+    * One RHEL 9 system for the proxy server and one supported client, e.g. also running RHEL 9.
+    * An inventory file with `[PROXY]` and `[CLI]` groups with the hostnames inside.
+
+Example:
+
+```
+[PROXY]
+proxy.example.com
+
+[CLI]
+cli01.example.com
+```
+
+## Creating a CloudFormation Stack in AWS
+Note: skip this step if not using AWS.
+
+Run the provided script:
+
+```
+$ ./create-cf-stack.py
+```
+
+With no arguments, it creates a stack with a RHEL 9 x86\_64 system for the proxy and the same
+configuration for a client. The current date (YYYYMMDD) is used for the name.
+
+See the output from `--help` for more information. Notably, you may wish to use a different region,
+name, architecture for the proxy server, or change the number of RHEL 9 or 8 clients (even to 0).
+
+`RHEL*.json` files are provided to automate the selection of the AMIs. AMI IDs can be overridden
+on the command line or changed in these JSON files.
+
+When this script has finished, it creates an inventory file called
+`hosts_insights_proxy_<NAME>.cfg` and also prints its contents.
+
+## Creating the file with credentials
+Create the `credentials.conf` file, in this very directory, as follows:
+
+```
+[rh]
+username=<YOUR RED HAT USERNAME>
+password=<YOUR RED HAT PASSWORD>
+```
+
+This data is used in order to register the systems to RHSM (to be able to access the Insights proxy
+dnf repository and install the RPM), and to log in to the registry that the proxy container is in.
+
+## Running the test suite
+As simple as:
+
+```
+$ ansible-playbook -i <INVENTORY FILE> test.yml
+```
+
+See the tags in the individual YAML files in subdirectories. If you only want to run some tasks,
+use the relevant tags, comma separated, as the argument of `--tags`.
+
+Test data is kept in `group_vars/all.yml`.
+
+### Example
+
+If you only want to set the environment up because you wish to keep it running:
+
+```
+$ ansible-playbook -i hosts_insights_proxy_20250205.cfg test.yml --tags subscribe,build_firewall,rpm_install,user_create,user_login,service_install,service_start,service_status,fetch_helper,run_helper
+```
+
+In this case, don't forget to unsubscribe the systems from RHSM before you terminate them. If the
+complete playbook is run, this happens automatically during the final cleanup, unless a task fails.
+
+## Notes
+To enable logging for easier sharing of the output, run the `ansible-playbook` command with
+`ANSIBLE_LOG_PATH=/some/file`.

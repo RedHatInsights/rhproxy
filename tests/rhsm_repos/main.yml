@@ -1,0 +1,21 @@
+# Tests for RHSM repos through the proxy
+#
+- hosts: CLI
+  tasks:
+  - name: check for the proxy in the RHSM configuration
+    command: subscription-manager config
+    register: submancfg
+    changed_when: false
+    failed_when: "'proxy_hostname = ' + server not in submancfg.stdout"
+    tags: rhsm_repos
+
+  - name: check the repolist
+    command: "yum -v repolist"
+    changed_when: false
+    tags: rhsm_repos
+
+  - name: install a test package from RHSM repos
+    package:
+      name: "{{ test_rhsm_package }}"
+      state: present
+    tags: rhsm_repos

@@ -1,0 +1,19 @@
+server: "{{ groups['PROXY'][0] }}"
+rh_user: "{{ lookup('ini', 'username section=rh file=../credentials.conf') }}"
+rh_password: "{{ lookup('ini', 'password section=rh file=../credentials.conf') }}"
+registry: registry.redhat.io
+container: insights-proxy
+rpm_name: rhproxy
+local_user: rhproxy
+command: rhproxy
+test_good_host: mirrors.fedoraproject.org
+test_bad_host: www.fi.muni.cz
+test_rhsm_package: tree
+test_epel_package: screen
+test_3rd_party_repo:
+  name: zoo
+  description: Zoo from Pulp demo repos
+  protocol: https://
+  hostname: repos.fedorapeople.org
+  path_to_repodata: /pulp/pulp/demo_repos/zoo/
+  package: bear

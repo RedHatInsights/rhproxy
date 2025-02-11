@@ -1,0 +1,20 @@
+# Common first steps on all nodes
+#
+- hosts: all
+  tasks:
+  - name: subscribe to RHSM
+    redhat_subscription:
+      state: present
+      username: "{{ rh_user }}"
+      password: "{{ rh_password }}"
+    tags: subscribe
+
+  - name: make sure RHSM repo management is enabled
+    command: subscription-manager config --rhsm.manage_repos=1
+    tags: subscribe
+
+  - name: install the firewall
+    package:
+      name: iptables
+      state: present
+    tags: build_firewall
