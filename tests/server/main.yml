@@ -23,12 +23,21 @@
   - name: enable the Insights proxy repo
     rhsm_repository:
       name: insights-proxy-for-rhel-9-{{ ansible_architecture }}-rpms
+    when: local_rpm is not defined
     tags: subscribe
+
+  - name: copy a local Insights proxy RPM
+    copy:
+      src: "{{ local_rpm }}"
+      dest: /tmp
+    when: local_rpm is defined
+    tags: local_rpm
 
   - name: install the Insights proxy RPM
     package:
-      name: "{{ rpm_name }}"
+      name: "{{ local_rpm | default(rpm_name) }}"
       state: latest
+      disable_gpg_check: "{{ unsigned | default(False) | bool }}"
     tags: rpm_install
 
   - name: create the user for Insights proxy
@@ -43,9 +52,9 @@
 
   - name: log in to the registry
     containers.podman.podman_login:
-      registry: "{{ registry }}"
-      username: "{{ rh_user }}"
-      password: "{{ rh_password }}"
+      registry: "{{ registry['host'] }}"
+      username: "{{ registry['username'] }}"
+      password: "{{ registry['password'] }}"
     become_user: "{{ local_user }}"
     tags: user_login
 
@@ -76,7 +85,7 @@
     command: podman images --noheading
     become_user: "{{ local_user }}"
     register: images
-    failed_when: "registry + '/' + container not in images.stdout"
+    failed_when: "registry['host'] + '/' + container not in images.stdout"
     changed_when: false
     tags: image_list
 
@@ -84,7 +93,7 @@
     command: podman container list --noheading
     become_user: "{{ local_user }}"
     register: containers
-    failed_when: "registry + '/' + container not in containers.stdout"
+    failed_when: "registry['host'] + '/' + container not in containers.stdout"
     changed_when: false
     tags: container_list
 

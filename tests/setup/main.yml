@@ -5,7 +5,7 @@
   - name: subscribe to RHSM
     redhat_subscription:
       state: present
-      username: "{{ rh_user }}"
+      username: "{{ rh_username }}"
       password: "{{ rh_password }}"
     tags: subscribe
 

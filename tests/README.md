@@ -79,10 +79,17 @@ Create the `credentials.conf` file, in this very directory, as follows:
 [rh]
 username=<YOUR RED HAT USERNAME>
 password=<YOUR RED HAT PASSWORD>
+
+[quay]
+username=<YOUR QUAY USERNAME>
+password=<YOUR QUAY PASSWORD>
 ```
 
 This data is used in order to register the systems to RHSM (to be able to access the Insights proxy
 dnf repository and install the RPM), and to log in to the registry that the proxy container is in.
+
+The credentials for Quay are only needed if testing unreleased versions from Quay. However, in that
+case you're going to need a scratch build of the rhproxy RPM that pulls the image from Quay, too.
 
 ## Running the test suite
 As simple as:
@@ -95,6 +102,8 @@ See the tags in the individual YAML files in subdirectories. If you only want to
 use the relevant tags, comma separated, as the argument of `--tags`.
 
 Test data is kept in `group_vars/all.yml`.
+Any variable can be overridden on the command line.
+In addition, two more variables are used in the code and can be set to a non-default value.
 
 ### Example
 
@@ -106,6 +115,17 @@ $ ansible-playbook -i hosts_insights_proxy_20250205.cfg test.yml --tags subscrib
 
 In this case, don't forget to unsubscribe the systems from RHSM before you terminate them. If the
 complete playbook is run, this happens automatically during the final cleanup, unless a task fails.
+
+If you want to test an unsigned RPM that uses an image from quay.io, use the following argument
+on the `ansible-playbook` command line:
+
+```
+--extra-vars "local_rpm=<PATH_TO_LOCAL_RHPROXY_RPM> unsigned=True registry_alias=quay"
+```
+
+The RPM must exist on the system where the playbook was launched, and it will be copied to the
+proxy node. Alternatively, if the RPM is reachable from the proxy node using a URL, set the
+`rpm_name` variable to this URL; also use `unsigned=True` if this RPM isn't signed.
 
 ## Notes
 To enable logging for easier sharing of the output, run the `ansible-playbook` command with
