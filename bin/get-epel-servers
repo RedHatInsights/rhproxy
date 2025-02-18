@@ -22,7 +22,7 @@ for row in doc('table')[0]:
             if re.match("^/mirrors/EPEL/[^/]*/[^/]*$", href):
                 href_paths = href.split("/")
                 version, arch = href_paths[3], href_paths[4]
-                epel_versions.add(version)
+                epel_versions.add(version.split(".")[0])
                 epel_archs.add(arch)
                 query_params += ["repo=epel-{}&arch={}&country=global".format(version, arch)]
 
