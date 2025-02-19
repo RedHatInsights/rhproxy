@@ -12,6 +12,10 @@
     when: inventory_hostname in groups['CLI']
     tags: cleanup
 
+  - name: unregister from Insights
+    command: insights-client --unregister
+    tags: unsubscribe,cleanup
+
   - name: unsubscribe from RHSM
     redhat_subscription:
       state: absent
