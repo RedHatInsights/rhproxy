@@ -27,8 +27,8 @@ fi
 SUBCMD="${1}"
 shift
 
-export RHEL_RELEASE
 RHEL_RELEASE=$(uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/')
+export RHEL_RELEASE
 
 function restart_services {
   echo "Restarting Insights Services ..."
