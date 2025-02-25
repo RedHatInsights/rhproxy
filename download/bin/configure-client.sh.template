@@ -27,6 +27,9 @@ fi
 SUBCMD="${1}"
 shift
 
+RHEL_RELEASE=$(uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/')
+export RHEL_RELEASE
+
 function restart_services {
   echo "Restarting Insights Services ..."
   systemctl daemon-reload
@@ -36,6 +39,11 @@ function restart_services {
 }
 
 function install_rhcd_selinux_policy {
+  # We don't need to do this for RHEL8
+  if [ "${RHEL_RELEASE}" = "el8" ]; then
+    return
+  fi
+
   # If SELinux is not enabled, we're done.
   if [ ! "$(/usr/sbin/getenforce)" = "Enforcing" ]; then
     return
