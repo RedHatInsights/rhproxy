@@ -2,14 +2,6 @@
 #
 - hosts: CLI
   tasks:
-  - name: uninstall the RHUI client
-    # just in case this is a test system in AWS...
-    # such a system normally uses RHUI repos,
-    package:
-      name: rh-amazon-rhui-client
-      state: absent
-    tags: disable_rhui
-
   - name: get the nameserver
     command: "awk '/^nameserver/ { print $2 }' /etc/resolv.conf"
     register: get_ns

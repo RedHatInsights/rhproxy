@@ -2,6 +2,10 @@
 #
 - hosts: all
   tasks:
+  - name: disable all repositories
+    command: "yum-config-manager --disable '*'"
+    tags: subscribe
+
   - name: subscribe to RHSM
     redhat_subscription:
       state: present
