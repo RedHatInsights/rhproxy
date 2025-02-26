@@ -1,0 +1,33 @@
+# Tests for EPEL though the proxy
+#
+- hosts: CLI
+  tasks:
+  - name: import the EPEL GPG key
+    rpm_key:
+      key: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
+    environment:
+      https_proxy: "http://{{ server }}:3128"
+    tags: epel
+
+  - name: enable EPEL
+    package:
+      name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+      state: present
+    environment:
+      https_proxy: "http://{{ server }}:3128"
+    tags: epel
+
+  - name: add the proxy configuration to the EPEL repos
+    command: "yum-config-manager --save --setopt=*.proxy=http://{{ server }}:3128/ epel*"
+    tags: epel
+
+  - name: check the repolist with EPEL
+    command: "yum -v repolist"
+    changed_when: false
+    tags: epel
+
+  - name: install a test package from EPEL
+    package:
+      name: "{{ test_epel_package }}"
+      state: present
+    tags: epel

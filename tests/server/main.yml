@@ -1,0 +1,111 @@
+# Configuration of the server node and its smoke tests
+#
+- hosts: PROXY
+  tasks:
+  - name: allow access to the proxy port to the systems in the inventory
+    command: "iptables -A INPUT -s {{ hostvars[item]['ansible_default_ipv4']['address'] }} -p tcp --dport 3128 -j ACCEPT"
+    with_items: "{{ groups['PROXY'] + groups['CLI'] }}"
+    tags: build_firewall
+
+  - name: deny access to the proxy port to others
+    command: iptables -A INPUT -p tcp --dport 3128 -j REJECT
+    tags: build_firewall
+
+  - name: allow access to the proxy web port to the systems in the inventory
+    command: "iptables -A INPUT -s {{ hostvars[item]['ansible_default_ipv4']['address'] }} -p tcp --dport 8443 -j ACCEPT"
+    with_items: "{{ groups['PROXY'] + groups['CLI'] }}"
+    tags: build_firewall
+
+  - name: deny access to the proxy web port to others
+    command: iptables -A INPUT -p tcp --dport 3128 -j REJECT
+    tags: build_firewall
+
+  - name: enable the Insights proxy repo
+    rhsm_repository:
+      name: insights-proxy-for-rhel-9-{{ ansible_architecture }}-rpms
+    when: local_rpm is not defined
+    tags: subscribe
+
+  - name: copy a local Insights proxy RPM
+    copy:
+      src: "{{ local_rpm }}"
+      dest: /tmp
+    when: local_rpm is defined
+    tags: local_rpm
+
+  - name: install the Insights proxy RPM
+    package:
+      name: "{{ local_rpm | default(rpm_name) }}"
+      state: latest
+      disable_gpg_check: "{{ unsigned | default(False) | bool }}"
+    tags: rpm_install
+
+  - name: create the user for Insights proxy
+    user:
+      name: "{{ local_user }}"
+    tags: user_create
+
+  - name: enable lingering for the user
+    # this is necessary to ensure the right rundir for the container and podman auth data
+    command: "loginctl enable-linger {{ local_user }}"
+    tags: user_create
+
+  - name: log in to the registry
+    containers.podman.podman_login:
+      registry: "{{ registry['host'] }}"
+      username: "{{ registry['username'] }}"
+      password: "{{ registry['password'] }}"
+    become_user: "{{ local_user }}"
+    tags: user_login
+
+  - name: install the proxy
+    command: "{{ command }} install"
+    become_user: "{{ local_user }}"
+    tags: service_install
+
+  - name: start the proxy
+    command: "{{ command }} start"
+    become_user: "{{ local_user }}"
+    tags: service_start
+
+  - name: wait a bit
+    pause:
+      seconds: 5
+    tags: service_start
+
+  - name: check the proxy service
+    command: "{{ command }} status"
+    become_user: "{{ local_user }}"
+    register: status_cmd
+    failed_when: "'Active: active' not in status_cmd.stdout"
+    changed_when: false
+    tags: service_status
+
+  - name: check the podman image
+    command: podman images --noheading
+    become_user: "{{ local_user }}"
+    register: images
+    failed_when: "registry['host'] + '/' + container not in images.stdout"
+    changed_when: false
+    tags: image_list
+
+  - name: check the container
+    command: podman container list --noheading
+    become_user: "{{ local_user }}"
+    register: containers
+    failed_when: "registry['host'] + '/' + container not in containers.stdout"
+    changed_when: false
+    tags: container_list
+
+  - name: test the proxy from the server
+    command: "curl -L -x http://{{ server }}:3128 https://{{ test_good_host }}/"
+    changed_when: false
+    tags: local_test
+
+  - name: check the log
+    command: podman logs rhproxy
+    become_user: "{{ local_user }}"
+    register: podman_logs
+    failed_when: "'CONNECT ' + test_good_host not in podman_logs.stdout"
+    changed_when: false
+    tags: local_test

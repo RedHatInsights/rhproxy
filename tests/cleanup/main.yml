@@ -1,0 +1,79 @@
+# Teardown tasks
+#
+- hosts: all
+  tasks:
+  - name: uninstall test packages
+    package:
+      name:
+        - "{{ test_rhsm_package }}"
+        - "{{ test_epel_package }}"
+        - "{{ test_3rd_party_repo['package'] }}"
+      state: absent
+    when: inventory_hostname in groups['CLI']
+    tags: cleanup
+
+  - name: unregister from Insights
+    command: insights-client --unregister
+    tags: unsubscribe,cleanup
+
+  - name: unsubscribe from RHSM
+    redhat_subscription:
+      state: absent
+    tags: unsubscribe,cleanup
+
+  - name: remove EPEL
+    package:
+      name: epel-release
+      state: absent
+    when: inventory_hostname in groups['CLI']
+    tags: cleanup
+
+  - name: remove the test repo
+    yum_repository:
+      name: "{{ test_3rd_party_repo['name'] }}"
+      state: absent
+    when: inventory_hostname in groups['CLI']
+    tags: cleanup
+
+  - name: run the helper script to unconfigure the proxy
+    command: "/tmp/configure-client.sh --unconfigure"
+    when: inventory_hostname in groups['CLI']
+    tags: run_helper_uncfg,cleanup
+
+  - name: reset the firewall on the client
+    # this is a two-step operation
+    shell: "iptables -P OUTPUT ACCEPT ; iptables -F"
+    when: inventory_hostname in groups['CLI']
+    tags: teardown_firewall,cleanup
+
+  - name: stop the proxy service
+    command: "{{ command }} stop"
+    become_user: "{{ local_user }}"
+    when: inventory_hostname in groups['PROXY']
+    tags: service_stop,cleanup
+
+  - name: uninstall the proxy service
+    command: "{{ command }} uninstall -f"
+    become_user: "{{ local_user }}"
+    when: inventory_hostname in groups['PROXY']
+    tags: service_uninstall,cleanup
+
+  - name: uninstall the proxy RPM
+    package:
+      name: rhproxy
+      state: absent
+    when: inventory_hostname in groups['PROXY']
+    tags: rpm_uninstall,cleanup
+
+  - name: delete the user for Insights proxy
+    user:
+      name: "{{ local_user }}"
+      state: absent
+      remove: true
+    when: inventory_hostname in groups['PROXY']
+    tags: user_delete,cleanup
+
+  - name: reset the firewall on the server
+    command: iptables -F
+    when: inventory_hostname in groups['PROXY']
+    tags: teardown_firewall,cleanup

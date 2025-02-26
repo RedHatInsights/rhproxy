@@ -1,0 +1,57 @@
+# Client configuration
+#
+- hosts: CLI
+  tasks:
+  - name: get the nameserver
+    command: "awk '/^nameserver/ { print $2 }' /etc/resolv.conf"
+    register: get_ns
+    changed_when: false
+    failed_when: get_ns.stdout_lines|length == 0
+    tags: build_firewall
+
+  - name: forbid locally-initiated outgoing connections
+    # do this in one shell command; the first command alone would cut the system off
+    # you may experience a short blip anyway, IOW, this task may take longer than usual
+    shell: "iptables -P OUTPUT DROP ; iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT"
+    tags: build_firewall
+
+  - name: allow DNS lookups
+    command: "iptables -A OUTPUT -p udp -d {{ get_ns.stdout_lines[0] }} -j ACCEPT"
+    tags: build_firewall
+
+  - name: allow connections to the proxy server
+    command: "iptables -A OUTPUT -p tcp -d {{ server }} -j ACCEPT"
+    tags: build_firewall
+
+  - name: allow connections to the AWS Instance Metadata Service
+    # insights client talks to it when in AWS...
+    command: "iptables -A OUTPUT -p tcp -d 169.254.169.254 -j ACCEPT"
+    when: "inventory_hostname.endswith('amazonaws.com')"
+    tags: build_firewall
+
+  - name: check if direct connection to an allowed remote host fails (times out due to the firewall)
+    command: "curl -m 5 https://{{ test_good_host }}/"
+    register: curl_direct
+    changed_when: false
+    failed_when: curl_direct.rc != 28
+    tags: direct_connect
+
+  - name: check if connection to an unauthorized remote host through the proxy is denied
+    command: "curl -L -x http://{{ server }}:3128 https://{{ test_bad_host }}/"
+    register: curl_proxy_bad_host
+    changed_when: false
+    failed_when: "curl_proxy_bad_host.rc != 56 or 'Received HTTP code 404 from proxy after CONNECT' not in curl_proxy_bad_host.stderr"
+    tags: proxy_connect
+
+  - name: download the helper script
+    get_url:
+      url: "https://{{ server }}:8443/download/bin/configure-client.sh"
+      validate_certs: false
+      dest: /tmp
+      mode: "755"
+    tags: fetch_helper
+
+  - name: run the helper script
+    command: "/tmp/configure-client.sh --configure --proxy-host {{ server }}"
+    changed_when: false
+    tags: run_helper
