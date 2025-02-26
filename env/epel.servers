@@ -1,5 +1,5 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-02-19
+# Updated:        2025-02-26
 # Count:          296
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
@@ -27,6 +27,7 @@ creeperhost.mm.fcix.net
 d2lzkl7pfhq30w.cloudfront.net
 de.mirrors.cicku.me
 dfw.mirror.rackspace.com
+distrohub.kyiv.ua
 divergentnetworks.mm.fcix.net
 dl.fedoraproject.org
 download-cc-rdu01.fedoraproject.org
@@ -46,7 +47,6 @@ epel.srv.magticom.ge
 epel.uni-sofia.bg
 es.mirrors.cicku.me
 eu.edge.kernel.org
-fastmirror.pp.ua
 fedora-archive.ip-connect.info
 fedora-archive.ip-connect.vn.ua
 fedora-archive.mirror.liquidtelecom.com
@@ -246,7 +246,7 @@ mirrors.nxthost.com
 mirrors.powernet.com.ru
 mirrors.ptisp.pt
 mirrors.qlu.edu.cn
-mirrors.rit.edu
+mirrors.rc.rit.edu
 mirrors.sohu.com
 mirrors.sonic.net
 mirrors.tuna.tsinghua.edu.cn
