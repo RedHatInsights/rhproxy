@@ -1,6 +1,6 @@
 %global base_version 1.5
-%global patch_version 3
-%global engine_version 1.5.0
+%global patch_version 4
+%global engine_version 1.5.1
 
 Name:           rhproxy
 Version:        %{base_version}.%{patch_version}
@@ -54,6 +54,10 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Wed Feb 26 2025 Alberto Bellotti <abellott@redhat.com> - 1.5.4
+- Now pulling the rhproxy-engine container image 1.5.1 from registry.redhat.io
+- Skip setting the SELinux module policy in configure-client.sh, not needed for RHEL8
+
 * Wed Jan 29 2025 Alberto Bellotti <abellott@redhat.com> - 1.5.3
 - Updated the image repo path in registry.redhat.io to exclude rhproxy-engine
 
