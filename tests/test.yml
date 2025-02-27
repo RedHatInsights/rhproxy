@@ -1,0 +1,12 @@
+# I'm the playbook that executes all the tests. Run me!
+#
+- import_playbook: setup/main.yml
+
+- import_playbook: server/main.yml
+- import_playbook: client/main.yml
+- import_playbook: insights/main.yml
+- import_playbook: rhsm_repos/main.yml
+- import_playbook: epel/main.yml
+- import_playbook: custom_repos/main.yml
+
+- import_playbook: cleanup/main.yml

@@ -1,0 +1,27 @@
+# Tests for the Insights client
+#
+- hosts: CLI
+  tasks:
+  - name: test the connection to Insights
+    command: insights-client --test-connection --verbose
+    register: insights_test
+    changed_when: false
+    failed_when: "'http://' + server + ':3128' not in insights_test.stdout or insights_test.rc != 0"
+    tags: insights
+
+  - name: register to Insights
+    command: insights-client --register
+    changed_when: false
+    tags: insights
+
+  - name: test the Insights status
+    command: insights-client --status --verbose
+    register: insights_status
+    changed_when: false
+    failed_when: "'http://' + server + ':3128' not in insights_status.stdout or insights_test.rc != 0"
+    tags: insights
+
+  - name: run the Insights client
+    command: insights-client
+    changed_when: false
+    tags: insights
