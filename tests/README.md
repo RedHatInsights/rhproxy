@@ -127,6 +127,14 @@ The RPM must exist on the system where the playbook was launched, and it will be
 proxy node. Alternatively, if the RPM is reachable from the proxy node using a URL, set the
 `rpm_name` variable to this URL; also use `unsigned=True` if this RPM isn't signed.
 
+You can also override the image path in the quadlet service file if you want to pull an image that
+differs from the one in this file: for example, to pull a new test image at Quay while testing an
+rhproxy RPM build that uses the Red Hat registry. To do so, add the following extra variable:
+
+```
+image_override=<REGISTRY_HOST/IMAGE_PATH:VERSION>
+```
+
 ## Notes
 To enable logging for easier sharing of the output, run the `ansible-playbook` command with
 `ANSIBLE_LOG_PATH=/some/file`.
