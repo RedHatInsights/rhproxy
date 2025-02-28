@@ -58,6 +58,14 @@
     become_user: "{{ local_user }}"
     tags: user_login
 
+  - name: override the image path if needed
+    lineinfile:
+      path: /usr/share/rhproxy/config/rhproxy.container
+      regexp: "^Image="
+      line: Image={{ image_override }}
+    when: image_override is defined
+    tags: service_install
+
   - name: install the proxy
     command: "{{ command }} install"
     become_user: "{{ local_user }}"
