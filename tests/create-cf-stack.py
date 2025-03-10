@@ -24,7 +24,7 @@ argparser = argparse.ArgumentParser(description='Create CloudFormation stack for
                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 argparser.add_argument('--name', help='common name for stack members', default=time.strftime("%Y%m%d"))
-argparser.add_argument('--cli8', help='number of RHEL8 clients', type=int, default=0)
+argparser.add_argument('--cli8', help='number of RHEL8 clients', type=int, default=1)
 argparser.add_argument('--cli8-arch', help='RHEL 8 clients\' architectures (comma-separated list)', default='x86_64', metavar='ARCH')
 argparser.add_argument('--cli9', help='number of RHEL9 clients', type=int, default=1)
 argparser.add_argument('--cli9-arch', help='RHEL 9 clients\' architectures (comma-separated list)', default='x86_64', metavar='ARCH')

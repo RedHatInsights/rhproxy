@@ -1,0 +1,56 @@
+# Tests for RHC
+#
+- hosts: all
+  tasks:
+  - name: block for client tasks
+    block:
+      - name: remove PID files
+      # needed before yggdrasil PR 299
+        file:
+          path: "{{ item }}"
+          state: absent
+        with_items:
+          - /var/run/rhc/workers/rhc-worker-playbook.worker.pid
+          - /var/run/rhc/workers/rhc-package-manager-worker.pid
+
+      - name: restart the rhc daemon
+        systemd_service:
+          name: rhcd
+          state: restarted
+
+      - name: wait two minutes and get the rhc daemon status report
+      # can't use the pause module due to Ansible issue 19966
+        shell: "sleep 120 ; systemctl status rhcd"
+        register: daemon_status
+        changed_when: false
+        failed_when: "'failed to start worker' in daemon_status.stdout"
+        # ignore before rhc-worker-playbook PR 56
+        ignore_errors: true
+
+      - name: display the rhc daemon status report
+        debug:
+          msg: "{{ daemon_status.stdout }}"
+
+      - name: get the rhc client status report
+        command: rhc status
+        register: client_status
+        changed_when: false
+
+      - name: display the rhc client status report
+        debug:
+          msg: "{{ client_status.stdout }}"
+    when: inventory_hostname in groups['CLI']
+    tags: rhc
+
+  - name: block for server tasks
+    block:
+      - name: check the server log
+        command: podman logs rhproxy
+        become_user: "{{ local_user }}"
+        register: podman_logs_2
+        failed_when: "'CONNECT yggd' in podman_logs_2.stdout"
+        changed_when: false
+        # ignore before rhc-worker-playbook PR 56
+        ignore_errors: true
+    when: inventory_hostname in groups['PROXY']
+    tags: rhc
