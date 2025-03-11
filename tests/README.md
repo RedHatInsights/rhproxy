@@ -61,7 +61,7 @@ $ ./create-cf-stack.py
 ```
 
 With no arguments, it creates a stack with a RHEL 9 x86\_64 system for the proxy and two more client
-sytems running RHEL 8 and 9, both using x86\_64. The current date (YYYYMMDD) is used for the name.
+systems running RHEL 8 and 9, both using x86\_64. The current date (YYYYMMDD) is used for the name.
 
 See the output from `--help` for more information. Notably, you may wish to use a different region,
 name, architecture for the proxy server, or change the number of RHEL 9 or 8 clients (even to 0).
