@@ -17,7 +17,7 @@
     tags: build_firewall
 
   - name: deny access to the proxy web port to others
-    command: iptables -A INPUT -p tcp --dport 3128 -j REJECT
+    command: iptables -A INPUT -p tcp --dport 8443 -j REJECT
     tags: build_firewall
 
   - name: enable the Insights proxy repo
