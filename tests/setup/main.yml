@@ -22,3 +22,10 @@
       name: iptables
       state: present
     tags: build_firewall
+
+  - name: make sure the playbook package is installed on the clients
+    package:
+      name: rhc-worker-playbook
+      state: latest
+    when: inventory_hostname in groups['CLI']
+    tags: rpm_install
