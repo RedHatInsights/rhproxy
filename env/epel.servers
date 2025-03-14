@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-03-10
-# Count:          298
+# Updated:        2025-03-14
+# Count:          294
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -115,7 +115,6 @@ lolhost.mm.fcix.net
 mirror-icn.yuki.net.uk
 mirror-mci.yuki.net.uk
 mirror-nrt.yuki.net.uk
-mirror.01link.hk
 mirror.0xem.ma
 mirror.23m.com
 mirror.2degrees.nz
@@ -148,7 +147,6 @@ mirror.etf.bg.ac.rs
 mirror.euserv.net
 mirror.facebook.net
 mirror.fcix.net
-mirror.fjordos.no
 mirror.fmt-2.serverforge.org
 mirror.freedif.org
 mirror.freethought-internet.co.uk
@@ -200,7 +198,6 @@ mirror.rnet.missouri.edu
 mirror.sabay.com.kh
 mirror.servaxnet.com
 mirror.sfo12.us.leaseweb.net
-mirror.snu.edu.in
 mirror.steadfastnet.com
 mirror.szerverem.hu
 mirror.team-cymru.com
@@ -297,7 +294,6 @@ syd.mirror.rackspace.com
 tw.mirrors.cicku.me
 ucmirror.canterbury.ac.nz
 us.mirrors.cicku.me
-uvermont.mm.fcix.net
 volico.mm.fcix.net
 www.gtlib.gatech.edu
 www.nic.funet.fi
