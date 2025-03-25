@@ -7,19 +7,22 @@ First, enable the appropriate repo then install the `rhproxy` RPM:
 
 ## Enabling the RPM Repo:
 
-### For Tech Preview Builds:
+### For General Availability Builds:
 
 #### X86_64
 
 ```sh
-# sudo subscription-manager repos --enable insights-proxy-1-tech-preview-for-rhel-9-x86_64-rpms
+# sudo subscription-manager repos --enable insights-proxy-for-rhel-9-x86_64-rpms
 ```
 
 #### AARCH64
 
 ```sh
-# sudo subscription-manager repos --enable insights-proxy-1-tech-preview-for-rhel-9-aarch64-rpms
+# sudo subscription-manager repos --enable insights-proxy-for-rhel-9-aarch64-rpms
 ```
+
+> [!IMPORTANT]
+> Be sure to enable this GA repository, update the RPM, and reinstall the service if you have installed a Technology Preview build before.
 
 ### For Upstream Release Builds:
 
