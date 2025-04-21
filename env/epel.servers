@@ -1,13 +1,12 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-03-25
-# Count:          292
+# Updated:        2025-04-23
+# Count:          290
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
 # Warning: Any updates to this file are lost when rhproxy is updated.
 abqix.mm.fcix.net
 alma.acidman.thelefty.org
-anorien.csc.warwick.ac.uk
 ap.edge.kernel.org
 ask4.mm.fcix.net
 atl.mirrors.knownhost.com
@@ -18,9 +17,9 @@ bungi.mm.fcix.net
 ca.mirrors.cicku.me
 cdn.fjordos.no
 centos.anexia.at
-centos.mirror.alwyzon.net
 ch.mirrors.cicku.me
 codingflyboy.mm.fcix.net
+cofractal-ewr.mm.fcix.net
 cofractal-sea.mm.fcix.net
 coresite-atl.mm.fcix.net
 creeperhost.mm.fcix.net
@@ -107,7 +106,6 @@ lchs.mm.fcix.net
 lesnet.mm.fcix.net
 level66.mm.fcix.net
 linux-mirrors.fnal.gov
-linux.domainesia.com
 linux.mirrors.es.net
 linuxsoft.cern.ch
 lolhost.mm.fcix.net
@@ -121,6 +119,7 @@ mirror.5i.fi
 mirror.aarnet.edu.au
 mirror.accum.se
 mirror.airenetworks.es
+mirror.alwyzon.net
 mirror.ams-1.serverforge.org
 mirror.bahnhof.net
 mirror.cedia.org.ec
@@ -135,7 +134,6 @@ mirror.cs.princeton.edu
 mirror.csclub.uwaterloo.ca
 mirror.cspacehostings.com
 mirror.dal.nexril.net
-mirror.daniel-jost.net
 mirror.datacenter.by
 mirror.de.leaseweb.net
 mirror.digitalnova.at
@@ -155,7 +153,6 @@ mirror.grid.uchicago.edu
 mirror.hnd.cl
 mirror.host.ag
 mirror.hoster.kz
-mirror.hostiko.network
 mirror.hostnet.nl
 mirror.hyperdedic.ru
 mirror.i3d.net
@@ -171,6 +168,7 @@ mirror.layeronline.com
 mirror.linux-ia64.org
 mirror.logol.ru
 mirror.lstn.net
+mirror.maeen.sa
 mirror.mangohost.net
 mirror.marwan.ma
 mirror.math.princeton.edu
@@ -212,6 +210,7 @@ mirror.uv.es
 mirror.vpsnet.com
 mirror.vsys.host
 mirror.wd6.net
+mirror.wiseglobalsolutions.com
 mirror.xenyth.net
 mirror.yandex.ru
 mirror.yer.az
@@ -220,7 +219,6 @@ mirrors.20i.com
 mirrors.cat.pdx.edu
 mirrors.chroot.ro
 mirrors.coreix.net
-mirrors.dotsrc.org
 mirrors.fibianet.dk
 mirrors.glesys.net
 mirrors.hosterion.ro
