@@ -87,9 +87,9 @@ function configure_rhc_worker_playbook {
     return
   fi
 
-  RHC_WORKER="/etc/rhc/workers/rhc-worker-playbook.worker"
-  RHC_WORKER_TOML="${RHC_WORKER}.toml"
-  RHC_WORKER_PID="${RHC_WORKER}.pid"
+  RHC_WORKER="rhc-worker-playbook.worker"
+  RHC_WORKER_TOML="/etc/rhc/workers/${RHC_WORKER}.toml"
+  RHC_WORKER_PID="/var/run/rhc/workers/${RHC_WORKER}.pid"
   CFG_PATTERN='env = \[.*"HTTPS_PROXY=".*,.*"HTTP_PROXY=".*\]'
   CFG='env = ["HTTPS_PROXY=", "https_proxy=", "HTTP_PROXY=", "http_proxy="]'
 
