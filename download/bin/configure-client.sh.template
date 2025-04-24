@@ -82,14 +82,15 @@ export RHSM_CONF="/etc/rhsm/rhsm.conf"
 export RHCD_OVERRIDE_DIR="/etc/systemd/system/rhcd.service.d"
 
 function configure_rhc_worker_playbook {
-  # This is only needed on RHEL8 as per https://access.redhat.com/solutions/7104932
-  if [ ! "${RHEL_RELEASE}" = "el8" ]; then
+  # This is only needed on RHEL8 and RHEL9 as per https://access.redhat.com/solutions/7104932
+  if [[ ! "${RHEL_RELEASE}" =~ ^el[89]$ ]]; then
     return
   fi
 
   RHC_WORKER="rhc-worker-playbook.worker"
   RHC_WORKER_TOML="/etc/rhc/workers/${RHC_WORKER}.toml"
   RHC_WORKER_PID="/var/run/rhc/workers/${RHC_WORKER}.pid"
+  RHC_PKGMGR_PID="/var/run/rhc/workers/rhc-package-manager-worker.pid"
   CFG_PATTERN='env = \[.*"HTTPS_PROXY=".*,.*"HTTP_PROXY=".*\]'
   CFG='env = ["HTTPS_PROXY=", "https_proxy=", "HTTP_PROXY=", "http_proxy="]'
 
@@ -98,6 +99,9 @@ function configure_rhc_worker_playbook {
     echo "${CFG}" >> "${RHC_WORKER_TOML}"
   fi
   rm -f "${RHC_WORKER_PID}"
+  if [ "${RHEL_RELEASE}" = "el9" ]; then
+    rm -f "${RHC_PKGMGR_PID}"
+  fi
 }
 
 
