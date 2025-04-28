@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-04-23
-# Count:          290
+# Updated:        2025-04-28
+# Count:          274
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -10,21 +10,17 @@ alma.acidman.thelefty.org
 ap.edge.kernel.org
 ask4.mm.fcix.net
 atl.mirrors.knownhost.com
-au.mirrors.cicku.me
 b4sh.mm.fcix.net
-br.mirrors.cicku.me
 bungi.mm.fcix.net
 ca.mirrors.cicku.me
 cdn.fjordos.no
 centos.anexia.at
-ch.mirrors.cicku.me
 codingflyboy.mm.fcix.net
 cofractal-ewr.mm.fcix.net
 cofractal-sea.mm.fcix.net
 coresite-atl.mm.fcix.net
 creeperhost.mm.fcix.net
 d2lzkl7pfhq30w.cloudfront.net
-de.mirrors.cicku.me
 dfw.mirror.rackspace.com
 distrohub.kyiv.ua
 divergentnetworks.mm.fcix.net
@@ -44,7 +40,6 @@ epel.mirror.omnilance.com
 epel.mirror.shastacoe.net
 epel.srv.magticom.ge
 epel.uni-sofia.bg
-es.mirrors.cicku.me
 eu.edge.kernel.org
 fedora-archive.ip-connect.info
 fedora-archive.ip-connect.vn.ua
@@ -88,20 +83,15 @@ ftp.uni-kl.de
 ftp.uni-stuttgart.de
 ftp.upjs.sk
 ftp.yz.yamagata-u.ac.jp
-gb.mirrors.cicku.me
 ge.mirror.cloud9.ge
 gsl-syd.mm.fcix.net
-hk.mirrors.cicku.me
 hkg.mirror.rackspace.com
 iad.mirror.rackspace.com
-in.mirrors.cicku.me
 insect.mm.fcix.net
 irltoolkit.mm.fcix.net
 it1.mirror.vhosting-it.com
 it2.mirror.vhosting-it.com
 ix-denver.mm.fcix.net
-jp.mirrors.cicku.me
-kr.mirrors.cicku.me
 lchs.mm.fcix.net
 lesnet.mm.fcix.net
 level66.mm.fcix.net
@@ -255,7 +245,6 @@ mirrors.xtom.ee
 mnvoip.mm.fcix.net
 muug.ca
 na.edge.kernel.org
-nl.mirrors.cicku.me
 nnenix.mm.fcix.net
 nocix.mm.fcix.net
 nullroute.mm.fcix.net
@@ -278,20 +267,15 @@ repo.jing.rocks
 repo2.shinjiru.com
 repos.silknet.com
 ridgewireless.mm.fcix.net
-ru.mirrors.cicku.me
 ryamer.mm.fcix.net
-sa.mirrors.cicku.me
-sg.mirrors.cicku.me
 sjc.mirror.rackspace.com
 solidrock.mm.fcix.net
 southfront.mm.fcix.net
 stix.mm.fcix.net
 syd.mirror.rackspace.com
-tw.mirrors.cicku.me
 ucmirror.canterbury.ac.nz
 us.mirrors.cicku.me
 volico.mm.fcix.net
 www.gtlib.gatech.edu
 www.nic.funet.fi
-za.mirrors.cicku.me
 ziply.mm.fcix.net

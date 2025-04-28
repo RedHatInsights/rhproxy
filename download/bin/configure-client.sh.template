@@ -104,6 +104,28 @@ function configure_rhc_worker_playbook {
   fi
 }
 
+export INSIGHTS_CLIENT_TAGS="/etc/insights-client/tags.yaml"
+export INSIGHTS_PROXY_TAG="insights-proxy"
+
+function delete_insights_client_proxy_tag {
+  if [ -f "${INSIGHTS_CLIENT_TAGS}" ] && grep -q "^${INSIGHTS_PROXY_TAG}: " "${INSIGHTS_CLIENT_TAGS}"; then
+    sed -i "/^${INSIGHTS_PROXY_TAG}: /d" "${INSIGHTS_CLIENT_TAGS}"
+  fi
+}
+
+function configure_insights_client_proxy_tag {
+  PROXY_HOST="${1,,}" # Convert to lowercase
+  if [ -n "${PROXY_HOST}" ]; then
+    echo "Configuring insights-client ${INSIGHTS_PROXY_TAG} tag"
+    delete_insights_client_proxy_tag
+    echo "${INSIGHTS_PROXY_TAG}: ${PROXY_HOST}" >> "${INSIGHTS_CLIENT_TAGS}"
+  fi
+}
+
+function unconfigure_insights_client_proxy_tag {
+  echo "Unconfiguring insights-client ${INSIGHTS_PROXY_TAG} tag"
+  delete_insights_client_proxy_tag
+}
 
 #---------------- Configure ---------------
 if [ "${SUBCMD}" = "--configure" ]; then
@@ -140,6 +162,7 @@ Environment=HTTPS_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
 
   install_rhcd_selinux_policy
   configure_rhc_worker_playbook
+  configure_insights_client_proxy_tag "${PROXY_HOST}"
   restart_services
 
 #---------------- Unconfigure ---------------
@@ -155,6 +178,7 @@ elif [ "${SUBCMD}" = "--unconfigure" ]; then
   # Remove the override for the RHC Daemon
   rm -f "${RHCD_OVERRIDE_DIR}/override.conf"
 
+  unconfigure_insights_client_proxy_tag
   restart_services
 else
   echo "Unknown configure-client.sh option ${SUBCMD} specified."
