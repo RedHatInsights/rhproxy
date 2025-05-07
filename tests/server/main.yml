@@ -23,19 +23,19 @@
   - name: enable the Insights proxy repo
     rhsm_repository:
       name: insights-proxy-for-rhel-9-{{ ansible_architecture }}-rpms
-    when: local_rpm is not defined
+    when: rpm_override is not defined
     tags: subscribe
 
   - name: copy a local Insights proxy RPM
     copy:
-      src: "{{ local_rpm }}"
+      src: "{{ rpm_override }}"
       dest: /tmp
-    when: local_rpm is defined
-    tags: local_rpm
+    when: rpm_override is defined and '://' not in rpm_override
+    tags: rpm_install
 
   - name: install the Insights proxy RPM
     package:
-      name: "{{ local_rpm | default(rpm_name) }}"
+      name: "{{ (('://' in rpm_override) | ternary(rpm_override, '/tmp/' + rpm_override|basename)) if rpm_override is defined else rpm_name }}"
       state: latest
       disable_gpg_check: "{{ unsigned | default(False) | bool }}"
     tags: rpm_install
@@ -104,6 +104,15 @@
     failed_when: "registry['host'] + '/' + container not in containers.stdout"
     changed_when: false
     tags: container_list
+
+  - name: check the engine version
+    command: "podman images --format '{% raw %}{{.Tag}}{% endraw %}'"
+    become_user: "{{ local_user }}"
+    register: actual_engine_version
+    failed_when: actual_engine_version.stdout != expected_engine_version
+    changed_when: false
+    when: expected_engine_version is defined
+    tags: version_check
 
   - name: test the proxy from the server
     command: "curl -L -x http://{{ server }}:3128 https://{{ test_good_host }}/"
