@@ -4,28 +4,12 @@
   tasks:
   - name: block for client tasks
     block:
-      - name: remove PID files
-      # needed before yggdrasil PR 299
-        file:
-          path: "{{ item }}"
-          state: absent
-        with_items:
-          - /var/run/rhc/workers/rhc-worker-playbook.worker.pid
-          - /var/run/rhc/workers/rhc-package-manager-worker.pid
-
-      - name: restart the rhc daemon
-        systemd_service:
-          name: rhcd
-          state: restarted
-
       - name: wait two minutes and get the rhc daemon status report
       # can't use the pause module due to Ansible issue 19966
         shell: "sleep 120 ; systemctl status rhcd"
         register: daemon_status
         changed_when: false
         failed_when: "'failed to start worker' in daemon_status.stdout"
-        # ignore before rhc-worker-playbook PR 56
-        ignore_errors: true
 
       - name: display the rhc daemon status report
         debug:
@@ -50,7 +34,5 @@
         register: podman_logs_2
         failed_when: "'CONNECT yggd' in podman_logs_2.stdout"
         changed_when: false
-        # ignore before rhc-worker-playbook PR 56
-        ignore_errors: true
     when: inventory_hostname in groups['PROXY']
     tags: rhc

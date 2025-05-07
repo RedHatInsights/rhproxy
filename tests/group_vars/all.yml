@@ -9,6 +9,9 @@ registry:
   password: "{{ lookup('ini', 'password section=' + registry_alias + ' file=../credentials.conf') }}"
 rh_username: "{{ lookup('ini', 'username section=rh file=../credentials.conf') }}"
 rh_password: "{{ lookup('ini', 'password section=rh file=../credentials.conf') }}"
+#rh_client_id: "{{ lookup('ini', 'client_id section=rh file=../credentials.conf') }}"
+#rh_client_secret: "{{ lookup('ini', 'client_secret section=rh file=../credentials.conf') }}"
+rh_offline_token: "{{ lookup('ini', 'offline_token section=rh file=../credentials.conf') }}"
 container: "{{ 'insights-proxy' if registry_alias == 'rh' else 'insights_proxy' }}"
 rpm_name: rhproxy
 local_user: rhproxy

@@ -79,6 +79,7 @@ Create the `credentials.conf` file, in this very directory, as follows:
 [rh]
 username=<YOUR RED HAT USERNAME>
 password=<YOUR RED HAT PASSWORD>
+offline_token=<YOUR OFFLINE API TOKEN GENERATED AT https://access.redhat.com/management/api>
 
 [quay]
 username=<YOUR QUAY USERNAME>
@@ -105,7 +106,11 @@ Test data is kept in `group_vars/all.yml`.
 Any variable can be overridden on the command line.
 In addition, two more variables are used in the code and can be set to a non-default value.
 
-### Example
+### Examples
+
+Here are a few examples demonstrating alternative ways to run the test suite.
+
+#### Preparing the systems and leaving them in this state
 
 If you only want to set the environment up because you wish to keep it running:
 
@@ -116,24 +121,49 @@ $ ansible-playbook -i hosts_insights_proxy_20250205.cfg test.yml --tags subscrib
 In this case, don't forget to unsubscribe the systems from RHSM before you terminate them. If the
 complete playbook is run, this happens automatically during the final cleanup, unless a task fails.
 
-If you want to test an unsigned RPM that uses an image from quay.io, use the following argument
-on the `ansible-playbook` command line:
+#### Overriding the rhproxy RPM
+
+If you want to test an rhproxy RPM different from the one in RHSM, you can supply a local
+(pre-downloaded) RPM, or you can specify a URL that's reachable from the proxy node. Such a
+non-default RPM may even be unsigned or signed with an unknown key. To use this feature, run the
+`ansible-playbook` command with extra variables as follows:
 
 ```
---extra-vars "local_rpm=<PATH_TO_LOCAL_RHPROXY_RPM> unsigned=True registry_alias=quay"
+--extra-vars "rpm_override=/tmp/rhproxy-V-R.noarch.rpm unsigned=True"
 ```
 
-The RPM must exist on the system where the playbook was launched, and it will be copied to the
-proxy node. Alternatively, if the RPM is reachable from the proxy node using a URL, set the
-`rpm_name` variable to this URL; also use `unsigned=True` if this RPM isn't signed.
+or:
+
+```
+--extra-vars "rpm_override=http://example.com/rhproxy-V-R.noarch.rpm unsigned=True"
+```
+
+#### Overriding the rhproxy engine
 
 You can also override the image path in the quadlet service file if you want to pull an image that
 differs from the one in this file: for example, to pull a new test image at Quay while testing an
 rhproxy RPM build that uses the Red Hat registry. To do so, add the following extra variable:
 
 ```
-image_override=<REGISTRY_HOST/IMAGE_PATH:VERSION>
+--extra-vars "image_override=quay.io/insights_proxy/rhproxy-engine:X.Y.Z registry_alias=quay"
 ```
+
+(don't forget about the registry alias to make sure the proxy node gets logged in to Quay) or:
+
+```
+--extra-vars "image_override=registry.redhat.io/insights-proxy/insights-proxy-container-rhel9:X.Y.Z"
+```
+
+#### Checking the rhproxy engine version
+
+If you want to be really sure that a particular engine version is pulled, you can specify this
+version and let the test suite compare it with the running version. To do so, use:
+
+```
+--extra-vars "expected_engine_version=X.Y.Z"
+```
+
+Note: This is actually done by checking the image tag.
 
 ## Notes
 To enable logging for easier sharing of the output, run the `ansible-playbook` command with

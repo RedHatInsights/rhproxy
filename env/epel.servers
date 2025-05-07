@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-04-28
-# Count:          274
+# Updated:        2025-05-07
+# Count:          265
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -13,7 +13,6 @@ atl.mirrors.knownhost.com
 b4sh.mm.fcix.net
 bungi.mm.fcix.net
 ca.mirrors.cicku.me
-cdn.fjordos.no
 centos.anexia.at
 codingflyboy.mm.fcix.net
 cofractal-ewr.mm.fcix.net
@@ -94,7 +93,6 @@ it2.mirror.vhosting-it.com
 ix-denver.mm.fcix.net
 lchs.mm.fcix.net
 lesnet.mm.fcix.net
-level66.mm.fcix.net
 linux-mirrors.fnal.gov
 linux.mirrors.es.net
 linuxsoft.cern.ch
@@ -134,7 +132,6 @@ mirror.etf.bg.ac.rs
 mirror.euserv.net
 mirror.facebook.net
 mirror.fcix.net
-mirror.fjordos.no
 mirror.fmt-2.serverforge.org
 mirror.freedif.org
 mirror.freethought-internet.co.uk
@@ -155,7 +152,6 @@ mirror.karneval.cz
 mirror.lanet.network
 mirror.lax.adaptivedatanetworks.com
 mirror.layeronline.com
-mirror.linux-ia64.org
 mirror.logol.ru
 mirror.lstn.net
 mirror.maeen.sa
@@ -163,7 +159,6 @@ mirror.mangohost.net
 mirror.marwan.ma
 mirror.math.princeton.edu
 mirror.mci-1.serverforge.org
-mirror.metrocast.net
 mirror.netcologne.de
 mirror.netone.nl
 mirror.netsite.dk
@@ -182,21 +177,18 @@ mirror.ps.kz
 mirror.raiolanetworks.com
 mirror.realcompute.io
 mirror.rise.ph
-mirror.rnet.missouri.edu
 mirror.sabay.com.kh
 mirror.servaxnet.com
 mirror.sfo12.us.leaseweb.net
 mirror.szerverem.hu
 mirror.team-cymru.com
 mirror.telepoint.bg
-mirror.theory7.net
 mirror.tornadovps.com
 mirror.twds.com.tw
 mirror.umd.edu
 mirror.us.leaseweb.net
 mirror.us.mirhosting.net
 mirror.usi.edu
-mirror.uv.es
 mirror.vpsnet.com
 mirror.vsys.host
 mirror.wd6.net
@@ -206,6 +198,7 @@ mirror.yandex.ru
 mirror.yer.az
 mirror.za.abantu.cloud
 mirrors.20i.com
+mirrors.bytes.ua
 mirrors.cat.pdx.edu
 mirrors.chroot.ro
 mirrors.coreix.net
@@ -228,7 +221,6 @@ mirrors.neusoft.edu.cn
 mirrors.nic.cz
 mirrors.nxthost.com
 mirrors.powernet.com.ru
-mirrors.ptisp.pt
 mirrors.qlu.edu.cn
 mirrors.rc.rit.edu
 mirrors.sohu.com
@@ -252,7 +244,6 @@ ohioix.mm.fcix.net
 opencolo.mm.fcix.net
 ord.mirror.rackspace.com
 packages.oit.ncsu.edu
-paducahix.mm.fcix.net
 pkg.adfinis-on-exoscale.ch
 pkg.adfinis.com
 pubmirror1.math.uh.edu
