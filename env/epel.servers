@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-05-07
-# Count:          265
+# Updated:        2025-05-20
+# Count:          263
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -21,13 +21,11 @@ coresite-atl.mm.fcix.net
 creeperhost.mm.fcix.net
 d2lzkl7pfhq30w.cloudfront.net
 dfw.mirror.rackspace.com
-distrohub.kyiv.ua
 divergentnetworks.mm.fcix.net
 dl.fedoraproject.org
 download-cc-rdu01.fedoraproject.org
 download.nus.edu.sg
 edgeuno-bog2.mm.fcix.net
-epel.01link.hk
 epel.grena.ge
 epel.hysing.is
 epel.ip-connect.info
@@ -45,6 +43,7 @@ fedora-archive.ip-connect.vn.ua
 fedora-archive.mirror.liquidtelecom.com
 fedora-epel.koyanet.lv
 fedora-epel.mirror.iweb.com
+fedora-mirror.cloud.mu
 fedora-mirror02.rbc.ru
 fedora.cs.nctu.edu.tw
 fedora.cu.be
@@ -126,12 +125,12 @@ mirror.datacenter.by
 mirror.de.leaseweb.net
 mirror.digitalnova.at
 mirror.dogado.de
-mirror.dst.ca
 mirror.efect.ro
 mirror.etf.bg.ac.rs
 mirror.euserv.net
 mirror.facebook.net
 mirror.fcix.net
+mirror.fjordos.com
 mirror.fmt-2.serverforge.org
 mirror.freedif.org
 mirror.freethought-internet.co.uk
@@ -148,6 +147,7 @@ mirror.imt-systems.com
 mirror.in2p3.fr
 mirror.init7.net
 mirror.its.dal.ca
+mirror.its.umich.edu
 mirror.karneval.cz
 mirror.lanet.network
 mirror.lax.adaptivedatanetworks.com
@@ -196,8 +196,8 @@ mirror.wiseglobalsolutions.com
 mirror.xenyth.net
 mirror.yandex.ru
 mirror.yer.az
-mirror.za.abantu.cloud
 mirrors.20i.com
+mirrors.bfsu.edu.cn
 mirrors.bytes.ua
 mirrors.cat.pdx.edu
 mirrors.chroot.ro
@@ -223,7 +223,6 @@ mirrors.nxthost.com
 mirrors.powernet.com.ru
 mirrors.qlu.edu.cn
 mirrors.rc.rit.edu
-mirrors.sohu.com
 mirrors.sonic.net
 mirrors.tuna.tsinghua.edu.cn
 mirrors.ukfast.co.uk
@@ -251,7 +250,6 @@ pubmirror2.math.uh.edu
 pubmirror3.math.uh.edu
 reflector.westga.edu
 rep-epel-il.upress.io
-repo.boun.edu.tr
 repo.extreme-ix.org
 repo.ialab.dsu.edu
 repo.jing.rocks
