@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-05-20
-# Count:          263
+# Updated:        2025-05-29
+# Count:          270
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -11,6 +11,7 @@ ap.edge.kernel.org
 ask4.mm.fcix.net
 atl.mirrors.knownhost.com
 b4sh.mm.fcix.net
+br.mirrors.cicku.me
 bungi.mm.fcix.net
 ca.mirrors.cicku.me
 centos.anexia.at
@@ -54,6 +55,7 @@ fedora.mirror.thegigabit.com
 fedora.mirrorservice.org
 fedora.tu-chemnitz.de
 forksystems.mm.fcix.net
+fr.mirrors.cicku.me
 fr2.rpmfind.net
 free.nchc.org.tw
 ftp-chi.osuosl.org
@@ -85,11 +87,13 @@ ge.mirror.cloud9.ge
 gsl-syd.mm.fcix.net
 hkg.mirror.rackspace.com
 iad.mirror.rackspace.com
+in.mirrors.cicku.me
 insect.mm.fcix.net
 irltoolkit.mm.fcix.net
 it1.mirror.vhosting-it.com
 it2.mirror.vhosting-it.com
 ix-denver.mm.fcix.net
+jp.mirrors.cicku.me
 lchs.mm.fcix.net
 lesnet.mm.fcix.net
 linux-mirrors.fnal.gov
@@ -125,6 +129,7 @@ mirror.datacenter.by
 mirror.de.leaseweb.net
 mirror.digitalnova.at
 mirror.dogado.de
+mirror.dst.ca
 mirror.efect.ro
 mirror.etf.bg.ac.rs
 mirror.euserv.net
@@ -139,6 +144,7 @@ mirror.grid.uchicago.edu
 mirror.hnd.cl
 mirror.host.ag
 mirror.hoster.kz
+mirror.hosthink.net
 mirror.hostnet.nl
 mirror.hyperdedic.ru
 mirror.i3d.net
@@ -192,7 +198,6 @@ mirror.usi.edu
 mirror.vpsnet.com
 mirror.vsys.host
 mirror.wd6.net
-mirror.wiseglobalsolutions.com
 mirror.xenyth.net
 mirror.yandex.ru
 mirror.yer.az
@@ -257,6 +262,7 @@ repo2.shinjiru.com
 repos.silknet.com
 ridgewireless.mm.fcix.net
 ryamer.mm.fcix.net
+sg.mirrors.cicku.me
 sjc.mirror.rackspace.com
 solidrock.mm.fcix.net
 southfront.mm.fcix.net
@@ -265,6 +271,7 @@ syd.mirror.rackspace.com
 ucmirror.canterbury.ac.nz
 us.mirrors.cicku.me
 volico.mm.fcix.net
+www.fedora.is
 www.gtlib.gatech.edu
 www.nic.funet.fi
 ziply.mm.fcix.net
