@@ -24,6 +24,6 @@ test_3rd_party_repo:
   name: zoo
   description: Zoo from Pulp demo repos
   protocol: https://
-  hostname: repos.fedorapeople.org
-  path_to_repodata: /pulp/pulp/demo_repos/zoo/
+  hostname: fixtures.pulpproject.org
+  path_to_repodata: /rpm-unsigned/
   package: bear
