@@ -2,6 +2,12 @@
 #
 # Insights proxy Service
 #
+
+
+   this is some bad code
+
+        echo "HI"
+
 export VERBOSE="n"
 RHPROXY_NAME="Insights proxy"
 RHPROXY_SERVICE="rhproxy"
