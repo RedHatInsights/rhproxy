@@ -100,6 +100,7 @@ allow rhcd_t squid_port_t:tcp_socket name_connect;
 }
 
 export RHSM_CONF="/etc/rhsm/rhsm.conf"
+export RHC_WORKER_PLAYBOOK_OVERRIDE_DIR="/etc/systemd/system/com.redhat.Yggdrasil1.Worker1.rhc_worker_playbook.service.d"
 
 function system_service_override_dir {
   if is_rhel 8 9; then
@@ -107,10 +108,6 @@ function system_service_override_dir {
   else
     echo "/etc/systemd/system/yggdrasil.service.d"
   fi
-}
-
-function rhc_worker_playbook_override_dir {
-  echo "/etc/systemd/system/com.redhat.Yggdrasil1.Worker1.rhc_worker_playbook.service.d"
 }
 
 function configure_rhc_worker_playbook {
@@ -198,7 +195,6 @@ Environment=HTTPS_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
 
   # For RHEL10 and later, Override the Environment for the rhc_worker_playbook
   if ! is_rhel 8 9; then
-    RHC_WORKER_PLAYBOOK_OVERRIDE_DIR="$(rhc_worker_playbook_override_dir)"
     mkdir -p "${RHC_WORKER_PLAYBOOK_OVERRIDE_DIR}"
     cat - > "${RHC_WORKER_PLAYBOOK_OVERRIDE_DIR}/override.conf" <<!END!
 [Service]
@@ -227,7 +223,7 @@ elif [ "${SUBCMD}" = "--unconfigure" ]; then
 
   # For RHEL10 and later, Remove the override for the rhc_worker_playbook
   if ! is_rhel 8 9; then
-    rm -f "$(rhc_worker_playbook_override_dir)/override.conf"
+    rm -f "${RHC_WORKER_PLAYBOOK_OVERRIDE_DIR}/override.conf"
   fi
 
   unconfigure_insights_client_proxy_tag
