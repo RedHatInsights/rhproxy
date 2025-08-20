@@ -50,9 +50,10 @@ function restart_services {
   if is_rhel 8 9; then
     systemctl restart rhcd
   else
-    if [ "$(systemctl is-enabled yggdrasil)" == "enabled" ]; then
-      systemctl restart yggdrasil
+    if [ "$(systemctl is-enabled yggdrasil)" == "disabled" ]; then
+      systemctl enable yggdrasil
     fi
+    systemctl restart yggdrasil
   fi
 }
 
