@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-08-06
-# Count:          262
+# Updated:        2025-08-26
+# Count:          259
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -50,6 +50,7 @@ fedora.melbourneitmirror.net
 fedora.mirror.garr.it
 fedora.mirror.thegigabit.com
 fedora.mirrorservice.org
+fedora.nic.cz
 fedora.tu-chemnitz.de
 forksystems.mm.fcix.net
 fr2.rpmfind.net
@@ -110,7 +111,6 @@ mirror.cedia.org.ec
 mirror.centos.ikoula.com
 mirror.cherryservers.com
 mirror.chpc.utah.edu
-mirror.cloudhosting.lv
 mirror.cogentco.com
 mirror.compevo.com
 mirror.cpsc.ucalgary.ca
@@ -123,7 +123,6 @@ mirror.de.leaseweb.net
 mirror.digitalnova.at
 mirror.dogado.de
 mirror.dst.ca
-mirror.ec
 mirror.efect.ro
 mirror.espoch.edu.ec
 mirror.etf.bg.ac.rs
@@ -138,6 +137,7 @@ mirror.grid.uchicago.edu
 mirror.hnd.cl
 mirror.host.ag
 mirror.hoster.kz
+mirror.hosthink.net
 mirror.hostnet.nl
 mirror.hyperdedic.ru
 mirror.i3d.net
@@ -157,7 +157,6 @@ mirror.logol.ru
 mirror.lstn.net
 mirror.maeen.sa
 mirror.mangohost.net
-mirror.marwan.ma
 mirror.math.princeton.edu
 mirror.mci-1.serverforge.org
 mirror.netcologne.de
@@ -219,7 +218,6 @@ mirrors.nav.ro
 mirrors.neterra.net
 mirrors.netix.net
 mirrors.neusoft.edu.cn
-mirrors.nic.cz
 mirrors.nxthost.com
 mirrors.powernet.com.ru
 mirrors.rc.rit.edu
@@ -251,7 +249,6 @@ reflector.westga.edu
 rep-epel-il.upress.io
 repo.extreme-ix.org
 repo.ialab.dsu.edu
-repo.jing.rocks
 repos.silknet.com
 ryamer.mm.fcix.net
 sjc.mirror.rackspace.com

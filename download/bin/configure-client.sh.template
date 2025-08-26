@@ -30,17 +30,38 @@ shift
 RHEL_RELEASE=$(uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/')
 export RHEL_RELEASE
 
+function is_rhel() {
+  for rhel in "$@"
+  do
+    if [ "${RHEL_RELEASE}" == "el${rhel}" ]; then
+      true
+      return
+    fi
+  done
+  false
+  return
+}
+
 function restart_services {
   echo "Restarting Insights Services ..."
   systemctl daemon-reload
   systemctl restart rhsm.service
   systemctl restart rhsmcertd.service
-  systemctl restart rhcd
+  if is_rhel 8 9; then
+    systemctl restart rhcd
+  else
+    if subscription-manager identity &> /dev/null; then
+      if [ "$(systemctl is-enabled yggdrasil)" == "disabled" ]; then
+        systemctl enable yggdrasil
+      fi
+      systemctl restart yggdrasil
+    fi
+  fi
 }
 
 function install_rhcd_selinux_policy {
   # We don't need to do this for RHEL8
-  if [ "${RHEL_RELEASE}" = "el8" ]; then
+  if is_rhel 8; then
     return
   fi
 
@@ -79,28 +100,37 @@ allow rhcd_t squid_port_t:tcp_socket name_connect;
 }
 
 export RHSM_CONF="/etc/rhsm/rhsm.conf"
-export RHCD_OVERRIDE_DIR="/etc/systemd/system/rhcd.service.d"
+export RHC_WORKER_PLAYBOOK_OVERRIDE_DIR="/etc/systemd/system/com.redhat.Yggdrasil1.Worker1.rhc_worker_playbook.service.d"
+
+function system_service_override_dir {
+  if is_rhel 8 9; then
+    echo "/etc/systemd/system/rhcd.service.d"
+  else
+    echo "/etc/systemd/system/yggdrasil.service.d"
+  fi
+}
 
 function configure_rhc_worker_playbook {
-  # This is only needed on RHEL8 and RHEL9 as per https://access.redhat.com/solutions/7104932
-  if [[ ! "${RHEL_RELEASE}" =~ ^el[89]$ ]]; then
-    return
-  fi
+  # Needed as per https://access.redhat.com/solutions/7104932
+  if is_rhel 8 9; then
+    RHC_WORKER_DIR="/etc/rhc/workers"
+    RHC_WORKER="rhc-worker-playbook.worker"
+    RHC_WORKER_TOML="${RHC_WORKER_DIR}/${RHC_WORKER}.toml"
+    CFG_PATTERN='env = \[.*"HTTPS_PROXY=".*,.*"HTTP_PROXY=".*\]'
+    CFG='env = ["HTTPS_PROXY=", "https_proxy=", "HTTP_PROXY=", "http_proxy="]'
 
-  RHC_WORKER="rhc-worker-playbook.worker"
-  RHC_WORKER_TOML="/etc/rhc/workers/${RHC_WORKER}.toml"
-  RHC_WORKER_PID="/var/run/rhc/workers/${RHC_WORKER}.pid"
-  RHC_PKGMGR_PID="/var/run/rhc/workers/rhc-package-manager-worker.pid"
-  CFG_PATTERN='env = \[.*"HTTPS_PROXY=".*,.*"HTTP_PROXY=".*\]'
-  CFG='env = ["HTTPS_PROXY=", "https_proxy=", "HTTP_PROXY=", "http_proxy="]'
+    if [ ! -f "${RHC_WORKER_TOML}" ] || ! grep -Eq "${CFG_PATTERN}" "${RHC_WORKER_TOML}"; then
+      echo "Configuring the rhc-worker-playbook worker ..."
+      mkdir -p "${RHC_WORKER_DIR}"
+      echo "${CFG}" >> "${RHC_WORKER_TOML}"
+    fi
 
-  if [ ! -f "${RHC_WORKER_TOML}" ] || ! grep -Eq "${CFG_PATTERN}" "${RHC_WORKER_TOML}"; then
-    echo "Configuring the rhc-worker-playbook worker ..."
-    echo "${CFG}" >> "${RHC_WORKER_TOML}"
-  fi
-  rm -f "${RHC_WORKER_PID}"
-  if [ "${RHEL_RELEASE}" = "el9" ]; then
-    rm -f "${RHC_PKGMGR_PID}"
+    RHC_WORKER_PID="/var/run/rhc/workers/${RHC_WORKER}.pid"
+    rm -f "${RHC_WORKER_PID}"
+    if is_rhel 9; then
+      RHC_PKGMGR_PID="/var/run/rhc/workers/rhc-package-manager-worker.pid"
+      rm -f "${RHC_PKGMGR_PID}"
+    fi
   fi
 }
 
@@ -153,12 +183,23 @@ if [ "${SUBCMD}" = "--configure" ]; then
           -e "s/^proxy_port =.*$/proxy_port = ${PROXY_PORT}/" "${RHSM_CONF}"
 
   # Override the Environment for the RHC Daemon
-  mkdir -p "${RHCD_OVERRIDE_DIR}"
-  cat - > "${RHCD_OVERRIDE_DIR}/override.conf" <<!END!
+  SERVICE_OVERRIDE_DIR="$(system_service_override_dir)"
+  mkdir -p "${SERVICE_OVERRIDE_DIR}"
+  cat - > "${SERVICE_OVERRIDE_DIR}/override.conf" <<!END!
 [Service]
 Environment=HTTP_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
 Environment=HTTPS_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
 !END!
+
+  # For RHEL10 and later, Override the Environment for the rhc_worker_playbook
+  if ! is_rhel 8 9; then
+    mkdir -p "${RHC_WORKER_PLAYBOOK_OVERRIDE_DIR}"
+    cat - > "${RHC_WORKER_PLAYBOOK_OVERRIDE_DIR}/override.conf" <<!END!
+[Service]
+Environment=HTTP_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
+Environment=HTTPS_PROXY=http://${PROXY_HOST}:${PROXY_PORT}
+!END!
+  fi
 
   install_rhcd_selinux_policy
   configure_rhc_worker_playbook
@@ -176,7 +217,12 @@ elif [ "${SUBCMD}" = "--unconfigure" ]; then
           -e "s/^proxy_port =.*$/proxy_port =-1/" "${RHSM_CONF}"
 
   # Remove the override for the RHC Daemon
-  rm -f "${RHCD_OVERRIDE_DIR}/override.conf"
+  rm -f "$(system_service_override_dir)/override.conf"
+
+  # For RHEL10 and later, Remove the override for the rhc_worker_playbook
+  if ! is_rhel 8 9; then
+    rm -f "${RHC_WORKER_PLAYBOOK_OVERRIDE_DIR}/override.conf"
+  fi
 
   unconfigure_insights_client_proxy_tag
   restart_services
