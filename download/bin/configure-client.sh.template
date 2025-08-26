@@ -114,21 +114,17 @@ function configure_rhc_worker_playbook {
   # Needed as per https://access.redhat.com/solutions/7104932
   if is_rhel 8 9; then
     RHC_WORKER_DIR="/etc/rhc/workers"
-  else
-    RHC_WORKER_DIR="/etc/rhc-worker-playbook"
-  fi
-  RHC_WORKER="rhc-worker-playbook.worker"
-  RHC_WORKER_TOML="${RHC_WORKER_DIR}/${RHC_WORKER}.toml"
-  CFG_PATTERN='env = \[.*"HTTPS_PROXY=".*,.*"HTTP_PROXY=".*\]'
-  CFG='env = ["HTTPS_PROXY=", "https_proxy=", "HTTP_PROXY=", "http_proxy="]'
+    RHC_WORKER="rhc-worker-playbook.worker"
+    RHC_WORKER_TOML="${RHC_WORKER_DIR}/${RHC_WORKER}.toml"
+    CFG_PATTERN='env = \[.*"HTTPS_PROXY=".*,.*"HTTP_PROXY=".*\]'
+    CFG='env = ["HTTPS_PROXY=", "https_proxy=", "HTTP_PROXY=", "http_proxy="]'
 
-  if [ ! -f "${RHC_WORKER_TOML}" ] || ! grep -Eq "${CFG_PATTERN}" "${RHC_WORKER_TOML}"; then
-    echo "Configuring the rhc-worker-playbook worker ..."
-    mkdir -p "${RHC_WORKER_DIR}"
-    echo "${CFG}" >> "${RHC_WORKER_TOML}"
-  fi
+    if [ ! -f "${RHC_WORKER_TOML}" ] || ! grep -Eq "${CFG_PATTERN}" "${RHC_WORKER_TOML}"; then
+      echo "Configuring the rhc-worker-playbook worker ..."
+      mkdir -p "${RHC_WORKER_DIR}"
+      echo "${CFG}" >> "${RHC_WORKER_TOML}"
+    fi
 
-  if is_rhel 8 9; then
     RHC_WORKER_PID="/var/run/rhc/workers/${RHC_WORKER}.pid"
     rm -f "${RHC_WORKER_PID}"
     if is_rhel 9; then
