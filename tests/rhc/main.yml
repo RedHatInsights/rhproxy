@@ -26,6 +26,34 @@
     when: inventory_hostname in groups['CLI']
     tags: rhc
 
+  - name: block for rhc as the command for everything
+    block:
+      - name: temporarily disconnect from Red Hat services
+        command: rhc disconnect
+
+      - name: check the status to make sure the disconnection happened
+        command: rhc status
+        register: client_status_2
+        failed_when: client_status_2.rc == 0
+
+      - name: reconnect using rhc
+        command: rhc connect -u {{ rh_username }} -p '{{ rh_password }}'
+
+      - name: check status to make sure everything was restored
+        command: rhc status
+        register: client_status_3
+
+      - name: analyze the output
+        assert:
+          that:
+            - "'Connected to Red Hat Subscription Management' in client_status_3.stdout"
+            - "'Connected to Red Hat Insights' in client_status_3.stdout"
+            - "'The yggdrasil service is active' in client_status_3.stdout"
+          success_msg: OK
+          fail_msg: "{{ client_status_3.stdout_lines }}"
+    when: inventory_hostname in groups['CLI'] and ansible_distribution_major_version|int == 10
+    tags: rhc
+
   - name: block for server tasks
     block:
       - name: check the server log

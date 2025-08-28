@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-08-26
-# Count:          259
+# Updated:        2025-08-28
+# Count:          260
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -32,6 +32,7 @@ epel.ip-connect.info
 epel.mirror.constant.com
 epel.mirror.digitalpacific.com.au
 epel.mirror.liquidtelecom.com
+epel.mirror.liteserver.nl
 epel.mirror.omnilance.com
 epel.mirror.shastacoe.net
 epel.srv.magticom.ge

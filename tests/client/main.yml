@@ -9,10 +9,12 @@
     failed_when: get_ns.stdout_lines|length == 0
     tags: build_firewall
 
-  - name: forbid locally-initiated outgoing connections
-    # do this in one shell command; the first command alone would cut the system off
-    # you may experience a short blip anyway, IOW, this task may take longer than usual
-    shell: "iptables -P OUTPUT DROP ; iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT"
+  - name: clear existing rules in the OUTPUT chain
+    command: "iptables -F OUTPUT"
+    tags: build_firewall
+
+  - name: allow outgoing traffic for established and related connections
+    command: "iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT"
     tags: build_firewall
 
   - name: allow DNS lookups
@@ -29,6 +31,10 @@
     when: "inventory_hostname.endswith('amazonaws.com')"
     tags: build_firewall
 
+  - name: drop all other outgoing traffic at the end of the chain
+    command: "iptables -A OUTPUT -j DROP"
+    tags: build_firewall
+
   - name: check if direct connection to an allowed remote host fails (times out due to the firewall)
     command: "curl -m 5 https://{{ test_good_host }}/"
     register: curl_direct
@@ -37,10 +43,12 @@
     tags: direct_connect
 
   - name: check if connection to an unauthorized remote host through the proxy is denied
+    vars:
+      curl_error: "{{ 'Received HTTP code 404 from proxy after CONNECT' if ansible_distribution_major_version|int <= 9 else 'CONNECT tunnel failed, response 404' }}"
     command: "curl -L -x http://{{ server }}:3128 https://{{ test_bad_host }}/"
     register: curl_proxy_bad_host
     changed_when: false
-    failed_when: "curl_proxy_bad_host.rc != 56 or 'Received HTTP code 404 from proxy after CONNECT' not in curl_proxy_bad_host.stderr"
+    failed_when: "curl_proxy_bad_host.rc != 56 or curl_error not in curl_proxy_bad_host.stderr"
     tags: proxy_connect
 
   - name: download the helper script
