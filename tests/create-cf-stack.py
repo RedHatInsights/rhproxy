@@ -102,6 +102,9 @@ if args.cli8 == -1:
 if args.cli9 == -1:
     args.cli9 = len(instance_types)
     args.cli9_arch = ",".join(instance_types.keys())
+if args.cli10 == -1:
+    args.cli10 = len(instance_types)
+    args.cli10_arch = ",".join(instance_types.keys())
 
 
 proxy_os = "RHEL9"
