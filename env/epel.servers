@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-08-28
-# Count:          260
+# Updated:        2025-09-01
+# Count:          259
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -186,7 +186,6 @@ mirror.team-cymru.com
 mirror.telepoint.bg
 mirror.tornadovps.com
 mirror.twds.com.tw
-mirror.umd.edu
 mirror.us.leaseweb.net
 mirror.us.mirhosting.net
 mirror.vpsnet.com
