@@ -23,6 +23,17 @@
       state: present
     tags: build_firewall
 
+  - name: check if rebooting is needed
+    command: needs-restarting -r
+    register: needs_restarting
+    failed_when: needs_restarting.rc not in [0, 1]
+    tags: build_firewall
+
+  - name: reboot after installing the firewall, if the kernel was updated at the same time
+    reboot:
+    when: needs_restarting.rc == 1
+    tags: build_firewall
+
   - name: make sure the playbook package is installed on the clients
     package:
       name: rhc-worker-playbook

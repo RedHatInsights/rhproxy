@@ -28,6 +28,8 @@ argparser.add_argument('--cli8', help='number of RHEL8 clients', type=int, defau
 argparser.add_argument('--cli8-arch', help='RHEL 8 clients\' architectures (comma-separated list)', default='x86_64', metavar='ARCH')
 argparser.add_argument('--cli9', help='number of RHEL9 clients', type=int, default=1)
 argparser.add_argument('--cli9-arch', help='RHEL 9 clients\' architectures (comma-separated list)', default='x86_64', metavar='ARCH')
+argparser.add_argument('--cli10', help='number of RHEL10 clients', type=int, default=1)
+argparser.add_argument('--cli10-arch', help='RHEL 10 clients\' architectures (comma-separated list)', default='x86_64', metavar='ARCH')
 argparser.add_argument('--server-arch', default="x86_64", help='use this architecture for the proxy server')
 argparser.add_argument('--input-conf', default="/etc/ec2.yaml", help='use supplied yaml config file')
 argparser.add_argument('--output-conf', help='output file')
@@ -45,8 +47,10 @@ argparser.add_argument('--novpc', help='do not use VPC, use EC2 Classic', action
 
 argparser.add_argument('--ami-8-override', help='RHEL 8 AMI ID to override the mapping', metavar='ID')
 argparser.add_argument('--ami-9-override', help='RHEL 9 AMI ID to override the mapping', metavar='ID')
+argparser.add_argument('--ami-10-override', help='RHEL 10 AMI ID to override the mapping', metavar='ID')
 argparser.add_argument('--ami-8-arm64-override', help='RHEL 8 ARM64 AMI ID to override the mapping', metavar='ID')
 argparser.add_argument('--ami-9-arm64-override', help='RHEL 9 ARM64 AMI ID to override the mapping', metavar='ID')
+argparser.add_argument('--ami-10-arm64-override', help='RHEL 10 ARM64 AMI ID to override the mapping', metavar='ID')
 argparser.add_argument('--ansible-ssh-extra-args', help='Extra arguments for SSH connections established by Ansible', metavar='ARGS')
 argparser.add_argument('--key-pair-name', help='the name of the key pair in the given AWS region, if your local user name differs and SSH configuraion is undefined in the yaml config file')
 
@@ -99,6 +103,9 @@ if args.cli8 == -1:
 if args.cli9 == -1:
     args.cli9 = len(instance_types)
     args.cli9_arch = ",".join(instance_types.keys())
+if args.cli10 == -1:
+    args.cli10 = len(instance_types)
+    args.cli10_arch = ",".join(instance_types.keys())
 
 
 proxy_os = "RHEL9"
@@ -106,7 +113,8 @@ proxy_os = "RHEL9"
 json_dict['Description'] = "Insights proxy stack"
 
 json_dict['Mappings'] = {u'RHEL8': {args.region: {}},
-                         u'RHEL9': {args.region: {}}}
+                         u'RHEL9': {args.region: {}},
+                         u'RHEL10': {args.region: {}}}
 
 try:
     if args.ami_8_override:
@@ -122,6 +130,13 @@ try:
         with open("RHEL9mapping.json") as mjson:
             rhel9mapping = json.load(mjson)
             json_dict['Mappings']['RHEL9'] = rhel9mapping
+
+    if args.ami_10_override:
+        json_dict['Mappings']['RHEL10'][args.region]['AMI'] = args.ami_10_override
+    else:
+        with open("RHEL10mapping.json") as mjson:
+            rhel10mapping = json.load(mjson)
+            json_dict['Mappings']['RHEL10'] = rhel10mapping
 
 except Exception as e:
     sys.stderr.write("Got '%s' error \n" % e)
@@ -176,8 +191,8 @@ json_dict['Resources']["proxy"] = \
                u'Type': u'AWS::EC2::Instance'}
 
 # clients
-os_dict = {8: "RHEL8", 9: "RHEL9"}
-for i in (8, 9):
+os_dict = {8: "RHEL8", 9: "RHEL9", 10: "RHEL10"}
+for i in (8, 9, 10):
     num_cli_ver = args.__getattribute__("cli%i" % i)
     if num_cli_ver:
         os = os_dict[i]
@@ -205,6 +220,8 @@ for i in (8, 9):
                     image_id = args.ami_8_arm64_override
                 elif i == 9 and args.ami_9_arm64_override:
                     image_id = args.ami_9_arm64_override
+                elif i == 10 and args.ami_10_arm64_override:
+                    image_id = args.ami_10_arm64_override
                 else:
                     with open("RHEL%smapping_%s.json" % (i, cli_arch)) as mjson:
                        image_ids =  json.load(mjson)
