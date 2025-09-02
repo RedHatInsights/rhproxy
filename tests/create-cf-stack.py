@@ -49,6 +49,7 @@ argparser.add_argument('--ami-8-override', help='RHEL 8 AMI ID to override the m
 argparser.add_argument('--ami-9-override', help='RHEL 9 AMI ID to override the mapping', metavar='ID')
 argparser.add_argument('--ami-10-override', help='RHEL 10 AMI ID to override the mapping', metavar='ID')
 argparser.add_argument('--ami-8-arm64-override', help='RHEL 8 ARM64 AMI ID to override the mapping', metavar='ID')
+argparser.add_argument('--ami-9-arm64-override', help='RHEL 9 ARM64 AMI ID to override the mapping', metavar='ID')
 argparser.add_argument('--ami-10-arm64-override', help='RHEL 10 ARM64 AMI ID to override the mapping', metavar='ID')
 argparser.add_argument('--ansible-ssh-extra-args', help='Extra arguments for SSH connections established by Ansible', metavar='ARGS')
 argparser.add_argument('--key-pair-name', help='the name of the key pair in the given AWS region, if your local user name differs and SSH configuraion is undefined in the yaml config file')
