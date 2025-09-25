@@ -165,6 +165,32 @@ version and let the test suite compare it with the running version. To do so, us
 
 Note: This is actually done by checking the image tag.
 
+#### Checking if certain RPMs are installed in the container
+
+Common Vulnerabilities and Exposures (CVEs) affect every distribution, and in turn every container
+image, including Insights proxy becomes vulnerable easily. To address the CVEs, the Insights proxy
+container image must often be recreated with a newer version of the underlying UBI containing
+updates that resolve recent CVEs.
+
+By default, the test suite collects a list of all installed RPMs from the container, saves it on
+the proxy server host, and also fetches it to the Ansible control node. The file location is
+`/tmp/rhproxy_container_rpms` on both the server and the control node, and no action is taken with
+either copy of the list. If you want, you can examine it at your convenience.
+
+In addition, though, you can have the test suite check if one or more RPMs, specified as
+`name-version-release`, are actually installed in the container, making it safe from the known
+recent vulnerabilities. To do so, use the `check_rpms` extra variable and set it to a
+comma-separated list of NVRs that are known to contain fixes for the recent CVEs. For example,
+with Insights proxy container version 1.5.6, you could use:
+
+```
+--extra-vars check_rpms=libarchive-3.5.3-6.el9_6,libxml2-2.9.13-12.el9_6
+```
+
+Caveat lector: the exact strings are checked for; if a newer version/release of any of these
+packages is installed, the test will fail even though the container is (supposedly) still
+invulnerable.
+
 ## Notes
 To enable logging for easier sharing of the output, run the `ansible-playbook` command with
 `ANSIBLE_LOG_PATH=/some/file`.

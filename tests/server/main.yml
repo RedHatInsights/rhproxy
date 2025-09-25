@@ -126,3 +126,31 @@
     failed_when: "'CONNECT ' + test_good_host not in podman_logs.stdout"
     changed_when: false
     tags: local_test
+
+  - name: create a list of RPMs installed in the container
+    command: "podman exec rhproxy rpm -qa --qf '%{n}-%{v}-%{r}\n'"
+    become_user: "{{ local_user }}"
+    register: container_rpms
+    tags: container_rpms
+
+  - name: check specified RPMs
+    assert:
+      that: item in container_rpms.stdout_lines
+      success_msg: "OK, {{ item }} is installed in the container"
+      fail_msg: "Not OK, {{ item }} is not installed in the container"
+    with_items: "{{ check_rpms.split(',') }}"
+    when: check_rpms is defined
+    tags: container_rpms
+
+  - name: sort and save the list on the proxy server
+    copy:
+      content: "{{ container_rpms.stdout_lines | sort | join('\n') }}"
+      dest: /tmp/rhproxy_container_rpms
+    tags: container_rpms
+
+  - name: also fetch the list
+    fetch:
+      src: /tmp/rhproxy_container_rpms
+      dest: /tmp/
+      flat: True
+    tags: container_rpms
