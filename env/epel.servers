@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-09-19
-# Count:          259
+# Updated:        2025-10-02
+# Count:          260
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -35,6 +35,7 @@ epel.mirror.liquidtelecom.com
 epel.mirror.liteserver.nl
 epel.mirror.omnilance.com
 epel.mirror.shastacoe.net
+epel.mirror.ukraine.com.ua
 epel.srv.magticom.ge
 epel.uni-sofia.bg
 eu.edge.kernel.org
@@ -46,6 +47,7 @@ fedora-epel.mirror.iweb.com
 fedora-mirror02.rbc.ru
 fedora.cs.nctu.edu.tw
 fedora.cu.be
+fedora.ipacct.com
 fedora.melbourneitmirror.net
 fedora.mirror.garr.it
 fedora.mirror.thegigabit.com
@@ -67,6 +69,7 @@ ftp.cica.es
 ftp.fau.de
 ftp.fi.muni.cz
 ftp.kaist.ac.kr
+ftp.lysator.liu.se
 ftp.nluug.nl
 ftp.nsc.ru
 ftp.rediris.es
@@ -97,7 +100,6 @@ mirror-icn.yuki.net.uk
 mirror-mci.yuki.net.uk
 mirror-nrt.yuki.net.uk
 mirror.01link.hk
-mirror.0xem.ma
 mirror.23m.com
 mirror.2degrees.nz
 mirror.5i.fi
@@ -143,7 +145,6 @@ mirror.hosthink.net
 mirror.hostnet.nl
 mirror.hyperdedic.ru
 mirror.i3d.net
-mirror.ihost.md
 mirror.imt-systems.com
 mirror.in2p3.fr
 mirror.init7.net
