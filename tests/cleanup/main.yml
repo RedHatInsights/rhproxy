@@ -24,12 +24,17 @@
     failed_when: insights_unregister.rc > 1
     tags: unsubscribe,cleanup
 
-  - name: check Insights logs
-    # no timeout should be logged; if it is, it means Insights client didn't use the proxy server
-    command: grep ConnectTimeoutError /var/log/insights-client/insights-client.log
-    register: insights_timeout
-    # grep exits with 0 when it finds the string in the file, which is not what we want
-    failed_when: insights_timeout.rc == 0
+  - name: read the Insights client log
+    slurp:
+      src: /var/log/insights-client/insights-client.log
+    register: insights_log
+    tags: insights
+
+  - name: assert that ConnectTimeoutError is not found in the log
+    assert:
+      that: insights_log.content | b64decode | regex_search('ConnectTimeoutError') is not defined
+      success_msg: "OK: 'ConnectTimeoutError' was NOT found in the log."
+      fail_msg: "Not OK: 'ConnectTimeoutError' was found in the log."
     tags: insights
 
   - name: remove EPEL

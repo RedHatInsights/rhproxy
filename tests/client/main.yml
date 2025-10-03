@@ -7,7 +7,6 @@
     package:
       name: rh-amazon-rhui-client
       state: absent
-    when: "inventory_hostname.endswith('amazonaws.com')"
     tags: build_firewall
 
   - name: get the nameserver
