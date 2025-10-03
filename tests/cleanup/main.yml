@@ -32,7 +32,7 @@
 
   - name: assert that ConnectTimeoutError is not found in the log
     assert:
-      that: insights_log.content | b64decode | regex_search('ConnectTimeoutError') is not defined
+      that: insights_log.content | b64decode | regex_search('ConnectTimeoutError') == None
       success_msg: "OK: 'ConnectTimeoutError' was NOT found in the log."
       fail_msg: "Not OK: 'ConnectTimeoutError' was found in the log."
     tags: insights
