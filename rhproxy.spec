@@ -1,9 +1,8 @@
-%global base_version 1.5
-%global patch_version 11
+%global rpm_version 1.5.11
 %global engine_version 1.5.8
 
 Name:           rhproxy
-Version:        %{base_version}.%{patch_version}
+Version:        %{rpm_version}
 Release:        1%{?dist}
 Summary:        Insights proxy Service v%{version}
 
@@ -54,7 +53,7 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
-* Mon Nov 11 2025 Alberto Bellotti <abellott@redhat.com> - 1.5.11
+* Mon Nov 10 2025 Alberto Bellotti <abellott@redhat.com> - 1.5.11
 - Now pulling the rhproxy-engine container image 1.5.8 from registry.redhat.io
 
 * Thu Oct 02 2025 Alberto Bellotti <abellott@redhat.com> - 1.5.10
