@@ -12,14 +12,30 @@
     when: inventory_hostname in groups['CLI']
     tags: cleanup
 
-  - name: unregister from Insights
-    command: insights-client --unregister
-    tags: unsubscribe,cleanup
-
   - name: unsubscribe from RHSM
     redhat_subscription:
       state: absent
     tags: unsubscribe,cleanup
+
+  - name: unregister from Insights
+    command: insights-client --unregister
+    register: insights_unregister
+    # it's okay to exit with 1 because the system is no longer registered thanks to the task above
+    failed_when: insights_unregister.rc > 1
+    tags: unsubscribe,cleanup
+
+  - name: read the Insights client log
+    slurp:
+      src: /var/log/insights-client/insights-client.log
+    register: insights_log
+    tags: insights
+
+  - name: assert that ConnectTimeoutError is not found in the log
+    assert:
+      that: insights_log.content | b64decode | regex_search('ConnectTimeoutError') == None
+      success_msg: "OK: 'ConnectTimeoutError' was NOT found in the log."
+      fail_msg: "Not OK: 'ConnectTimeoutError' was found in the log."
+    tags: insights
 
   - name: remove EPEL
     package:
