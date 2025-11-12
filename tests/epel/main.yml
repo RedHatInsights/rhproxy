@@ -3,8 +3,10 @@
 - hosts: CLI
   tasks:
   - name: import the EPEL GPG key
-    rpm_key:
-      key: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
+#    Can't use rpm_key on RHEL 10.1 due to Ansible issue 86157
+#    rpm_key:
+#      key: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
+    command: rpm --import https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
     environment:
       https_proxy: "http://{{ server }}:3128"
     tags: epel
