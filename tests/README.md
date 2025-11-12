@@ -110,6 +110,16 @@ In addition, two more variables are used in the code and can be set to a non-def
 
 Here are a few examples demonstrating alternative ways to run the test suite.
 
+#### Updating the test systems
+To update RPMs on all the test systems before running the actual tests, use the following extra
+variable on the `ansible-playbook` command line:
+
+```
+--extra-vars update=True
+```
+
+If it becomes necessary to reboot a system afterwards, it will be rebooted automatically.
+
 #### Preparing the systems and leaving them in this state
 
 If you only want to set the environment up because you wish to keep it running:

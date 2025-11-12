@@ -2,13 +2,6 @@
 #
 - hosts: CLI
   tasks:
-  - name: remove the RHUI client RPM
-    # its cron job may attempt to update the client RPM but that will block dnf due to the firewall
-    package:
-      name: rh-amazon-rhui-client
-      state: absent
-    tags: build_firewall
-
   - name: get the nameserver
     command: "awk '/^nameserver/ { print $2 }' /etc/resolv.conf"
     register: get_ns
