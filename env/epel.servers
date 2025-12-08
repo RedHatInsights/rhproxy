@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2025-11-10
-# Count:          256
+# Updated:        2025-12-08
+# Count:          251
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -11,6 +11,7 @@ ap.edge.kernel.org
 ask4.mm.fcix.net
 atl.mirrors.knownhost.com
 b4sh.mm.fcix.net
+br.mirrors.cicku.me
 bungi.mm.fcix.net
 ca.mirrors.cicku.me
 centos.anexia.at
@@ -22,7 +23,6 @@ coresite-atl.mm.fcix.net
 creeperhost.mm.fcix.net
 d2lzkl7pfhq30w.cloudfront.net
 dfw.mirror.rackspace.com
-divergentnetworks.mm.fcix.net
 dl.fedoraproject.org
 download-cc-rdu01.fedoraproject.org
 edgeuno-bog2.mm.fcix.net
@@ -53,7 +53,6 @@ fedora.melbourneitmirror.net
 fedora.mirror.garr.it
 fedora.mirror.thegigabit.com
 fedora.mirrorservice.org
-fedora.nic.cz
 fedora.tu-chemnitz.de
 forksystems.mm.fcix.net
 fr2.rpmfind.net
@@ -65,13 +64,11 @@ ftp-stud.hs-esslingen.de
 ftp.agdsn.de
 ftp.arnes.si
 ftp.bme.hu
-ftp.cc.uoc.gr
 ftp.cica.es
 ftp.fau.de
 ftp.kaist.ac.kr
 ftp.linux.edu.lv
 ftp.lysator.liu.se
-ftp.nluug.nl
 ftp.nsc.ru
 ftp.rediris.es
 ftp.riken.jp
@@ -124,7 +121,6 @@ mirror.digitalnova.at
 mirror.dogado.de
 mirror.dst.ca
 mirror.efect.ro
-mirror.espoch.edu.ec
 mirror.etf.bg.ac.rs
 mirror.eu.4psacloud.com
 mirror.euserv.net
@@ -151,7 +147,6 @@ mirror.its.umich.edu
 mirror.karneval.cz
 mirror.lanet.network
 mirror.lax.adaptivedatanetworks.com
-mirror.limda.net
 mirror.linux.ec
 mirror.logol.ru
 mirror.lstn.net
@@ -174,7 +169,6 @@ mirror.pilotfiber.com
 mirror.plusline.net
 mirror.ps.kz
 mirror.raiolanetworks.com
-mirror.realcompute.io
 mirror.rise.ph
 mirror.sabay.com.kh
 mirror.servaxnet.com
@@ -260,4 +254,5 @@ www.fedora.is
 www.gtlib.gatech.edu
 www.nic.funet.fi
 yxeix.mm.fcix.net
+yycix.mm.fcix.net
 ziply.mm.fcix.net
