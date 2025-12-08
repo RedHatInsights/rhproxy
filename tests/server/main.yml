@@ -105,11 +105,20 @@
     changed_when: false
     tags: container_list
 
-  - name: check the engine version
+  - name: check the engine version in the list of images
     command: "podman images --format '{% raw %}{{.Tag}}{% endraw %}'"
     become_user: "{{ local_user }}"
     register: actual_engine_version
     failed_when: actual_engine_version.stdout != expected_engine_version
+    changed_when: false
+    when: expected_engine_version is defined
+    tags: version_check
+
+  - name: check the engine version in the log
+    command: podman logs rhproxy
+    become_user: "{{ local_user }}"
+    register: log_banner
+    failed_when: "'Starting Insights proxy version ' + expected_engine_version + ' ' not in log_banner.stdout"
     changed_when: false
     when: expected_engine_version is defined
     tags: version_check
