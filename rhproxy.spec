@@ -1,5 +1,5 @@
-%global rpm_version 1.5.13
-%global engine_version 1.5.10
+%global rpm_version 1.5.14
+%global engine_version 1.5.11
 
 Name:           rhproxy
 Version:        %{rpm_version}
@@ -53,6 +53,9 @@ sed -i 's/{{RHPROXY_ENGINE_RELEASE_TAG}}/%{engine_version}/' %{buildroot}/%{_dat
 %{_datadir}/%{name}/download/bin/configure-client.sh.template
 
 %changelog
+* Mon Mar 16 2026 Alberto Bellotti <abellott@redhat.com> - 1.5.14
+- Now pulling the rhproxy-engine container image 1.5.11 from registry.redhat.io
+
 * Tue Feb 10 2026 Alberto Bellotti <abellott@redhat.com> - 1.5.13
 - Now pulling the rhproxy-engine container image 1.5.10 from registry.redhat.io
 
