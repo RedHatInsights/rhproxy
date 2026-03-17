@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2026-03-16
-# Count:          244
+# Updated:        2026-03-17
+# Count:          243
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -117,7 +117,6 @@ mirror.csclub.uwaterloo.ca
 mirror.cspacehostings.com
 mirror.dal.nexril.net
 mirror.de.leaseweb.net
-mirror.dewabiz.com
 mirror.digitalnova.at
 mirror.dogado.de
 mirror.dst.ca
