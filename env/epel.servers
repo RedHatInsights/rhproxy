@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2026-04-22
-# Count:          237
+# Updated:        2026-06-03
+# Count:          243
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -37,7 +37,7 @@ epel.mirror.liteserver.nl
 epel.mirror.omnilance.com
 epel.mirror.shastacoe.net
 epel.mirror.ukraine.com.ua
-epel.srv.magticom.ge
+epel.mirror.wearetriple.com
 epel.uni-sofia.bg
 eu.edge.kernel.org
 fedora-archive.ip-connect.info
@@ -46,6 +46,7 @@ fedora-archive.mirror.liquidtelecom.com
 fedora-epel.koyanet.lv
 fedora-epel.mirror.iweb.com
 fedora-mirror-atl.gigsouth.com
+fedora-mirror02.rbc.ru
 fedora.as3741.net
 fedora.cs.nctu.edu.tw
 fedora.ipacct.com
@@ -57,7 +58,6 @@ fedora.tu-chemnitz.de
 forksystems.mm.fcix.net
 fr.mirrors.cicku.me
 fr2.rpmfind.net
-free.nchc.org.tw
 ftp-chi.osuosl.org
 ftp-nyc.osuosl.org
 ftp-osl.osuosl.org
@@ -94,6 +94,7 @@ linux-mirrors.fnal.gov
 linux.mirrors.es.net
 linuxsoft.cern.ch
 lolhost.mm.fcix.net
+mirror-mci.yuki.net.uk
 mirror.01link.hk
 mirror.23m.com
 mirror.aarnet.edu.au
@@ -109,6 +110,7 @@ mirror.cherryservers.com
 mirror.citrahost.com
 mirror.cogentco.com
 mirror.compevo.com
+mirror.cov.ukservers.com
 mirror.cpsc.ucalgary.ca
 mirror.cs.princeton.edu
 mirror.csclub.uwaterloo.ca
@@ -127,7 +129,9 @@ mirror.flo.c-f.ro
 mirror.fmt-2.serverforge.org
 mirror.freedif.org
 mirror.freethought-internet.co.uk
+mirror.gi.co.id
 mirror.grid.uchicago.edu
+mirror.hemino.net
 mirror.hnd.cl
 mirror.host.ag
 mirror.hoster.kz
@@ -140,11 +144,9 @@ mirror.jagoanhosting.id
 mirror.karneval.cz
 mirror.krfoss.org
 mirror.lanet.network
-mirror.lax.adaptivedatanetworks.com
 mirror.linux.ec
 mirror.logol.ru
 mirror.lstn.net
-mirror.maeen.sa
 mirror.mangohost.net
 mirror.math.princeton.edu
 mirror.mci-1.serverforge.org
@@ -167,11 +169,14 @@ mirror.rise.ph
 mirror.sabay.com.kh
 mirror.servaxnet.com
 mirror.sfo12.us.leaseweb.net
+mirror.shomepower.com
+mirror.siwoo.org
 mirror.slu.cz
 mirror.team-cymru.com
 mirror.telepoint.bg
 mirror.tornadovps.com
 mirror.twds.com.tw
+mirror.tzulo.com
 mirror.us.leaseweb.net
 mirror.us.mirhosting.net
 mirror.vpsnet.com
@@ -182,7 +187,7 @@ mirror.yandex.ru
 mirror.za.abantu.cloud
 mirrors.20i.com
 mirrors.bfsu.edu.cn
-mirrors.cat.pdx.edu
+mirrors.bytes.ua
 mirrors.chroot.ro
 mirrors.coreix.net
 mirrors.fibianet.dk
@@ -192,7 +197,6 @@ mirrors.hostico.ro
 mirrors.hostiserver.com
 mirrors.huaweicloud.com
 mirrors.ipserverone.com
-mirrors.ircam.fr
 mirrors.iu13.net
 mirrors.lug.mtu.edu
 mirrors.mit.edu
@@ -201,6 +205,7 @@ mirrors.nav.ro
 mirrors.neterra.net
 mirrors.netix.net
 mirrors.nxthost.com
+mirrors.qlu.edu.cn
 mirrors.rc.rit.edu
 mirrors.sonic.net
 mirrors.tuna.tsinghua.edu.cn
@@ -221,7 +226,9 @@ opencolo.mm.fcix.net
 ord.mirror.rackspace.com
 packages.oit.ncsu.edu
 paducahix.mm.fcix.net
-plug-mirror.rcac.purdue.edu
+pubmirror1.math.uh.edu
+pubmirror2.math.uh.edu
+pubmirror3.math.uh.edu
 reflector.westga.edu
 rep-epel-il.upress.io
 repo.ialab.dsu.edu
@@ -240,5 +247,4 @@ volico.mm.fcix.net
 www.fedora.is
 www.gtlib.gatech.edu
 www.nic.funet.fi
-yxeix.mm.fcix.net
 ziply.mm.fcix.net
