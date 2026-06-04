@@ -47,7 +47,7 @@
         assert:
           that:
             - "'Connected to Red Hat Subscription Management' in client_status_3.stdout"
-            - "'Connected to Red Hat Insights' in client_status_3.stdout"
+            - "'Connected to Red Hat Lightspeed' in client_status_3.stdout"
             - "'The yggdrasil service is active' in client_status_3.stdout"
           success_msg: OK
           fail_msg: "{{ client_status_3.stdout_lines }}"
