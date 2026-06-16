@@ -44,7 +44,7 @@
 
   - name: check if connection to an unauthorized remote host through the proxy is denied
     vars:
-      curl_error: "{{ 'Received HTTP code 403 from proxy after CONNECT' if ansible_distribution_major_version|int <= 9 else 'CONNECT tunnel failed, response 403' }}"
+      curl_error: "{{ 'Received HTTP code ' ~ expected_proxy_deny_code | string ~ ' from proxy after CONNECT' if ansible_distribution_major_version|int <= 9 else 'CONNECT tunnel failed, response ' ~ expected_proxy_deny_code | string }}"
     command: "curl -L -x http://{{ server }}:3128 https://{{ test_bad_host }}/"
     register: curl_proxy_bad_host
     changed_when: false

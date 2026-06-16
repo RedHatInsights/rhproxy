@@ -18,6 +18,7 @@ local_user: rhproxy
 command: rhproxy
 test_good_host: mirrors.fedoraproject.org
 test_bad_host: www.fi.muni.cz
+expected_proxy_deny_code: 403
 test_rhsm_package: tree
 test_epel_package: screen
 test_3rd_party_repo:
