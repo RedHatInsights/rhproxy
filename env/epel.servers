@@ -1,6 +1,6 @@
 # Dnf/Yum EPEL Servers
-# Updated:        2026-06-15
-# Count:          238
+# Updated:        2026-07-01
+# Count:          235
 # Versions:       4, 5, 6, 7, 8, 9, 10
 # Architectures:  aarch64, armhfp, i386, ppc64, ppc64le, s390x, x86_64
 #
@@ -23,7 +23,6 @@ d2lzkl7pfhq30w.cloudfront.net
 de.mirrors.cicku.me
 dfw.mirror.rackspace.com
 distrohub.kyiv.ua
-divergentnetworks.mm.fcix.net
 dl.fedoraproject.org
 epel.grena.ge
 epel.hysing.is
@@ -64,7 +63,6 @@ ftp.arnes.si
 ftp.bme.hu
 ftp.cica.es
 ftp.fau.de
-ftp.kaist.ac.kr
 ftp.linux.edu.lv
 ftp.nsc.ru
 ftp.rediris.es
@@ -105,7 +103,6 @@ mirror.cedia.org.ec
 mirror.centos.ikoula.com
 mirror.cherryservers.com
 mirror.citrahost.com
-mirror.cogentco.com
 mirror.compevo.com
 mirror.cov.ukservers.com
 mirror.cpsc.ucalgary.ca
@@ -116,6 +113,7 @@ mirror.dal.nexril.net
 mirror.de.leaseweb.net
 mirror.digitalnova.at
 mirror.dogado.de
+mirror.dsp-lab.space
 mirror.dst.ca
 mirror.efect.ro
 mirror.etf.bg.ac.rs
@@ -127,7 +125,6 @@ mirror.fmt-2.serverforge.org
 mirror.freedif.org
 mirror.freethought-internet.co.uk
 mirror.grid.uchicago.edu
-mirror.hemino.net
 mirror.hnd.cl
 mirror.host.ag
 mirror.hoster.kz
